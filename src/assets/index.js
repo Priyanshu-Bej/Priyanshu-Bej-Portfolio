@@ -1,5 +1,4 @@
 import me from "./priyanshubej.png";
-import spotify from "./Spotify_Clone.png";
 import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
@@ -27,7 +26,6 @@ import gift from "./education/gift.png";
 
 export {
   me,
-  spotify,
   github,
   menu,
   close,
