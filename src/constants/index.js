@@ -212,20 +212,23 @@ const certifications = [
     name: "SimpliLearn",
     date: "2024",
 
-    image: "",
+    image:
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/simplilearn.jpg?raw=true",
   },
   {
     certification: "NPTEL Cloud Computing Certification ",
     name: "Indian Institute of Technology, Kharagpur",
     date: "2023",
-    image: "",
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/4b7021e319d8c63dd7b1a50023f36c85b839797f/src/assets/IIT_Kharagpur_Logo.svg?token=AX3MYAR3K6CC45PQOZFKB2DHBLU7G",
   },
   {
     certification:
       "AI Appreciation Certificate: Foundations of Artificial Intelligence",
     name: "E&IT Department, Government of Odisha and Intel.",
     date: "2023",
-    image: "",
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/refs/heads/main/src/assets/Government%20of%20Odisha.png?token=GHSAT0AAAAAACYPCKIGIRLH6QDFQJCFMTH4ZYK5HNQ",
   },
 ];
 const projects = [
