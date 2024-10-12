@@ -61,19 +61,19 @@ export const navLinks = [
 const services = [
   {
     title: "Flutter Developer",
-    icon: "",
+    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/flutter.png?raw=true",
   },
   {
     title: "Android Developer",
-    icon: "",
+    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/android.png?raw=true",
   },
   {
     title: "IOS Developer",
-    icon: "",
+    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/ios.png?raw=true",
   },
   {
     title: "Freelancer",
-    icon: "",
+    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/freelancer.png?raw=true",
   },
 ];
 
@@ -213,14 +213,14 @@ const certifications = [
     date: "2024",
 
     image:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/simplilearn.jpg?raw=true",
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/simplilearn.png?raw=true",
   },
   {
     certification: "NPTEL Cloud Computing Certification ",
     name: "Indian Institute of Technology, Kharagpur",
     date: "2023",
     image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/4b7021e319d8c63dd7b1a50023f36c85b839797f/src/assets/IIT_Kharagpur_Logo.svg?token=AX3MYAR3K6CC45PQOZFKB2DHBLU7G",
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
   },
   {
     certification:
@@ -228,7 +228,7 @@ const certifications = [
     name: "E&IT Department, Government of Odisha and Intel.",
     date: "2023",
     image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/refs/heads/main/src/assets/Government%20of%20Odisha.png?token=GHSAT0AAAAAACYPCKIGIRLH6QDFQJCFMTH4ZYK5HNQ",
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/Government%20of%20Odisha.png?raw=true",
   },
 ];
 const projects = [
@@ -251,7 +251,8 @@ const projects = [
       },
     ],
     image:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/blob/main/railkafe.png?raw=true",
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/blob/main/src/assets/railkafe.png?raw=true",
+
     source_code_link:
       "https://play.google.com/store/apps/details?id=com.railkafe.app",
   },
