@@ -22,7 +22,7 @@ To get a closer look at my projects and run this portfolio locally on your machi
    Launch the development server by executing:
 
 4. **View the Portfolio:**
-   Open a web browser and visit: http://localhost:3000
+   Open a web browser and visit: http://localhost:3000 
 
 ## Let's Connect! 🤝
 
