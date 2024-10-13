@@ -13,7 +13,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 // Replace these with your actual image and resume link
 const resumeDetails = {
   image: "https://github.com/Priyanshu-Bej/Priyanshu-Pritam-Bej-Resume/blob/main/Priyanshu_Pritam_Bej_Resume_Thumbnail.png?raw=true", // Replace with your resume image path
-  resume_link: "https://drive.google.com/file/d/1Qnbk-amO8IrfA5f0vCgHDZI45iXc2kyb/view?usp=drive_link", // Replace with your resume link
+  resume_link: "https://drive.google.com/file/d/1O6ZNfHPqNeRDpWb0_3Ab_H50AUsTfExL/view?usp=sharing", // Replace with your resume link
   title: "My Resume",
   description:
     "Click to view my resume.",
