@@ -14,7 +14,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 const resumeDetails = {
   image: "https://github.com/Priyanshu-Bej/Priyanshu-Pritam-Bej-Resume/blob/main/Priyanshu_Pritam_Bej_Resume_Thumbnail.png?raw=true", // Replace with your resume image path
   resume_link: "https://drive.google.com/file/d/1O6ZNfHPqNeRDpWb0_3Ab_H50AUsTfExL/view?usp=sharing", // Replace with your resume link
-  title: "My Resume",
+  title: "Inspect Resume",
   description:
     "Click to view my resume.",
 };
@@ -73,7 +73,7 @@ const Resume = () => {
     <>
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText}`}>Professional Snapshot</p>
-        <h2 className={`${styles.sectionHeadText}`}>Resume.</h2>
+        <h2 className={`${styles.sectionHeadText}`}>Resume.init()</h2>
       </motion.div>
 
       <div className="w-full flex mt-4">
