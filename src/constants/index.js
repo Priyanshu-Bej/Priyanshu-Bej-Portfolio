@@ -349,6 +349,20 @@ const projects = [
         name: "Amazon S3",
         color: "pink-text-gradient",
       },
+
+      {
+        name: "Firebase",
+        color: "blue-text-gradient",
+      },
+
+      {
+        name: "Laravel",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "NodeJs",
+        color: "green-text-gradient",
+      },
     ],
     image:
       "https://raw.githubusercontent.com/Priyanshu-Bej/Typof-app/refs/heads/main/typof.png",
@@ -384,7 +398,8 @@ const projects = [
       },
     ],
     image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Typof-app/refs/heads/main/letsfun.png",
+      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/refs/heads/main/src/assets/letsfun.png",
+
     source_code_link:
       "https://play.google.com/store/apps/details?id=com.letsFun.user&hl=en_IN",
   },
