@@ -1,4 +1,11 @@
 import {
+  android,
+  androidStudio,
+  baripadCollege,
+  bloc,
+  dart,
+  figma,
+  firebase,
   // javascript,
   // bootstrap,
   // html,
@@ -12,31 +19,19 @@ import {
   // nodejs,
   // mongodb,
   // mysql,
-
   flutter,
-  dart,
-  kotlin,
-  androidStudio,
-  bloc,
-  firebase,
+  freelancerLogo,
+  gift,
+  git,
   githubLogo,
+  irissLogo,
+  kodsLogo,
+  kotlin,
+  kv,
   mongo,
   nodejs,
   postman,
-  git,
-  figma,
-  kodsLogo,
   typoflogo,
-  freelancerLogo,
-  baripadCollege,
-  kv,
-  gift,
-  android,
-  // enis,
-  // lordroid,
-  // quebec,
-  // spotify,
-  // bl,
 } from "../assets";
 
 export const navLinks = [
@@ -134,11 +129,26 @@ const technologies = [
 
 const experiences = [
   {
+    title: "Mobile App Developer",
+    company_name: "IRISS Inc | Bengaluru",
+    icon: irissLogo,
+    iconBg: "#0078D7",
+    date: "Dec 2024 - Present",
+    points: [
+      "Leading the development of Esentry, a next-generation app designed to revolutionize asset management across various industries globally.",
+      "Utilizing advanced technologies including IRISS sensors and hubs for real-time monitoring, maintenance, and control of assets, enhancing operational efficiency and user experience.",
+      "Implementing NFC technology to streamline asset tracking and management, along with maintenance automation features to reduce downtime.",
+      "Developing detailed reporting tools within the app to provide actionable insights, maintenance history, and performance analytics, supporting critical decision-making processes.",
+      "Ensuring app scalability and performance to meet the needs of a global client base, from small-scale factories to large enterprises.",
+      "Driving significant revenue gains and operational efficiencies for clients, positioning the app as a pivotal tool in industrial asset management.",
+    ],
+  },
+  {
     title: "Flutter Developer",
     company_name: "Kods Technologies | Bengaluru",
     icon: kodsLogo,
     iconBg: "#4B0082",
-    date: "Dec 2023 - Present",
+    date: "Dec 2023 - Dec 2024",
     points: [
       "Led the development of real-time, cross-platform service apps for sectors including Ed-tech, Food Delivery, and Ride Booking, enhancing operational efficiency and user experience.",
       "Utilized Flutter for UI development, integrating analytics to monitor and enhance user interactions and satisfaction.",
@@ -249,12 +259,52 @@ const projects = [
         name: "Socket I/O",
         color: "pink-text-gradient",
       },
+      {
+        name: "Firebase",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "PhonePe Payment SDK",
+        color: "green-text-gradient",
+      },
     ],
     image:
       "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/blob/main/src/assets/railkafe.png?raw=true",
 
     source_code_link:
       "https://play.google.com/store/apps/details?id=com.railkafe.app",
+  },
+
+  {
+    name: "Vdriv - Booking Professional Drivers",
+    description:
+      "Developed Vdriv, an app that allows users to book professional drivers for local, outstation, one-way, or round trips. It features flexible scheduling, secure payments, and real-time notifications to ensure a smooth and reliable travel experience.",
+    tags: [
+      {
+        name: "Flutter",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "RazorPay",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Nodejs",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Firebase",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "RazorPay Payment SDK",
+        color: "green-text-gradient",
+      },
+    ],
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/VDriv-Book-Drivers-online/refs/heads/main/vdriv.png",
+    source_code_link:
+      "https://play.google.com/store/apps/details?id=com.vdriv.user",
   },
   {
     name: "ABC Online Learning Platform",
@@ -272,6 +322,10 @@ const projects = [
       {
         name: "MongoDB",
         color: "pink-text-gradient",
+      },
+      {
+        name: "RazorPay Payment SDK",
+        color: "green-text-gradient",
       },
     ],
     image:
@@ -302,28 +356,39 @@ const projects = [
       "https://play.google.com/store/apps/details?id=com.typof&pcampaignid=web_share",
   },
   {
-    name: "Vdriv - Booking Professional Drivers",
+    name: "Let's Fun - A Mordern Dating Platform",
     description:
-      "Developed Vdriv, an app that allows users to book professional drivers for local, outstation, one-way, or round trips. It features flexible scheduling, secure payments, and real-time notifications to ensure a smooth and reliable travel experience.",
+      "Developed Let's Fun, an modern dating platform that offers seamless communication through video, audio, and instant chat features, designed to help you connect with like-minded individuals effortlessly.",
     tags: [
       {
         name: "Flutter",
         color: "blue-text-gradient",
       },
       {
-        name: "RazorPay",
+        name: "REST API's",
         color: "green-text-gradient",
       },
+
       {
-        name: "Nodejs",
+        name: "Laravel",
         color: "pink-text-gradient",
+      },
+      {
+        name: "Firebase",
+        color: "green-text-gradient",
+      },
+
+      {
+        name: "Aroga Voice and Video SDK",
+        color: "blue-text-gradient",
       },
     ],
     image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/VDriv-Book-Drivers-online/refs/heads/main/vdriv.png",
+      "https://raw.githubusercontent.com/Priyanshu-Bej/Typof-app/refs/heads/main/letsfun.png",
     source_code_link:
-      "https://github.com/Priyanshu-Bej/VDriv-Book-Drivers-online",
+      "https://play.google.com/store/apps/details?id=com.letsFun.user&hl=en_IN",
   },
+
   {
     name: "ATOMS - Academic & School Management System",
     description:
@@ -341,10 +406,10 @@ const projects = [
         name: "Laravel",
         color: "pink-text-gradient",
       },
-      // {
-      //   name: "kotlin",
-      //   color: "orange-text-gradient",
-      // },
+      {
+        name: "RazorPay Payment SDK",
+        color: "green-text-gradient",
+      },
     ],
     image:
       "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System/blob/main/Atoms.png?raw=true",
@@ -354,10 +419,10 @@ const projects = [
 ];
 
 export {
+  certifications,
+  educational,
+  experiences,
+  projects,
   services,
   technologies,
-  experiences,
-  educational,
-  certifications,
-  projects,
 };

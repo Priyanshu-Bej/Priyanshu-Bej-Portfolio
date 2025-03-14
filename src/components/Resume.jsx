@@ -3,17 +3,17 @@
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
-import Tilt from "react-tilt";
 import { motion } from "framer-motion";
+import Tilt from "react-tilt";
 
-import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
+import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 
 // Replace these with your actual image and resume link
 const resumeDetails = {
   image: "https://github.com/Priyanshu-Bej/Priyanshu-Pritam-Bej-Resume/blob/main/Priyanshu_Pritam_Bej_Resume_Thumbnail.png?raw=true", // Replace with your resume image path
-  resume_link: "https://drive.google.com/file/d/1kDkVnTFTp0X3BzCZM9t-GH2AM1sPaIxl/view?usp=sharing", //New Updaeted Resume
+  resume_link: "https://drive.google.com/file/d/1Th8vxK2BKSmp8kA2V2Fj6rJ8BQVpBB6L/view?usp=sharing", //New Updaeted Resume
   title: "Inspect Resume",
   description:
     "Click to view my resume.",
