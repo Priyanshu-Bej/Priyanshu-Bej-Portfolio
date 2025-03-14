@@ -14,18 +14,18 @@ To get a closer look at my projects and run this portfolio locally on your machi
 
 1. **Clone the Repository:**
    Begin by cloning this repository to your local machine. Use the following command in your terminal:
-   https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio
+   *https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio*
 
 2. **Install Dependencies:**
    Navigate to the cloned repository directory and install the necessary dependencies.
-   npm install --legacy-peer-deps
+   _npm install --legacy-peer-deps_
 
 3. **Run the Development Server:**
    Launch the development server by executing:
-   npm run dev
+   _npm run dev_
 
 4. **View the Portfolio:**
-   Open a web browser and visit: http://localhost:3000
+   Open a web browser and visit: _http://localhost:3000_
 
 ## Let's Connect! 🤝
 
