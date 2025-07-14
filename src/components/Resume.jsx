@@ -4,7 +4,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import { motion } from "framer-motion";
-import Tilt from "react-tilt";
 
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
@@ -26,43 +25,37 @@ const ResumeCard = ({ image, resume_link, title, description }) => {
       className="relative group"
     >
       <a href={resume_link} target="_blank" rel="noopener noreferrer">
-        <Tilt
-          options={{
-            max: 45,
-            scale: 1,
-            speed: 450,
-          }}
-          className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full cursor-pointer relative"
+        <div
+          className="bg-[rgba(40,40,70,0.55)] backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-0 sm:w-[380px] w-full cursor-pointer relative overflow-hidden transition-transform duration-300 hover:scale-[1.03] hover:shadow-3xl"
+          style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}
         >
-          {/* Left Arrow */}
-          <div className="absolute left-[-80px] top-1/2 transform -translate-y-1/2 w-[80px] h-[12px] bg-white rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+          {/* Animated Gradient Border */}
+          <div className="absolute inset-0 rounded-3xl pointer-events-none z-0 border-2 border-transparent bg-gradient-to-tr from-[#7f5cff]/60 via-transparent to-[#00cea8]/60 animate-pulse" style={{filter:'blur(2px)'}} />
 
-          {/* Right Arrow */}
-          <div className="absolute right-[-80px] top-1/2 transform -translate-y-1/2 w-[80px] h-[12px] bg-white -rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
-
-          <div className="relative w-full h-[230px]">
+          <div className="relative w-full h-[230px] z-10">
             <img
               src={image}
               alt="resume_image"
-              className="w-full h-full object-cover rounded-2xl"
+              className="w-full h-full object-cover rounded-2xl border-4 border-white/10 shadow-lg"
             />
-
-            {/* <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-              <div className="black-gradient w-10 h-10 rounded-full flex justify-center items-center">
-                <img
-                  src="https://via.placeholder.com/20" // Replace with an icon or image relevant to your resume
-                  alt="open resume"
-                  className="w-1/2 h-1/2 object-contain"
-                />
-              </div>
-            </div> */}
           </div>
 
-          <div className="mt-5">
-            <h3 className="text-white font-bold text-[24px]">{title}</h3>
-            <p className="mt-2 text-secondary text-[14px]">{description}</p>
+          <div className="mt-5 px-6 pb-6 pt-2 z-10 relative flex flex-col items-center">
+            <span className="inline-block px-3 py-1 mb-2 rounded-full bg-gradient-to-r from-[#7f5cff] to-[#00cea8] text-white text-xs font-bold tracking-widest shadow-md uppercase w-fit">
+              {title.split(" ")[0]}
+            </span>
+            <h3 className="text-white font-extrabold text-[24px] mb-1 text-center drop-shadow-lg">{title}</h3>
+            <p className="text-[#b3b3ff] text-[15px] font-medium mb-4 text-center">{description}</p>
+            <a
+              href={resume_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-2 rounded-xl bg-gradient-to-r from-[#7f5cff] to-[#00cea8] text-white font-bold shadow-lg hover:from-[#00cea8] hover:to-[#7f5cff] transition-all duration-200 text-lg mt-2"
+            >
+              View Resume
+            </a>
           </div>
-        </Tilt>
+        </div>
       </a>
     </motion.div>
   );
