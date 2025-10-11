@@ -20,7 +20,7 @@ const Experience = () => {
         <p className={`${styles.sectionSubText} text-center`}>
           What I have done so far
         </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>
+        <h2 style={{ color: 'red', background: 'yellow', fontSize: '40px', zIndex: 1000, position: 'relative', textAlign: 'center', margin: '20px 0' }}>
           Career Commits.
         </h2>
       </motion.div>
