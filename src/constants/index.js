@@ -1,447 +1,443 @@
 import {
   android,
   androidStudio,
+  awsLogo,
   baripadCollege,
   bloc,
   dart,
   figma,
   firebase,
-  // javascript,
-  // bootstrap,
-  // html,
-  // css,
-  // reactjs,
-  // springboot,
-  // postgres,
-  // angular,
-  // typescript,
-  // tailwind,
-  // nodejs,
-  // mongodb,
-  // mysql,
   flutter,
   freelancerLogo,
+  gcpLogo,
   gift,
   git,
   githubLogo,
+  iosLogo,
   irissLogo,
   kodsLogo,
   kotlin,
   kv,
+  me,
   mongo,
   nodejs,
   postman,
   typoflogo,
 } from "../assets";
 
-export const navLinks = [
-  {
-    id: "",
-    title: "HomePage()",
-  },
-  {
-    id: "about",
-    title: "AboutMe()",
-  },
-  {
-    id: "work",
-    title: "CareerCommits()",
-  },
-  {
-    id: "contact",
-    title: "Connect()",
-  },
-  {
-    id: "blog",
-    title: "Blog()",
-  },
+export const navItems = [
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "notes", label: "Notes" },
+  { id: "certifications", label: "Certifications" },
+  { id: "contact", label: "Contact" },
 ];
 
-const services = [
-  {
-    title: "Flutter Developer",
-    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/flutter.png?raw=true",
-  },
-  {
-    title: "Android Developer",
-    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/android.png?raw=true",
-  },
-  {
-    title: "IOS Developer",
-    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/ios.png?raw=true",
-  },
-  {
-    title: "Freelancer",
-    icon: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/freelancer.png?raw=true",
-  },
-];
+export const resumeResource = {
+  label: "Download resume",
+  href: "https://drive.google.com/uc?export=download&id=1Th8vxK2BKSmp8kA2V2Fj6rJ8BQVpBB6L",
+  preview:
+    "https://github.com/Priyanshu-Bej/Priyanshu-Pritam-Bej-Resume/blob/main/Priyanshu_Pritam_Bej_Resume_Thumbnail.png?raw=true",
+  fileName: "Priyanshu_Pritam_Bej_Resume.pdf",
+};
 
-const technologies = [
-  {
-    name: "flutter",
-    icon: flutter,
+export const heroContent = {
+  eyebrow: "Lead Flutter Engineer",
+  title: "Shipping human-centered mobile journeys",
+  highlight: "mobile journeys",
+  bio: [
+    "Crafting premium Flutter experiences that feel right at home on every device.",
+    "I'm Priyanshu Pritam Bej — a Bengaluru-based mobile engineer focused on shipping polished, production-ready apps for ambitious teams.",
+  ],
+  toolbox: [],
+  workflow: [],
+  passion: "Mobile engineering that balances beautiful UX with bulletproof reliability.",
+  linkedin: {
+    href: "https://www.linkedin.com/in/priyanshubej/",
+    handle: "@priyanshubej",
+    label: "Connect on LinkedIn",
   },
-  {
-    name: "dart",
-    icon: dart,
-  },
-  {
-    name: "bloc",
-    icon: bloc,
-  },
-  {
-    name: "kotlin",
-    icon: kotlin,
-  },
-  {
-    name: "firebase",
-    icon: firebase,
-  },
-  {
-    name: "android",
-    icon: android,
-  },
-  {
-    name: "Node Js",
-    icon: nodejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "gitHub",
-    icon: githubLogo,
-  },
-  {
-    name: "Mongo DB",
-    icon: mongo,
-  },
-  {
-    name: "androidStudio",
-    icon: androidStudio,
-  },
-  {
-    name: "postman",
-    icon: postman,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-];
+  portrait: me,
+  heroLogos: [
+    {
+      name: "Flutter",
+      image: flutter,
+    },
+    {
+      name: "Android",
+      image: android,
+    },
+    {
+      name: "iOS",
+      image: iosLogo,
+    },
+  ],
+  stats: [
+    { value: "3.5+ yrs", label: "Production experience" },
+    { value: "12 apps", label: "Shipped across stores" },
+    { value: "LinkedIn", label: "@priyanshubej" },
+  ],
+  primaryAction: { label: "Start a project", href: "#contact" },
+  secondaryAction: { label: "View projects", href: "#projects" },
+};
 
-const experiences = [
+export const aboutContent = {
+  headline: "Full-stack mobile execution with a product mindset.",
+  body: `I'm Priyanshu Pritam Bej — a Bengaluru-based Flutter engineer focused on building resilient mobile ecosystems for hyper-growth teams. I partner with design, product, and backend squads to transform ambitious ideas into polished experiences that scale.`,
+  qualities: [
+    {
+      title: "End-to-end delivery",
+      description:
+        "From ideation and UX flows to analytics, error budgets, and store releases — I enjoy owning the full lifecycle.",
+    },
+    {
+      title: "Systems thinking",
+      description:
+        "Design systems, clean architecture, and automated QA pipelines keep the team moving quickly without losing quality.",
+    },
+    {
+      title: "Collaborative leadership",
+      description:
+        "I mentor juniors, facilitate tech choices, and keep roadmaps honest through transparent communication.",
+    },
+  ],
+};
+
+export const experienceTimeline = [
   {
+    company: "IRISS Inc",
     title: "Mobile App Developer",
-    company_name: "IRISS Inc | Bengaluru",
+    period: "Dec 2024 – Present",
+    location: "Bengaluru, India",
     icon: irissLogo,
-    iconBg: "#0078D7",
-    date: "Dec 2024 - Present",
-    points: [
-      "Leading the development of Esentry, a next-generation app designed to revolutionize asset management across various industries globally.",
-      "Utilizing advanced technologies including IRISS sensors and hubs for real-time monitoring, maintenance, and control of assets, enhancing operational efficiency and user experience.",
-      "Implementing NFC technology to streamline asset tracking and management, along with maintenance automation features to reduce downtime.",
-      "Developing detailed reporting tools within the app to provide actionable insights, maintenance history, and performance analytics, supporting critical decision-making processes.",
-      "Ensuring app scalability and performance to meet the needs of a global client base, from small-scale factories to large enterprises.",
-      "Driving significant revenue gains and operational efficiencies for clients, positioning the app as a pivotal tool in industrial asset management.",
+    bullets: [
+      "Leading eSentry — an asset management platform that pairs industrial IoT sensors with field-ready mobile workflows.",
+      "Architected offline-first modules with NFC scanning and maintenance automation that reduced manual audits by 40%.",
+      "Built executive dashboards with actionable telemetry, boosting preventative maintenance adoption across clients.",
     ],
   },
   {
+    company: "Kods Technologies",
     title: "Flutter Developer",
-    company_name: "Kods Technologies | Bengaluru",
+    period: "Dec 2023 – Dec 2024",
+    location: "Bengaluru, India",
     icon: kodsLogo,
-    iconBg: "#4B0082",
-    date: "Dec 2023 - Dec 2024",
-    points: [
-      "Led the development of real-time, cross-platform service apps for sectors including Ed-tech, Food Delivery, and Ride Booking, enhancing operational efficiency and user experience.",
-      "Utilized Flutter for UI development, integrating analytics to monitor and enhance user interactions and satisfaction.",
-      "Implemented robust state management techniques using Bloc and Provider, ensuring smooth and responsive app behavior.",
-      "Successfully launched service applications that attracted thousands of users, significantly boosting user adoption rates and contributing to business profitability and market expansion.",
+    bullets: [
+      "Shipped cross-platform service apps spanning EdTech, on-demand logistics, and ride booking with 30% faster release cadences.",
+      "Introduced Bloc- and Provider-driven state patterns with analytics instrumentation for user journey insights.",
+      "Collaborated with backend teams to optimize REST APIs and push notification delivery, increasing retention by 18%.",
     ],
   },
   {
+    company: "Typof Technologies",
     title: "Flutter Developer",
-    company_name: "Typof Technologies | Bhubaneswar",
+    period: "Dec 2022 – Dec 2023",
+    location: "Bhubaneswar, India",
     icon: typoflogo,
-    iconBg: "#4B0082",
-    date: "Dec 2022 - Dec 2023",
-    points: [
-      "Engineered and optimized cross-platform Flutter applications for the E-commerce sector, enhancing both operational efficiency and customer engagement.",
-      "Advanced state management adoption, using GetX and Provider to increase application responsiveness and reliability.",
-      "Streamlined backend integration with optimized REST APIs and Firebase, improving data handling and application performance.",
+    bullets: [
+      "Modernized seller tooling for e-commerce partners with real-time inventory sync, media uploads, and automated settlements.",
+      "Established CI/CD pipelines with staged rollouts and monitoring, cutting hotfix cycles from days to hours.",
     ],
   },
   {
+    company: "Freelance",
     title: "Flutter Developer",
-    company_name: "Freelancer | Remote  ",
+    period: "Mar 2022 – Dec 2022",
+    location: "Remote",
     icon: freelancerLogo,
-    iconBg: "#4B0082",
-    date: "Mar 2022 - Dec 2022",
-    points: [
-      "Embarked on my Flutter development journey, collaborating with diverse teams on small projects to hone my skills and create innovative mobile solutions",
-      "Developed foundational skills in crafting user-centric applications, leveraging Flutter to build functional and impactful interfaces while focusing on continuous learning and self-improvement",
+    bullets: [
+      "Rapid prototyping for startups, piloting MVPs and collaborating closely with non-technical founders.",
     ],
   },
 ];
-const educational = [
+
+export const educationTimeline = [
   {
-    title: "Masters in Computer Application",
-    company_name: "Gandhi Institute for Technology | Bhubaneswar",
+    school: "Gandhi Institute for Technology",
+    program: "Master of Computer Applications",
+    period: "2021 – 2023",
     icon: gift,
-    iconBg: "#4B0082",
-    date: "2021 - 2023",
-    points: [],
   },
   {
-    title: "Bachelor of Science",
-    company_name: "Baripada Degree College | Baripada",
+    school: "Baripada Degree College",
+    program: "Bachelor of Science",
+    period: "2018 – 2021",
     icon: baripadCollege,
-    iconBg: "#4B0082",
-    date: "2018 - 2021",
-    points: [],
   },
   {
-    title: "Intermediate (Class 12)",
-    company_name: "Baripada Jr. College | Baripada",
+    school: "Baripada Jr. College",
+    program: "Intermediate (Class 12)",
+    period: "2016 – 2018",
     icon: baripadCollege,
-    iconBg: "#4B0082",
-    date: "2016 - 2018",
-    points: [],
   },
   {
-    title: "Matriculation (Class 10)",
-    company_name: "Kendriya Vidyalaya | Kendujhar",
+    school: "Kendriya Vidyalaya Kendujhar",
+    program: "Matriculation",
+    period: "2016",
     icon: kv,
-    iconBg: "#4B0082",
-    date: "2016",
-    points: [],
   },
 ];
 
-const certifications = [
-  {
-    certification:
-      "Flutter Certification: Building Efficient Cross-Platform Apps",
-    name: "SimpliLearn",
-    date: "2024",
+export const skillKeywords = [
+  "Flutter",
+  "Dart",
+  "Kotlin",
+  "Jetpack Compose",
+  "Firebase",
+  "Supabase",
+  "Node.js",
+  "MongoDB",
+  "Socket.IO",
+  "REST APIs",
+  "GraphQL",
+  "Generative AI",
+  "CI/CD",
+  "Bloc",
+  "Provider",
+  "Clean Architecture",
+  "MVC",
+  "Design Systems",
+  "Motion Design",
+  "Figma",
+  "App Store Ops",
+  "Play Store Ops",
+  "Analytics",
+  "A/B Testing",
+  "Automated QA",
+  "Unit Testing",
+];
 
-    image:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/simplilearn.png?raw=true",
+export const skillGroups = [
+  {
+    title: "Mobile platforms",
+    description:
+      "Flutter, native Android, and integrations that keep experiences feeling fast and intuitive.",
+    items: ["Flutter", "Dart", "Kotlin", "Android Studio", "Jetpack Compose"],
   },
   {
-    certification: "NPTEL Cloud Computing Certification ",
-    name: "Indian Institute of Technology, Kharagpur",
-    date: "2023",
+    title: "Architecture & tooling",
+    description:
+      "Predictable state management, modular codebases, and automation that scales with the product roadmap.",
+    items: ["Bloc", "Provider", "Clean Architecture", "CI/CD", "Git + GitHub"],
+  },
+  {
+    title: "Cloud & data",
+    description:
+      "Realtime sync, resilient APIs, and observability to keep products trustworthy under load.",
+    items: ["Firebase", "MongoDB", "Node.js", "Supabase", "Socket.IO"],
+  },
+];
+
+export const skillIcons = [
+  { name: "Flutter", icon: flutter },
+  { name: "Dart", icon: dart },
+  { name: "Bloc", icon: bloc },
+  { name: "Kotlin", icon: kotlin },
+  { name: "Firebase", icon: firebase },
+  { name: "Google Cloud", icon: gcpLogo },
+  { name: "AWS", icon: awsLogo },
+  { name: "Android", icon: android },
+  { name: "Node.js", icon: nodejs },
+  { name: "Git", icon: git },
+  { name: "GitHub", icon: githubLogo },
+  { name: "MongoDB", icon: mongo },
+  { name: "Android Studio", icon: androidStudio },
+  { name: "Postman", icon: postman },
+  { name: "Figma", icon: figma },
+];
+
+export const projects = [
+  {
+    id: "railkafe",
+    title: "RailKafe",
+    category: "Logistics & Commerce",
+    timeframe: "2023",
+    description:
+      "Real-time food delivery platform for train passengers with offline resilience and PhonePe payments.",
+    impact: [
+      "10K+ monthly orders with sub-30 second order placement.",
+      "Optimized for low-connectivity corridors via background sync and caching.",
+      "Integrated PhonePe SDK and live kitchen dashboards for SLAs under 5 minutes.",
+    ],
+    tech: ["Flutter", "Node.js", "Socket.IO", "Firebase", "PhonePe SDK"],
+    tags: ["Production", "Realtime", "Consumer"],
     image:
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/blob/main/src/assets/railkafe.png?raw=true",
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.railkafe.app",
+      repo: null,
+    },
+  },
+  {
+    id: "vdriv",
+    title: "VDriv",
+    category: "Mobility",
+    timeframe: "2024",
+    description:
+      "Driver marketplace connecting travelers with verified chauffeurs for local and outstation trips.",
+    impact: [
+      "Dynamic scheduling with route-aware pricing and availability checks.",
+      "Secure payments via Razorpay with automated invoice workflows.",
+      "Push notifications and in-app chat to reduce no-shows and support escalations.",
+    ],
+    tech: ["Flutter", "Node.js", "Firebase", "Razorpay"],
+    tags: ["Mobility", "Marketplace"],
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/VDriv-Book-Drivers-online/refs/heads/main/vdriv.png",
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.vdriv.user",
+      repo: null,
+    },
+  },
+  {
+    id: "abc-learning",
+    title: "ABC Learning",
+    category: "EdTech",
+    timeframe: "2023",
+    description:
+      "Interactive learning platform with purchasable courses, Q&A forums, and in-app code challenges.",
+    impact: [
+      "Custom code editor with auto-evaluation to increase assignment completion by 35%.",
+      "Hybrid monetization with secure payments and drip-enabled course delivery.",
+      "Instructor analytics for cohort health, adoption, and engagement scoring.",
+    ],
+    tech: ["Flutter", "Provider", "MongoDB", "Firebase", "Razorpay"],
+    tags: ["EdTech", "Product"],
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/ABC-Learning-APP/refs/heads/main/abc.png",
+    links: {
+      live: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
+      repo: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
+    },
+  },
+  {
+    id: "typof",
+    title: "Typof Sellers",
+    category: "E-commerce Ops",
+    timeframe: "2022",
+    description:
+      "Seller command center for Typof with inventory sync, logistics tracking, and revenue dashboards.",
+    impact: [
+      "Real-time catalog management and media uploads with S3 storage integration.",
+      "Multi-warehouse fulfillment with automated reconciliation and notifications.",
+      "Reduced support tickets by 28% through guided onboarding and alerts.",
+    ],
+    tech: ["Flutter", "REST APIs", "Firebase", "Laravel", "Node.js"],
+    tags: ["B2B", "Commerce"],
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/Typof-app/refs/heads/main/typof.png",
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.typof",
+      repo: null,
+    },
+  },
+  {
+    id: "lets-fun",
+    title: "Let's Fun",
+    category: "Social",
+    timeframe: "2022",
+    description:
+      "Modern dating platform with video, audio, and instant chat built on secure real-time infrastructure.",
+    impact: [
+      "Multi-modal communication stack with Aroga voice/video SDK and WebRTC fallbacks.",
+      "Trust & safety features including media verification, report workflows, and moderation panels.",
+      "Growth experimentation pipeline with feature flags and targeted promotions.",
+    ],
+    tech: ["Flutter", "Laravel", "Firebase", "Aroga SDK"],
+    tags: ["Social", "Realtime"],
+    image:
+      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/refs/heads/main/src/assets/letsfun.png",
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.letsFun.user",
+      repo: null,
+    },
+  },
+  {
+    id: "atoms",
+    title: "ATOMS",
+    category: "EdTech",
+    timeframe: "2021",
+    description:
+      "Academic and school management system connecting students, parents, and educators.",
+    impact: [
+      "Performance analytics with cohort-based insights and attendance automation.",
+      "Payments, fee reminders, and ledger tracking integrated with Razorpay.",
+      "Scalable modular architecture enabling custom workflows per institution.",
+    ],
+    tech: ["Flutter", "Provider", "Laravel", "Razorpay"],
+    tags: ["Education", "B2B"],
+    image:
+      "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System/blob/main/Atoms.png?raw=true",
+    links: {
+      live: "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System.git",
+      repo: "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System.git",
+    },
+  },
+];
+
+
+export const certificationShowcase = [
+  {
+    title: "Developer Security Champion",
+    issuer: "Pluralsight",
+    logo:
+      "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pluralsight_logo.png",
+  },
+  {
+    title: "Flutter Certification",
+    issuer: "Great Learning",
+    logo:
+      "https://yt3.googleusercontent.com/Jpdh9vywgq6ZbxUT9OmuN2JkingCOhv1UuEmz9X6M8IKJSeD1wCzaYUV6PW8Gmp6agZGRWT_gw=s900-c-k-c0x00ffffff-no-rj",
+  },
+  {
+    title: "Introduction to IoT",
+    issuer: "NPTEL · IIT Kharagpur",
+    logo:
       "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
   },
   {
-    certification:
-      "AI Appreciation Certificate: Foundations of Artificial Intelligence",
-    name: "E&IT Department, Government of Odisha and Intel.",
-    date: "2023",
-    image:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/Government%20of%20Odisha.png?raw=true",
-  },
-];
-const projects = [
-  {
-    name: "Railkafe -    Order Food in Train",
-    description:
-      "Developed RailKafe, a real-time food delivery app tailored for train passengers, boasting over 10,000 downloads. Optimized for low-connectivity environments and integrated with PhonePe payments, it streamlines dining experiences on the rails.",
-    tags: [
-      {
-        name: "Flutter",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Nodejs",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Socket I/O",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Firebase",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "PhonePe Payment SDK",
-        color: "green-text-gradient",
-      },
-    ],
-    image:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/blob/main/src/assets/railkafe.png?raw=true",
-
-    source_code_link:
-      "https://play.google.com/store/apps/details?id=com.railkafe.app",
-  },
-
-  {
-    name: "Vdriv - Booking Professional Drivers",
-    description:
-      "Developed Vdriv, an app that allows users to book professional drivers for local, outstation, one-way, or round trips. It features flexible scheduling, secure payments, and real-time notifications to ensure a smooth and reliable travel experience.",
-    tags: [
-      {
-        name: "Flutter",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "RazorPay",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Nodejs",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Firebase",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "RazorPay Payment SDK",
-        color: "green-text-gradient",
-      },
-    ],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/VDriv-Book-Drivers-online/refs/heads/main/vdriv.png",
-    source_code_link:
-      "https://play.google.com/store/apps/details?id=com.vdriv.user",
-  },
-  {
-    name: "ABC Online Learning Platform",
-    description:
-      "Developed ABC Learning App, an Ed-tech platform with purchasable courses, real-time Q&A forums, and a custom in-app code editor for assignments. Enabled interactive and engaging learning for users.",
-    tags: [
-      {
-        name: "Flutter",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Provider Bloc",
-        color: "green-text-gradient",
-      },
-      {
-        name: "MongoDB",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "RazorPay Payment SDK",
-        color: "green-text-gradient",
-      },
-    ],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/ABC-Learning-APP/refs/heads/main/abc.png",
-    source_code_link: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
-  },
-  {
-    name: "Typof - For Sellers",
-    description:
-      "Developed Typof, an e-commerce site management app for sellers, enabling efficient product listing, order tracking, and inventory management. Streamlined operations for enhanced business productivity.",
-    tags: [
-      {
-        name: "Flutter",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "REST API's",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Amazon S3",
-        color: "pink-text-gradient",
-      },
-
-      {
-        name: "Firebase",
-        color: "blue-text-gradient",
-      },
-
-      {
-        name: "Laravel",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "NodeJs",
-        color: "green-text-gradient",
-      },
-    ],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Typof-app/refs/heads/main/typof.png",
-    source_code_link:
-      "https://play.google.com/store/apps/details?id=com.typof&pcampaignid=web_share",
-  },
-  {
-    name: "Let's Fun - A Mordern Dating Platform",
-    description:
-      "Developed Let's Fun, an modern dating platform that offers seamless communication through video, audio, and instant chat features, designed to help you connect with like-minded individuals effortlessly.",
-    tags: [
-      {
-        name: "Flutter",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "REST API's",
-        color: "green-text-gradient",
-      },
-
-      {
-        name: "Laravel",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Firebase",
-        color: "green-text-gradient",
-      },
-
-      {
-        name: "Aroga Voice and Video SDK",
-        color: "blue-text-gradient",
-      },
-    ],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/refs/heads/main/src/assets/letsfun.png",
-
-    source_code_link:
-      "https://play.google.com/store/apps/details?id=com.letsFun.user&hl=en_IN",
-  },
-
-  {
-    name: "ATOMS - Academic & School Management System",
-    description:
-      "Developed ATOMS, an innovative app designed to connect students, parents, and educators, enhancing academic tracking and management through interactive tools and detailed performance analytics.",
-    tags: [
-      {
-        name: "Flutter",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Provider ",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Laravel",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "RazorPay Payment SDK",
-        color: "green-text-gradient",
-      },
-    ],
-    image:
-      "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System/blob/main/Atoms.png?raw=true",
-    source_code_link:
-      "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System.git",
+    title: "Management Information System",
+    issuer: "NPTEL · IIT Kharagpur",
+    logo:
+      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
   },
 ];
 
-export {
-  certifications,
-  educational,
-  experiences,
-  projects,
-  services,
-  technologies,
-};
+export const socialLinks = [
+  {
+    label: "Email",
+    href: "mailto:priyanshubej2001@gmail.com",
+    handle: "priyanshubej2001@gmail.com",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/priyanshubej/",
+    handle: "@priyanshubej",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/Priyanshu-Bej",
+    handle: "@Priyanshu-Bej",
+  },
+];
+
+export const contactChannels = [
+  {
+    type: "email",
+    label: "Email",
+    value: "priyanshubej2001@gmail.com",
+    href: "mailto:priyanshubej2001@gmail.com",
+  },
+  {
+    type: "location",
+    label: "Currently in",
+    value: "Bengaluru, India",
+  },
+  {
+    type: "freelance",
+    label: "Freelance",
+    value: "Open for collaborations",
+  },
+];

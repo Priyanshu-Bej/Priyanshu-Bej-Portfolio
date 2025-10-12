@@ -5,13 +5,16 @@ import me from "./priyanshubej.png";
 
 import android from "./tech/android.png";
 import androidStudio from "./tech/androidStudio.png";
+import awsLogo from "./tech/aws.png";
 import bloc from "./tech/bloc.png";
 import dart from "./tech/dart.png";
 import figma from "./tech/figma.png";
 import firebase from "./tech/firebase.png";
 import flutter from "./tech/flutter.png";
+import gcpLogo from "./tech/GCP.png";
 import git from "./tech/git.png";
 import githubLogo from "./tech/github.png";
+import iosLogo from "./ios.png";
 import kotlin from "./tech/kotlin.png";
 import mongo from "./tech/mongo.png";
 import nodejs from "./tech/nodejs.png";
@@ -28,6 +31,7 @@ import kv from "./education/kv.png";
 export {
   android,
   androidStudio,
+  awsLogo,
   baripadCollege,
   bloc,
   close,
@@ -36,10 +40,12 @@ export {
   firebase,
   flutter,
   freelancerLogo,
+  gcpLogo,
   gift,
   git,
   github,
   githubLogo,
+  iosLogo,
   irissLogo,
   kodsLogo,
   kotlin,

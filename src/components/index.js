@@ -1,31 +1,9 @@
-import About from "./About";
-import {
-  BallCanvas,
-  ComputersCanvas,
-  EarthCanvas,
-  StarsCanvas,
-} from "./canvas";
-import Contact from "./Contact";
-import Experience from "./Experience";
-import Feedbacks from "./Feedbacks";
-import Hero from "./Hero";
-import Navbar from "./Navbar";
-import Tech from "./Tech";
-import Works from "./Works";
-export { default as Blog } from "./Blog";
-export { default as BlogPost } from "./BlogPost";
-
-export {
-  About,
-  BallCanvas,
-  ComputersCanvas,
-  Contact,
-  EarthCanvas,
-  Experience,
-  Feedbacks,
-  Hero,
-  Navbar,
-  StarsCanvas,
-  Tech,
-  Works,
-};
+export { default as Navbar } from "./layout/Navbar";
+export { default as Footer } from "./layout/Footer";
+export { default as HeroSection } from "./sections/HeroSection";
+export { default as AboutSection } from "./sections/AboutSection";
+export { default as SkillsSection } from "./sections/SkillsSection";
+export { default as ProjectsSection } from "./sections/ProjectsSection";
+export { default as NotesSection } from "./sections/NotesSection";
+export { default as TestimonialsSection } from "./sections/TestimonialsSection";
+export { default as ContactSection } from "./sections/ContactSection";
