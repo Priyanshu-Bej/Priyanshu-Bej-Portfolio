@@ -307,7 +307,8 @@ const HeroSection = () => {
               </p>
               <a
                 href={resumeResource.href}
-                download={resumeResource.fileName}
+                target="_blank"
+                rel="noreferrer"
                 className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-brand-primary transition hover:text-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-white"
               >
                 Tiny resume ↓

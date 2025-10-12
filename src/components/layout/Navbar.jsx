@@ -56,8 +56,10 @@ const Navbar = () => {
     smoothScrollTo(`#${id}`);
   };
 
-  const resumeLabel =
-    theme === "dark" ? "Resume" : resumeResource.label ?? "Resume";
+  const resumeLabel = resumeResource.label ?? "Resume";
+  const resumeDownloadProps = resumeResource.fileName
+    ? { download: resumeResource.fileName }
+    : {};
 
   return (
     <header
@@ -105,7 +107,9 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <a
               href={resumeResource.href}
-              download={resumeResource.fileName}
+              target="_blank"
+              rel="noreferrer"
+              {...resumeDownloadProps}
               className="group inline-flex items-center gap-2 rounded-full border border-brand-primary/30 bg-brand-primary px-4 py-2 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
             >
               <FiDownloadCloud />
@@ -118,9 +122,11 @@ const Navbar = () => {
         <div className="flex items-center gap-3 lg:hidden">
           <a
             href={resumeResource.href}
-            download={resumeResource.fileName}
+            target="_blank"
+            rel="noreferrer"
+            {...resumeDownloadProps}
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/20 text-neutral-600 shadow-card-light backdrop-blur-lg transition hover:text-brand-primary dark:border-white/10 dark:bg-white/10 dark:text-neutral-100"
-            aria-label="Download resume"
+            aria-label="View resume"
           >
             <FiDownloadCloud className="text-lg" />
           </a>

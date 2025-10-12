@@ -36,30 +36,28 @@ export const navItems = [
 ];
 
 export const resumeResource = {
-  label: "Download resume",
-  href: "https://drive.google.com/uc?export=download&id=1Th8vxK2BKSmp8kA2V2Fj6rJ8BQVpBB6L",
+  label: "View resume",
+  href: "https://drive.google.com/file/d/1jQe3SbdPrWvahaKmO2byuugcghnZxJI9/view?usp=sharing",
   preview:
     "https://github.com/Priyanshu-Bej/Priyanshu-Pritam-Bej-Resume/blob/main/Priyanshu_Pritam_Bej_Resume_Thumbnail.png?raw=true",
-  fileName: "Priyanshu_Pritam_Bej_Resume.pdf",
+  fileName: undefined,
 };
 
 export const heroContent = {
   eyebrow: "Lead Flutter Engineer",
   title: "Shipping human-centered mobile journeys",
   highlight: "mobile journeys",
-  bio: [
-    "Crafting premium Flutter experiences that feel right at home on every device.",
-    "I'm Priyanshu Pritam Bej — a Bengaluru-based mobile engineer focused on shipping polished, production-ready apps for ambitious teams.",
-  ],
+  bio: [],
   toolbox: [],
   workflow: [],
-  passion: "Mobile engineering that balances beautiful UX with bulletproof reliability.",
+  passion: "",
   linkedin: {
     href: "https://www.linkedin.com/in/priyanshubej/",
     handle: "@priyanshubej",
     label: "Connect on LinkedIn",
   },
   portrait: me,
+  aboutPortrait: me,
   heroLogos: [
     {
       name: "Flutter",

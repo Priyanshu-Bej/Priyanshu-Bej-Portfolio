@@ -54,7 +54,8 @@ const TimelineItem = ({ item, index }) => (
 
 const AboutSection = () => {
   const { headline, body, qualities } = aboutContent;
-  const { portrait } = heroContent;
+  const { aboutPortrait } = heroContent;
+  const displayPortrait = aboutPortrait;
 
   return (
     <section
@@ -99,7 +100,7 @@ const AboutSection = () => {
             <span className="absolute inset-0 rounded-[2.5rem] border border-white/25 opacity-80" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/30">
               <img
-                src={portrait}
+                src={displayPortrait}
                 alt="Priyanshu smiling in professional attire"
                 loading="lazy"
                 className="h-full w-full object-cover"
