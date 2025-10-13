@@ -375,31 +375,26 @@ export const projects = [
   },
 ];
 
-
 export const certificationShowcase = [
   {
     title: "Developer Security Champion",
     issuer: "Pluralsight",
-    logo:
-      "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pluralsight_logo.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pluralsight_logo.png",
   },
   {
     title: "Flutter Certification",
     issuer: "Great Learning",
-    logo:
-      "https://yt3.googleusercontent.com/Jpdh9vywgq6ZbxUT9OmuN2JkingCOhv1UuEmz9X6M8IKJSeD1wCzaYUV6PW8Gmp6agZGRWT_gw=s900-c-k-c0x00ffffff-no-rj",
+    logo: "https://yt3.googleusercontent.com/Jpdh9vywgq6ZbxUT9OmuN2JkingCOhv1UuEmz9X6M8IKJSeD1wCzaYUV6PW8Gmp6agZGRWT_gw=s900-c-k-c0x00ffffff-no-rj",
   },
   {
     title: "Introduction to IoT",
     issuer: "NPTEL · IIT Kharagpur",
-    logo:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
+    logo: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
   },
   {
     title: "Management Information System",
     issuer: "NPTEL · IIT Kharagpur",
-    logo:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
+    logo: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
   },
 ];
 
