@@ -219,14 +219,16 @@ const HeroSection = () => {
               href={linkedin.href}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex w-fit items-center gap-3 rounded-full border border-white/25 bg-white/12 px-4 py-2 text-xs uppercase tracking-[0.35em] text-neutral-600 shadow-card-light backdrop-blur transition hover:-translate-y-0.5 hover:border-brand-primary/50 hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-white/10 dark:bg-white/10 dark:text-neutral-200"
+              className="group inline-flex w-fit items-center gap-4 rounded-full border border-brand-primary/50 bg-brand-primary/10 px-7 py-3 text-sm font-semibold text-brand-primary shadow-lg backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-brand-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-brand-primary/40 dark:bg-brand-primary/15 dark:text-white"
             >
-              <FiLinkedin className="text-brand-primary" />
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-primary text-white shadow-md transition group-hover:bg-white group-hover:text-brand-primary">
+                <FiLinkedin className="h-5 w-5" />
+              </span>
               <span className="flex flex-col text-left tracking-normal">
-                <span className="text-[10px] uppercase text-neutral-500 dark:text-neutral-400">
+                <span className="text-[11px] uppercase tracking-[0.35em] text-brand-primary/80 transition group-hover:text-white/80 dark:text-white/80">
                   {linkedin.label}
                 </span>
-                <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-100">
+                <span className="text-lg font-semibold text-brand-primary transition group-hover:text-white dark:text-white">
                   {linkedin.handle}
                 </span>
               </span>

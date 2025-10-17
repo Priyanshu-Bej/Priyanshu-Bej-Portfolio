@@ -75,7 +75,7 @@ export const heroContent = {
   stats: [
     { value: "3.5+ yrs", label: "Production experience" },
     { value: "12 apps", label: "Shipped across stores" },
-    { value: "LinkedIn", label: "@priyanshubej" },
+    { value: "Revenue", label: "Generated in crores" },
   ],
   primaryAction: { label: "Start a project", href: "#contact" },
   secondaryAction: { label: "View projects", href: "#projects" },
