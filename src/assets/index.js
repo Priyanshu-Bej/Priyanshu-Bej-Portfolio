@@ -1,7 +1,7 @@
 import close from "./close.svg";
 import github from "./github.png";
 import menu from "./menu.svg";
-import me from "./priyanshu_bej_code_theme.JPG";
+import me from "./priyanshu_bej_code_theme.jpg";
 
 import iosLogo from "./ios.png";
 import android from "./tech/android.png";
