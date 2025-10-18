@@ -1,5 +1,5 @@
 import PageContainer from "../components/layout/PageContainer";
-import { ContactSection } from "../components";
+import ContactSection from "../components/sections/ContactSection";
 
 const Contact = () => (
   <PageContainer className="gap-0">

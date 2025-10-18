@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
@@ -159,7 +160,7 @@ const NoteModal = ({ note, onClose }) => {
         >
           <FiX className="text-lg" />
         </button>
-        <div className="custom-scroll max-h-[68vh] space-y-6 overflow-y-auto px-10 py-10">
+        <div className="scrollbar-glass max-h-[68vh] space-y-6 overflow-y-auto px-10 py-10">
           <p className="text-xs uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500">
             {note.date} · {note.readingTime} min read
           </p>
@@ -285,6 +286,19 @@ const NotesSection = () => {
       <NoteModal note={selectedNote} onClose={() => setSelectedNote(null)} />
     </section>
   );
+};
+
+NoteModal.propTypes = {
+  note: PropTypes.shape({
+    slug: PropTypes.string,
+    title: PropTypes.string,
+    date: PropTypes.string,
+    excerpt: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    content: PropTypes.string,
+    readingTime: PropTypes.number,
+  }),
+  onClose: PropTypes.func.isRequired,
 };
 
 export default NotesSection;

@@ -1,12 +1,17 @@
 import { AnimatePresence } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer, Navbar } from "./components";
 import AnimatedBackground from "./components/layout/AnimatedBackground";
 import PageTransitionLoader from "./components/layout/PageTransitionLoader";
 import ScrollProgress from "./components/layout/ScrollProgress";
-import { About, Contact, Home, Projects, Skills } from "./pages";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 const AppRoutes = () => {
   const location = useLocation();
