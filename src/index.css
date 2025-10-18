@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -48,7 +48,7 @@
 
 @layer components {
   .section-wrapper {
-    @apply pt-20 pb-24 md:pt-24 md:pb-28;
+    @apply pt-16 pb-20 md:pt-20 md:pb-24 rounded-[2.25rem];
   }
 
   .eyebrow {

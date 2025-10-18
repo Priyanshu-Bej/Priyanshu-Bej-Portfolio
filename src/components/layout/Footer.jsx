@@ -1,5 +1,6 @@
+import { NavLink } from "react-router-dom";
+
 import { navItems, socialLinks } from "../../constants";
-import { smoothScrollTo } from "../../utils/smoothScroll";
 
 const Footer = () => {
   return (
@@ -29,16 +30,16 @@ const Footer = () => {
               Navigate
             </p>
             <ul className="mt-4 space-y-2 text-sm">
-              {navItems.map(({ id, label }) => (
+              {navItems.map(({ id, label, path }) => (
                 <li key={id}>
-                  <button
-                    type="button"
-                    onClick={() => smoothScrollTo(`#${id}`)}
+                  <NavLink
+                    to={path}
+                    end={path === "/"}
                     className="inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-1.5 text-left text-neutral-600 transition hover:border-brand-primary/30 hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-neutral-300"
                   >
                     <span className="text-brand-primary/60">•</span>
                     {label}
-                  </button>
+                  </NavLink>
                 </li>
               ))}
             </ul>

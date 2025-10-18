@@ -1,4 +1,12 @@
-import { lazy, Suspense, useCallback, useMemo, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { motion } from "framer-motion";
 
 import { projects } from "../../constants";
@@ -10,8 +18,27 @@ const ProjectModal = lazy(() => import("../projects/ProjectModal"));
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
   const isMobile = useMediaQuery("(max-width: 767px)");
   const scrollRef = useRef(null);
+  const autoScrollFrame = useRef(null);
+  const resumePauseTimeout = useRef(null);
+
+  const pauseAutoScroll = useCallback(() => {
+    if (resumePauseTimeout.current) {
+      clearTimeout(resumePauseTimeout.current);
+      resumePauseTimeout.current = null;
+    }
+    setIsPaused(true);
+  }, []);
+
+  const resumeAutoScroll = useCallback(() => {
+    if (resumePauseTimeout.current) {
+      clearTimeout(resumePauseTimeout.current);
+      resumePauseTimeout.current = null;
+    }
+    setIsPaused(false);
+  }, []);
 
   const handleHorizontalScroll = useCallback(
     (event) => {
@@ -19,10 +46,44 @@ const ProjectsSection = () => {
       if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
         event.preventDefault();
         scrollRef.current.scrollLeft += event.deltaY;
+        pauseAutoScroll();
+        resumePauseTimeout.current = setTimeout(resumeAutoScroll, 2000);
       }
     },
-    [isMobile]
+    [isMobile, pauseAutoScroll, resumeAutoScroll]
   );
+
+  useEffect(() => {
+    if (isMobile) return undefined;
+    const container = scrollRef.current;
+    if (!container) return undefined;
+
+    const step = () => {
+      if (!isPaused) {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (maxScroll > 0) {
+          if (container.scrollLeft >= maxScroll - 1) {
+            container.scrollLeft = 0;
+          } else {
+            container.scrollLeft += 0.7;
+          }
+        }
+      }
+      autoScrollFrame.current = requestAnimationFrame(step);
+    };
+
+    autoScrollFrame.current = requestAnimationFrame(step);
+
+    return () => {
+      if (autoScrollFrame.current) {
+        cancelAnimationFrame(autoScrollFrame.current);
+      }
+      if (resumePauseTimeout.current) {
+        clearTimeout(resumePauseTimeout.current);
+        resumePauseTimeout.current = null;
+      }
+    };
+  }, [isMobile, isPaused, resumeAutoScroll]);
 
   const projectsList = useMemo(() => projects, []);
 
@@ -86,7 +147,14 @@ const ProjectsSection = () => {
               ref={scrollRef}
               onWheel={handleHorizontalScroll}
               variants={fadeInUp(0.28)}
+              onPointerEnter={pauseAutoScroll}
+              onPointerLeave={resumeAutoScroll}
+              onPointerDown={pauseAutoScroll}
+              onPointerUp={resumeAutoScroll}
+              onFocusCapture={pauseAutoScroll}
+              onBlurCapture={resumeAutoScroll}
               className="flex gap-7 overflow-x-auto scroll-smooth scrollbar-glass snap-x snap-mandatory px-1 py-2"
+              data-auto-scroll
             >
               {projectsList.map((project, index) => (
                 <div key={project.id} className="snap-start last:snap-end">

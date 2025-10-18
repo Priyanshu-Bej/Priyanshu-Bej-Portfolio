@@ -43,8 +43,20 @@ export default {
         info: "#38BDF8",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Poppins", "Inter", "system-ui", "sans-serif"],
+        sans: [
+          "Inter",
+          "Plus Jakarta Sans",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
+        display: [
+          "Space Grotesk",
+          "Plus Jakarta Sans",
+          "Inter",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       boxShadow: {
         "soft-xl": "0 25px 80px -35px rgba(0, 207, 255, 0.35)",

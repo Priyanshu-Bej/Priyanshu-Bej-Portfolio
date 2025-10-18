@@ -19,6 +19,7 @@ import {
   kotlin,
   kv,
   me,
+  aboutPortrait,
   mongo,
   nodejs,
   postman,
@@ -26,13 +27,11 @@ import {
 } from "../assets";
 
 export const navItems = [
-  { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "notes", label: "Notes" },
-  { id: "certifications", label: "Certifications" },
-  { id: "contact", label: "Contact" },
+  { id: "home", label: "Home", path: "/" },
+  { id: "about", label: "About", path: "/about" },
+  { id: "projects", label: "Projects", path: "/projects" },
+  { id: "skills", label: "Skills", path: "/skills" },
+  { id: "contact", label: "Contact", path: "/contact" },
 ];
 
 export const resumeResource = {
@@ -57,7 +56,7 @@ export const heroContent = {
     label: "Connect on LinkedIn",
   },
   portrait: me,
-  aboutPortrait: me,
+  aboutPortrait,
   heroLogos: [
     {
       name: "Flutter",
@@ -77,8 +76,8 @@ export const heroContent = {
     { value: "12 apps", label: "Shipped across stores" },
     { value: "Revenue", label: "Generated in crores" },
   ],
-  primaryAction: { label: "Start a project", href: "#contact" },
-  secondaryAction: { label: "View projects", href: "#projects" },
+  primaryAction: { label: "Start a project", href: "/contact" },
+  secondaryAction: { label: "View projects", href: "/projects" },
 };
 
 export const aboutContent = {

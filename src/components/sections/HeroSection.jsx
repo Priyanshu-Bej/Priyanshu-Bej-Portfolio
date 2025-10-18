@@ -1,13 +1,14 @@
 import { useCallback } from "react";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { FiLinkedin } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 import { heroContent, resumeResource } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
-import { smoothScrollTo } from "../../utils/smoothScroll";
 import FloatingParticles from "../ui/FloatingParticles";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const {
     eyebrow,
     title,
@@ -198,7 +199,7 @@ const HeroSection = () => {
           >
             <button
               type="button"
-              onClick={() => smoothScrollTo(primaryAction.href)}
+              onClick={() => navigate(primaryAction.href)}
               className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-brand-primary px-7 py-3 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
             >
               <span className="relative z-10">{primaryAction.label}</span>
@@ -206,7 +207,7 @@ const HeroSection = () => {
             </button>
             <button
               type="button"
-              onClick={() => smoothScrollTo(secondaryAction.href)}
+              onClick={() => navigate(secondaryAction.href)}
               className="group inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-7 py-3 text-sm font-semibold text-brand-primary backdrop-blur-lg transition duration-300 hover:-translate-y-0.5 hover:border-brand-primary/60 hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-white"
             >
               {secondaryAction.label}

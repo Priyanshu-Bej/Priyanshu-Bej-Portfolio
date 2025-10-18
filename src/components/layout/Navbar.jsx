@@ -1,83 +1,57 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiDownloadCloud, FiMenu, FiX } from "react-icons/fi";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { navItems, resumeResource } from "../../constants";
-import { useTheme } from "../../context/ThemeContext";
-import { smoothScrollTo } from "../../utils/smoothScroll";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme } = useTheme();
-
-  const sectionIds = useMemo(
-    () => navItems.map((item) => item.id).filter(Boolean),
-    []
-  );
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 24);
+      setIsScrolled(window.scrollY > 18);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-50% 0px -45% 0px",
-        threshold: 0.2,
-      }
-    );
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [sectionIds]);
-
-  const handleNavigate = (id) => {
     setMobileOpen(false);
-    setActiveSection(id);
-    smoothScrollTo(`#${id}`);
-  };
+  }, [pathname]);
 
   const resumeLabel = resumeResource.label ?? "Resume";
   const resumeDownloadProps = resumeResource.fileName
     ? { download: resumeResource.fileName }
     : {};
 
+  const handleNavigateHome = () => {
+    navigate("/");
+  };
+
   return (
     <header
-      className={`sticky top-0 z-[60] transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-[60] transition-[transform,opacity] duration-500 ${
         isScrolled ? "backdrop-blur-2xl" : ""
       }`}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between px-4 transition-all duration-300 md:px-6 ${
+        className={`mx-auto flex w-full max-w-6xl items-center justify-between px-4 transition-all duration-300 md:px-6 ${
           isScrolled
-            ? "mt-2 rounded-full border border-white/20 bg-white/10 py-3 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
-            : "py-5"
+            ? "mt-3 rounded-[2rem] border border-white/15 bg-white/12 py-3 shadow-card-light backdrop-blur-2xl dark:border-white/10 dark:bg-white/5"
+            : "mt-6 rounded-[2.25rem] border border-white/10 bg-white/14 py-4 shadow-soft-xl backdrop-blur-2xl dark:border-white/10 dark:bg-white/10"
         }`}
       >
         <button
           type="button"
-          onClick={() => handleNavigate("hero")}
+          onClick={handleNavigateHome}
           className="font-display text-lg font-semibold tracking-tight text-neutral-900 transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-neutral-100"
         >
           Priyanshu
@@ -87,20 +61,22 @@ const Navbar = () => {
         </button>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <ul className="flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-2 py-1 text-sm shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:text-neutral-200">
-            {navItems.map(({ id, label }) => (
+          <ul className="flex items-center gap-3 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-base shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:text-neutral-200">
+            {navItems.map(({ id, label, path }) => (
               <li key={id}>
-                <button
-                  type="button"
-                  onClick={() => handleNavigate(id)}
-                  className={`rounded-full px-4 py-2 transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${
-                    activeSection === id
-                      ? "bg-brand-primary text-white shadow-soft-xl"
-                      : "text-neutral-600 hover:text-brand-primary dark:text-neutral-300"
-                  }`}
+                <NavLink
+                  to={path}
+                  end={path === "/"}
+                  className={({ isActive }) =>
+                    `inline-flex items-center rounded-full px-5 py-2.5 text-base font-semibold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${
+                      isActive
+                        ? "bg-brand-primary text-white shadow-soft-xl"
+                        : "text-neutral-600 hover:text-brand-primary dark:text-neutral-300"
+                    }`
+                  }
                 >
                   {label}
-                </button>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -154,19 +130,19 @@ const Navbar = () => {
           >
             <div className="mx-4 mb-4 rounded-3xl border border-white/20 bg-white/15 p-4 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-neutral-100">
               <ul className="space-y-2">
-                {navItems.map(({ id, label }) => (
+                {navItems.map(({ id, label, path }) => (
                   <li key={id}>
-                    <button
-                      type="button"
-                      onClick={() => handleNavigate(id)}
-                      className={`w-full rounded-2xl px-4 py-3 text-left text-base font-medium transition hover:bg-brand-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-brand-primary/25 ${
-                        activeSection === id
-                          ? "bg-brand-primary text-white shadow-soft-xl"
-                          : ""
-                      }`}
+                    <NavLink
+                      to={path}
+                      end={path === "/"}
+                      className={({ isActive }) =>
+                        `block w-full rounded-2xl px-5 py-3 text-left text-lg font-semibold transition hover:bg-brand-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-brand-primary/25 ${
+                          isActive ? "bg-brand-primary text-white shadow-soft-xl" : ""
+                        }`
+                      }
                     >
                       {label}
-                    </button>
+                    </NavLink>
                   </li>
                 ))}
               </ul>

@@ -3,21 +3,15 @@ import { FiExternalLink } from "react-icons/fi";
 
 import { fadeInUp } from "../../utils/animations";
 
-const ProjectCard = ({
-  project,
-  index,
-  onOpen,
-  onHoverStart,
-  onHoverEnd,
-}) => {
-  const { title, category, description, image, tags, links, timeframe } =
+const ProjectCard = ({ project, index, onOpen, onHoverStart, onHoverEnd }) => {
+  const { title, category, description, image, tags, links, timeframe, impact = [] } =
     project;
 
   return (
     <motion.article
       variants={fadeInUp(0.06 * index)}
       whileHover={{ scale: 1.02, y: -4 }}
-      className="group relative flex h-full w-[min(340px,80vw)] flex-shrink-0 flex-col overflow-hidden rounded-[2.25rem] border border-white/25 bg-white/14 shadow-card-light backdrop-blur-2xl transition duration-500 hover:shadow-soft-xl dark:border-white/10 dark:bg-white/8 dark:shadow-card-dark"
+      className="group relative flex h-full w-[min(340px,80vw)] flex-shrink-0 flex-col overflow-hidden rounded-[2.25rem] border border-white/20 bg-white/12 shadow-card-light backdrop-blur-2xl transition duration-500 hover:shadow-soft-xl dark:border-white/10 dark:bg-white/10 dark:shadow-card-dark"
       onHoverStart={onHoverStart}
       onHoverEnd={onHoverEnd}
       onFocus={onHoverStart}
@@ -36,18 +30,28 @@ const ProjectCard = ({
             src={image}
             alt={`${title} project cover`}
             loading="lazy"
-            className="h-56 w-full object-cover transition duration-500 group-hover:scale-[1.05]"
+            className="h-56 w-full object-cover transition duration-500 group-hover:scale-[1.08]"
           />
           <span className="absolute left-4 top-4 rounded-full border border-white/30 bg-brand-primary/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-white shadow-soft-xl backdrop-blur">
             {timeframe}
           </span>
           <span className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-70" />
+          {impact.length > 0 && (
+            <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/65 via-black/20 to-transparent opacity-0 transition duration-500 group-hover:opacity-100">
+              <div className="px-5 pb-5">
+                <p className="text-[10px] uppercase tracking-[0.38em] text-white/60">
+                  Impact highlight
+                </p>
+                <p className="mt-2 text-sm text-white">{impact[0]}</p>
+              </div>
+            </div>
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-3 px-6 py-7">
           <p className="text-[11px] uppercase tracking-[0.34em] text-neutral-400 dark:text-neutral-500">
             {category}
           </p>
-          <h3 className="text-lg font-semibold text-neutral-900 transition group-hover:text-brand-primary dark:text-neutral-50">
+          <h3 className="text-xl font-semibold text-neutral-900 transition group-hover:text-brand-primary dark:text-neutral-50">
             {title}
           </h3>
           <p className="line-clamp-3 text-sm text-neutral-600 dark:text-neutral-300">
@@ -57,7 +61,7 @@ const ProjectCard = ({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-brand-primary/30 bg-brand-primary/12 px-2.5 py-1 text-brand-primary shadow-inner dark:border-brand-primary/45 dark:bg-brand-primary/25 dark:text-neutral-100"
+                className="rounded-full border border-brand-primary/30 bg-brand-primary/12 px-2.5 py-1 text-brand-primary shadow-inner transition duration-300 group-hover:border-brand-primary/45 group-hover:bg-brand-primary/20 dark:border-brand-primary/45 dark:bg-brand-primary/25 dark:text-neutral-100"
               >
                 #{tag}
               </span>
@@ -66,7 +70,7 @@ const ProjectCard = ({
         </div>
       </button>
 
-      <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-sm text-neutral-500 dark:border-white/10">
+      <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-sm text-neutral-500 backdrop-blur-sm dark:border-white/10">
         {links.live ? (
           <a
             href={links.live}
