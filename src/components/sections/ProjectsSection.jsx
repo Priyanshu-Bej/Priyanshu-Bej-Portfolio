@@ -90,11 +90,11 @@ const ProjectsSection = () => {
   return (
     <section
       id="projects"
-      className="section-wrapper relative overflow-hidden bg-white/15 backdrop-blur-2xl dark:bg-surface-base/45"
+      className="section-wrapper relative overflow-hidden border border-white/15 bg-white/12 backdrop-blur-2xl dark:border-white/10 dark:bg-white/8"
       aria-labelledby="projects-title"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-60 dark:bg-grid-dark" />
-      <div className="absolute inset-x-0 top-12 h-52 bg-gradient-to-b from-brand-secondary-soft/25 via-transparent to-transparent dark:from-brand-secondary-soft/20" />
+      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark/70" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-brand-secondary-soft/20 via-transparent to-transparent dark:from-brand-secondary-soft/28" />
 
       <div className="relative mx-auto max-w-6xl px-4 md:px-6">
         <motion.div

@@ -15,11 +15,11 @@ const SkillTag = ({ label, index }) => (
 const SkillsSection = () => (
   <section
     id="skills"
-    className="section-wrapper relative overflow-hidden bg-white/20 backdrop-blur-xl dark:bg-surface-base/50"
+    className="section-wrapper relative overflow-hidden border border-white/15 bg-white/12 backdrop-blur-2xl dark:border-white/10 dark:bg-white/8"
     aria-labelledby="skills-title"
   >
-    <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-60 dark:bg-grid-dark" />
-    <div className="absolute inset-x-0 top-16 h-48 bg-gradient-to-b from-brand-primary/10 via-transparent to-transparent dark:from-brand-primary/15" />
+    <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark/70" />
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-brand-primary/18 via-transparent to-transparent dark:from-brand-primary/28" />
 
     <div className="mx-auto max-w-6xl px-4 md:px-6">
       <motion.div

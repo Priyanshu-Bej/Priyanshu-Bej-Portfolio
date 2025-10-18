@@ -1,4 +1,5 @@
 import {
+  aboutPortrait,
   android,
   androidStudio,
   awsLogo,
@@ -19,7 +20,6 @@ import {
   kotlin,
   kv,
   me,
-  aboutPortrait,
   mongo,
   nodejs,
   postman,

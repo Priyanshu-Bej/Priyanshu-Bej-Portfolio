@@ -184,11 +184,11 @@ const NotesSection = () => {
   return (
     <section
       id="notes"
-      className="section-wrapper relative overflow-hidden bg-white/14 backdrop-blur-2xl dark:bg-surface-base/60"
+      className="section-wrapper relative overflow-hidden border border-white/15 bg-white/12 backdrop-blur-2xl dark:border-white/10 dark:bg-white/8"
       aria-labelledby="notes-title"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark" />
-      <div className="absolute inset-x-0 top-16 h-40 bg-gradient-to-b from-brand-primary/16 via-transparent to-transparent dark:from-brand-secondary-soft/20" />
+      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark/70" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-brand-secondary-soft/18 via-transparent to-transparent dark:from-brand-secondary-soft/26" />
 
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <motion.div

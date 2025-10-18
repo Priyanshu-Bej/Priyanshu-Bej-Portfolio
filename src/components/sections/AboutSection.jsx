@@ -58,13 +58,13 @@ const AboutSection = () => {
   const displayPortrait = aboutPortrait;
 
   return (
-    <section
-      id="about"
-      className="section-wrapper relative overflow-hidden"
-      aria-labelledby="about-title"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-70 dark:bg-grid-dark" />
-      <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-white/60 via-white/20 to-transparent dark:from-white/10 dark:via-white/5" />
+  <section
+    id="about"
+    className="section-wrapper relative overflow-hidden border border-white/15 bg-white/12 backdrop-blur-2xl dark:border-white/10 dark:bg-white/8"
+    aria-labelledby="about-title"
+  >
+    <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark/70" />
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-brand-primary/18 via-transparent to-transparent dark:from-brand-primary/28" />
 
       <div className="relative mx-auto max-w-6xl px-4 md:px-6">
         <motion.div
@@ -164,7 +164,9 @@ const AboutSection = () => {
           ))}
         </motion.div>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-2">
+        <div className="relative mt-16 grid gap-12 lg:grid-cols-2">
+          <div className="pointer-events-none absolute inset-y-0 left-0 h-full w-px bg-gradient-to-b from-brand-primary/35 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 h-full w-px bg-gradient-to-b from-brand-secondary-soft/30 via-transparent to-transparent" />
           <motion.div
             variants={fadeInUp(0.18)}
             initial="hidden"
