@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { FiDownloadCloud, FiMenu, FiX } from "react-icons/fi";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { navItems, resumeResource } from "../../constants";
 import ThemeToggle from "./ThemeToggle";
@@ -9,7 +9,6 @@ import ThemeToggle from "./ThemeToggle";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -31,51 +30,58 @@ const Navbar = () => {
     ? { download: resumeResource.fileName }
     : {};
 
-  const handleNavigateHome = () => {
-    navigate("/");
-  };
-
   return (
     <header
       className={`fixed inset-x-0 top-0 z-[60] transition-[transform,opacity] duration-500 ${
-        isScrolled ? "backdrop-blur-2xl" : ""
+        isScrolled ? "backdrop-blur-xl" : ""
       }`}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
       <nav
         className={`mx-auto flex w-full max-w-6xl items-center justify-between px-4 transition-all duration-300 md:px-6 ${
           isScrolled
-            ? "mt-3 rounded-[2rem] border border-white/15 bg-white/12 py-3 shadow-card-light backdrop-blur-2xl dark:border-white/10 dark:bg-white/5"
-            : "mt-6 rounded-[2.25rem] border border-white/10 bg-white/14 py-4 shadow-soft-xl backdrop-blur-2xl dark:border-white/10 dark:bg-white/10"
+            ? "mt-3 rounded-full border border-white/10 bg-white/8 py-2.5 shadow-[0_20px_60px_-35px_rgba(15,23,42,0.45)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5"
+            : "mt-6 rounded-full border border-white/5 bg-white/6 py-3 shadow-[0_25px_70px_-40px_rgba(15,23,42,0.55)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/10"
         }`}
       >
-        <button
-          type="button"
-          onClick={handleNavigateHome}
+        <Link
+          to="/"
           className="font-display text-lg font-semibold tracking-tight text-neutral-900 transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-neutral-100"
         >
           Priyanshu
           <span className="ml-1 rounded-full bg-gradient-to-r from-brand-primary via-brand-secondary-soft to-brand-accent bg-clip-text text-transparent">
             .dev
           </span>
-        </button>
+        </Link>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <ul className="flex items-center gap-3 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-base shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:text-neutral-200">
+          <ul className="flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-1.5 py-1 text-xs font-medium uppercase tracking-[0.28em] text-neutral-600 shadow-[0_18px_40px_-32px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-neutral-200">
             {navItems.map(({ id, label, path }) => (
               <li key={id}>
-                <NavLink
-                  to={path}
-                  end={path === "/"}
-                  className={({ isActive }) =>
-                    `inline-flex items-center rounded-full px-5 py-2.5 text-base font-semibold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${
-                      isActive
-                        ? "bg-brand-primary text-white shadow-soft-xl"
-                        : "text-neutral-600 hover:text-brand-primary dark:text-neutral-300"
-                    }`
-                  }
-                >
-                  {label}
+                <NavLink to={path} end={path === "/"}>
+                  {({ isActive }) => (
+                    <span
+                      className={`group relative inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${
+                        isActive
+                          ? "text-brand-primary"
+                          : "text-neutral-500 hover:text-brand-primary dark:text-neutral-300"
+                      }`}
+                    >
+                      <span
+                        className={`absolute inset-0 rounded-full bg-brand-primary/12 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
+                          isActive ? "opacity-100" : ""
+                        }`}
+                        aria-hidden
+                      />
+                      <span
+                        className={`pointer-events-none absolute inset-x-3 bottom-1 h-px rounded-full bg-gradient-to-r from-brand-primary/70 to-brand-secondary-soft/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
+                          isActive ? "opacity-100" : ""
+                        }`}
+                        aria-hidden
+                      />
+                      <span className="relative z-10 tracking-[0.32em]">{label}</span>
+                    </span>
+                  )}
                 </NavLink>
               </li>
             ))}
@@ -132,16 +138,16 @@ const Navbar = () => {
               <ul className="space-y-2">
                 {navItems.map(({ id, label, path }) => (
                   <li key={id}>
-                    <NavLink
-                      to={path}
-                      end={path === "/"}
-                      className={({ isActive }) =>
-                        `block w-full rounded-2xl px-5 py-3 text-left text-lg font-semibold transition hover:bg-brand-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-brand-primary/25 ${
-                          isActive ? "bg-brand-primary text-white shadow-soft-xl" : ""
-                        }`
-                      }
-                    >
-                      {label}
+                    <NavLink to={path} end={path === "/"}>
+                      {({ isActive }) => (
+                        <span
+                          className={`group relative block w-full rounded-2xl px-5 py-3 text-left text-lg font-semibold transition hover:bg-brand-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-brand-primary/25 ${
+                            isActive ? "bg-brand-primary text-white shadow-soft-xl" : ""
+                          }`}
+                        >
+                          {label}
+                        </span>
+                      )}
                     </NavLink>
                   </li>
                 ))}

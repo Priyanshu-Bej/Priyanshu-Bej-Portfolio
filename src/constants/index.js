@@ -28,10 +28,11 @@ import {
 
 export const navItems = [
   { id: "home", label: "Home", path: "/" },
-  { id: "about", label: "About", path: "/about" },
-  { id: "projects", label: "Projects", path: "/projects" },
-  { id: "skills", label: "Skills", path: "/skills" },
-  { id: "contact", label: "Contact", path: "/contact" },
+  { id: "about", label: "About", path: "/#about" },
+  { id: "projects", label: "Projects", path: "/#projects" },
+  { id: "skills", label: "Skills", path: "/#skills" },
+  { id: "notes", label: "Notes", path: "/#notes" },
+  { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
 export const resumeResource = {

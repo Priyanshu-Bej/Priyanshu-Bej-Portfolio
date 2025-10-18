@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer, Navbar } from "./components";
@@ -30,6 +30,28 @@ const AppRoutes = () => {
   );
 };
 
+const ScrollManager = () => {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (hash) {
+      const id = hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [pathname, hash]);
+
+  return null;
+};
+
 const App = () => (
   <div className="relative min-h-screen overflow-x-hidden bg-neutral-50 text-neutral-700 antialiased dark:bg-surface-base dark:text-neutral-200">
     <AnimatedBackground />
@@ -46,6 +68,7 @@ const App = () => (
 
     <main id="app-content" className="relative z-10 flex flex-col pt-20">
       <Suspense fallback={null}>
+        <ScrollManager />
         <AppRoutes />
       </Suspense>
       <Footer />

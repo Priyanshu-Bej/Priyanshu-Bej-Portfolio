@@ -17,11 +17,17 @@ const LazySection = ({
   rootMargin = "200px",
   threshold = 0.15,
   minHeight = "60vh",
+  forceRender = false,
 }) => {
   const containerRef = useRef(null);
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
+    if (forceRender && !shouldRender) {
+      setShouldRender(true);
+      return undefined;
+    }
+
     if (shouldRender) return undefined;
 
     const element = containerRef.current;
@@ -48,7 +54,7 @@ const LazySection = ({
       observer.unobserve(element);
       observer.disconnect();
     };
-  }, [rootMargin, shouldRender, threshold]);
+  }, [forceRender, rootMargin, shouldRender, threshold]);
 
   const placeholder = skeleton ?? <DefaultSkeleton minHeight={minHeight} />;
 
@@ -67,6 +73,7 @@ LazySection.propTypes = {
   rootMargin: PropTypes.string,
   threshold: PropTypes.number,
   minHeight: PropTypes.string,
+  forceRender: PropTypes.bool,
 };
 
 DefaultSkeleton.propTypes = {
