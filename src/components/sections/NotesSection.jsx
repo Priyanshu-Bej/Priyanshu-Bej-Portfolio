@@ -142,34 +142,34 @@ const NoteModal = ({ note, onClose }) => {
 
   if (!note) return null;
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/45 p-4 backdrop-blur">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-surface-base/70 backdrop-blur-[12px]" role="presentation">
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="note-modal-title"
         tabIndex={-1}
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-[2.5rem] border border-white/25 bg-white/90 shadow-soft-xl backdrop-blur-2xl dark:border-white/10 dark:bg-surface-elevated/90"
+        className="relative max-h-[85vh] w-full max-w-3xl overflow-hidden rounded-[2.75rem] border border-white/20 bg-white/95 p-10 shadow-[0_40px_120px_-40px_rgba(15,23,42,0.55)] backdrop-blur-[18px] dark:border-white/10 dark:bg-surface-elevated/95"
       >
         <button
           type="button"
           aria-label="Close note"
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-full border border-neutral-200 bg-white/70 p-2 text-neutral-500 shadow-card-light transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-white/10 dark:bg-surface-elevated/80 dark:text-neutral-200"
+          className="absolute right-6 top-6 rounded-full border border-neutral-200/80 bg-white/80 p-3 text-neutral-500 shadow-card-light transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-white/10 dark:bg-surface-elevated/70 dark:text-neutral-200"
         >
           <FiX className="text-lg" />
         </button>
-        <div className="overflow-y-auto px-6 py-8">
+        <div className="custom-scroll max-h-[68vh] space-y-6 overflow-y-auto px-10 py-10">
           <p className="text-xs uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500">
             {note.date} · {note.readingTime} min read
           </p>
           <h3
             id="note-modal-title"
-            className="mt-3 font-display text-2xl text-neutral-900 dark:text-neutral-50"
+            className="mt-4 font-display text-[clamp(1.9rem,3.2vw,2.4rem)] leading-tight text-neutral-900 dark:text-neutral-50"
           >
             {note.title}
           </h3>
-          <div className="mt-6 prose prose-neutral max-w-none dark:prose-invert">
+          <div className="prose prose-lg prose-neutral max-w-none leading-relaxed dark:prose-invert">
             <ReactMarkdown>{note.content}</ReactMarkdown>
           </div>
         </div>
@@ -233,51 +233,49 @@ const NotesSection = () => {
           </motion.div>
         ) : (
           <motion.div
-            variants={staggered(0.1, 0.2)}
+            variants={staggered(0.12, 0.24)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mt-10 grid gap-6 md:grid-cols-2"
+            className="grid gap-8 md:grid-cols-2"
           >
             {notes.map((note, index) => (
-            <motion.article
-              key={note.slug}
-              variants={fadeInUp(0.1 * index)}
-              className="group relative h-full overflow-hidden rounded-[2.25rem] border border-white/20 bg-white/14 p-6 shadow-card-light backdrop-blur-2xl transition duration-500 hover:-translate-y-1 hover:shadow-soft-xl dark:border-white/10 dark:bg-surface-elevated/60 dark:shadow-card-dark"
+              <motion.article
+                key={note.slug}
+                variants={fadeInUp(0.12 * (index + 1))}
+                className="group relative flex h-full flex-col gap-5 rounded-[2.5rem] border border-white/20 bg-white/14 p-8 shadow-card-light backdrop-blur-2xl transition duration-500 hover:-translate-y-1 hover:shadow-soft-xl dark:border-white/10 dark:bg-white/10 dark:shadow-card-dark"
               >
-                <p className="text-xs uppercase tracking-[0.28em] text-neutral-400 dark:text-neutral-500">
-                  {note.date}
-                </p>
-                <h3 className="mt-3 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
+                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
+                  <span>{note.date}</span>
+                  <span className="inline-flex items-center gap-1 text-brand-primary">
+                    <FiClock className="text-xs" /> {note.readingTime} min
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold leading-snug text-neutral-900 dark:text-neutral-50">
                   {note.title}
                 </h3>
-                <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300">
+                <p className="text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-300">
                   {note.excerpt}
                 </p>
-                <div className="mt-4 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-300">
-                  <span className="inline-flex items-center gap-1">
-                    <FiClock /> {note.readingTime} min read
-                  </span>
-                  <div className="flex gap-2">
+                {note.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
                     {note.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-brand-primary/10 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-primary dark:bg-brand-primary/20 dark:text-neutral-100"
+                        className="rounded-full border border-brand-primary/25 bg-brand-primary/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary dark:border-brand-primary/35 dark:bg-brand-primary/20 dark:text-neutral-100"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                </div>
-                <div className="mt-6 flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedNote(note)}
-                    className="inline-flex items-center gap-2 rounded-full border border-brand-primary/30 px-4 py-2 text-sm font-semibold text-brand-primary transition hover:border-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-                  >
-                    Read note <FiExternalLink />
-                  </button>
-                </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setSelectedNote(note)}
+                  className="inline-flex items-center gap-2 self-start rounded-full border border-brand-primary/35 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-primary transition duration-300 hover:-translate-y-0.5 hover:border-brand-primary/55 hover:text-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-brand-primary/30 dark:bg-white/5 dark:text-white"
+                >
+                  Read the full note <FiExternalLink className="text-xs" />
+                </button>
               </motion.article>
             ))}
           </motion.div>

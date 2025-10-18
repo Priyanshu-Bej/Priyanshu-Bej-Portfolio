@@ -1,30 +1,16 @@
 ---
-title: "How to Add New Blog Posts"
-date: "2024-06-12"
-excerpt: "A guide on adding new posts to your portfolio blog."
+title: "Android Release Checklist I Wish I Had at 23"
+date: "2024-04-19"
+excerpt: "My pre-flight ritual for shipping Android builds without the 2 AM rollback messages."
+tags: ["Android", "Release Engineering", "Play Console"]
 ---
 
-# How to Add New Blog Posts
+The first time I shipped an Android update, I assumed Gradle + Play Console would protect me. They didn’t. These days my release ritual is short and strict:
 
-To add a new blog post to your portfolio:
+- **Versioning sanity:** bump `versionCode`, match `versionName`, cut a tag, and point Crashlytics at the right build type.  
+- **Flags default off:** new experiments stay dark until crash-free sessions look healthy; remote config flips them later.  
+- **Listing refresh:** give Play copy/screens a skim to make sure the story matches the build. Product and marketing stay in the loop.  
+- **Archive the mapping file:** drop the ProGuard map alongside the release bundle so future stack traces are readable.  
+- **Stagger the rollout:** launch at 10%, watch ANRs + vitals for a day, then ramp. No more 100% rollouts followed by emergency hotfixes.  
 
-1. Create a new `.md` file in `src/blog/`
-2. Add frontmatter with title, date, and excerpt
-3. Write your content below the frontmatter
-4. Update the Blog component to include your new post
-
-## Example
-
-```markdown
----
-title: "Your Post Title"
-date: "2024-06-12"
-excerpt: "A brief description of your post."
----
-
-# Your Content Here
-
-Write your blog post content here...
-```
-
-That's it! Your new post will appear in the blog list.
+Those five bullets keep my phone quiet at 2 AM and make the QA team trust every release a little more.
