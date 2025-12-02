@@ -35,6 +35,11 @@ export const navItems = [
   { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
+export const legalLinks = [
+  { label: "Privacy Policy", path: "/privacy-policy" },
+  { label: "Terms & Conditions", path: "/terms-and-conditions" },
+];
+
 export const resumeResource = {
   label: "View resume",
   href: "https://drive.google.com/file/d/1jQe3SbdPrWvahaKmO2byuugcghnZxJI9/view?usp=sharing",

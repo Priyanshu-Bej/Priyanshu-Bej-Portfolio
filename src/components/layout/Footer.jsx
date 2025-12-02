@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import { navItems, socialLinks } from "../../constants";
+import { legalLinks, navItems, socialLinks } from "../../constants";
 
 const Footer = () => {
   return (
@@ -24,7 +24,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <nav aria-label="Footer navigation">
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
               Navigate
@@ -61,6 +61,25 @@ const Footer = () => {
                     <span className="text-brand-primary/60">↗</span>
                     {handle}
                   </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
+              Legal
+            </p>
+            <ul className="mt-4 space-y-2 text-sm">
+              {legalLinks.map(({ label, path }) => (
+                <li key={label}>
+                  <NavLink
+                    to={path}
+                    className="inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-1.5 text-left text-neutral-600 transition hover:border-brand-primary/30 hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-neutral-300"
+                  >
+                    <span className="text-brand-primary/60">↗</span>
+                    {label}
+                  </NavLink>
                 </li>
               ))}
             </ul>
