@@ -49,7 +49,7 @@ export const resumeResource = {
 };
 
 export const heroContent = {
-  eyebrow: "Lead Flutter Engineer",
+  eyebrow: "Lead Mobile App Engineer",
   title: "Shipping human-centered mobile journeys",
   highlight: "mobile journeys",
   bio: [],

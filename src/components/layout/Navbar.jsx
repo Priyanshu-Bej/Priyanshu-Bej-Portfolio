@@ -58,7 +58,7 @@ const Navbar = () => {
           <ul className="flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-1.5 py-1 text-xs font-medium uppercase tracking-[0.28em] text-neutral-600 shadow-[0_18px_40px_-32px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-neutral-200">
             {navItems.map(({ id, label, path }) => (
               <li key={id}>
-                <NavLink to={path} end={path === "/"}>
+                <NavLink to={path} end={path === "/"} className="no-underline">
                   {({ isActive }) => (
                     <span
                       className={`group relative inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${
@@ -68,13 +68,7 @@ const Navbar = () => {
                       }`}
                     >
                       <span
-                        className={`absolute inset-0 rounded-full bg-brand-primary/12 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
-                          isActive ? "opacity-100" : ""
-                        }`}
-                        aria-hidden
-                      />
-                      <span
-                        className={`pointer-events-none absolute inset-x-3 bottom-1 h-px rounded-full bg-gradient-to-r from-brand-primary/70 to-brand-secondary-soft/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
+                        className={`pointer-events-none absolute inset-0 rounded-full bg-brand-primary/12 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
                           isActive ? "opacity-100" : ""
                         }`}
                         aria-hidden
@@ -138,7 +132,7 @@ const Navbar = () => {
               <ul className="space-y-2">
                 {navItems.map(({ id, label, path }) => (
                   <li key={id}>
-                    <NavLink to={path} end={path === "/"}>
+                    <NavLink to={path} end={path === "/"} className="no-underline">
                       {({ isActive }) => (
                         <span
                           className={`group relative block w-full rounded-2xl px-5 py-3 text-left text-lg font-semibold transition hover:bg-brand-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-brand-primary/25 ${
