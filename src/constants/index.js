@@ -88,7 +88,7 @@ export const heroContent = {
 
 export const aboutContent = {
   headline: "Full-stack mobile execution with a product mindset.",
-  body: `I'm Priyanshu Pritam Bej — a Bengaluru-based Flutter engineer focused on building resilient mobile ecosystems for hyper-growth teams. I partner with design, product, and backend squads to transform ambitious ideas into polished experiences that scale.`,
+  body: `I'm Priyanshu Pritam Bej — a Bengaluru-based Mobile App Engineer focused on building resilient mobile ecosystems for hyper-growth teams. I partner with design, product, and backend squads to transform ambitious ideas into polished experiences that scale.`,
   qualities: [
     {
       title: "End-to-end delivery",

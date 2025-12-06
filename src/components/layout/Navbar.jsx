@@ -50,7 +50,7 @@ const Navbar = () => {
         >
           Priyanshu
           <span className="ml-1 rounded-full bg-gradient-to-r from-brand-primary via-brand-secondary-soft to-brand-accent bg-clip-text text-transparent">
-            .dev
+            dev
           </span>
         </Link>
 

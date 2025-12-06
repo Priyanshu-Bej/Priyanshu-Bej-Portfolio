@@ -13,7 +13,7 @@ const Footer = () => {
           <p className="font-display text-xl font-semibold text-neutral-900 dark:text-white">
             Priyanshu
             <span className="ml-1 bg-gradient-to-r from-brand-primary via-brand-secondary-soft to-brand-accent bg-clip-text text-transparent">
-              .dev
+              dev
             </span>
           </p>
           <p className="mt-2 max-w-md text-sm text-neutral-500 dark:text-neutral-300">
