@@ -1,5 +1,6 @@
 import close from "./close.svg";
 import github from "./github.png";
+import lockyLogo from "./locky.png";
 import menu from "./menu.svg";
 import me from "./priyanshu_bej_code_theme.jpg";
 import aboutPortrait from "./priyanshubej.png";
@@ -50,6 +51,7 @@ export {
   irissLogo,
   kodsLogo,
   kotlin,
+  lockyLogo,
   kv,
   me,
   aboutPortrait,

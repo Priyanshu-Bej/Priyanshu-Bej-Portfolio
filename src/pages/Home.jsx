@@ -6,6 +6,9 @@ import LazySection from "../components/layout/LazySection";
 import PageContainer from "../components/layout/PageContainer";
 
 const AboutSection = lazy(() => import("../components/sections/AboutSection"));
+const LockyShowcaseSection = lazy(() =>
+  import("../components/sections/LockyShowcaseSection")
+);
 const SkillsSection = lazy(() => import("../components/sections/SkillsSection"));
 const ProjectsSection = lazy(() => import("../components/sections/ProjectsSection"));
 const NotesSection = lazy(() => import("../components/sections/NotesSection"));
@@ -22,6 +25,9 @@ const Home = () => {
     <>
       <HeroSection />
       <PageContainer className="gap-0 pt-16">
+        <LazySection forceRender={isTarget("locky")}>
+          <LockyShowcaseSection />
+        </LazySection>
         <LazySection forceRender={isTarget("about")}>
           <AboutSection />
         </LazySection>
