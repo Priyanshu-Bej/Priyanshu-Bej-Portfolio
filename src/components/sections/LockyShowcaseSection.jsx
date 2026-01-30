@@ -15,12 +15,16 @@ const LockyShowcaseSection = () => {
       <div className="pointer-events-none absolute -left-28 top-10 h-72 w-72 rounded-full bg-brand-primary/15 blur-3xl" />
       <div className="pointer-events-none absolute -right-16 bottom-10 h-72 w-72 rounded-full bg-brand-secondary-soft/25 blur-3xl" />
 
-      <motion.div
+      <motion.a
+        href="https://play.google.com/store/apps/details?id=com.locky.priyanshubej"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open Locky on Play Store"
         variants={staggered()}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.35 }}
-        className="relative mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-[1.1fr,0.9fr] md:px-6"
+        className="group relative mx-auto grid max-w-6xl cursor-pointer gap-8 px-4 md:grid-cols-[1.1fr,0.9fr] md:px-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
       >
         <div className="space-y-5">
           <motion.p variants={fadeInUp(0.05)} className="eyebrow">
@@ -37,14 +41,20 @@ const LockyShowcaseSection = () => {
             variants={fadeInUp(0.18)}
             className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300"
           >
-            Turn physical cards into smart digital keys. Instantly scan with NFC, save encrypted notes offline, and manage subscriptions plus daily spends with cloud sync.
+            Turn physical cards into smart digital keys. Instantly scan with
+            NFC, save encrypted notes offline, and manage subscriptions plus
+            daily spends with cloud sync.
           </motion.p>
 
           <motion.div
             variants={fadeInUp(0.22)}
             className="flex flex-wrap gap-2 text-xs font-semibold text-brand-primary"
           >
-            {["Offline + AES-256", "Subscription manager", "Expense insights"].map((item) => (
+            {[
+              "Offline + AES-256",
+              "Subscription manager",
+              "Expense insights",
+            ].map((item) => (
               <span
                 key={item}
                 className="rounded-full border border-brand-primary/35 bg-brand-primary/10 px-3 py-1 text-brand-primary dark:border-brand-primary/45 dark:bg-brand-primary/20 dark:text-neutral-100"
@@ -54,15 +64,13 @@ const LockyShowcaseSection = () => {
             ))}
           </motion.div>
 
-          <motion.div variants={fadeInUp(0.26)} className="flex flex-wrap items-center gap-4">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.locky.priyanshubej&ref=producthunt"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-brand-primary/30 bg-brand-primary/15 px-5 py-2 text-sm font-semibold text-brand-primary transition hover:-translate-y-0.5 hover:border-brand-primary/60 hover:bg-brand-primary/25 hover:text-brand-primary dark:border-brand-primary/40 dark:bg-brand-primary/20 dark:text-neutral-100"
-            >
+          <motion.div
+            variants={fadeInUp(0.26)}
+            className="flex flex-wrap items-center gap-4"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-primary/30 bg-brand-primary/15 px-5 py-2 text-sm font-semibold text-brand-primary transition group-hover:-translate-y-0.5 group-hover:border-brand-primary/60 group-hover:bg-brand-primary/25 dark:border-brand-primary/40 dark:bg-brand-primary/20 dark:text-neutral-100">
               Download on Play Store <FiExternalLink />
-            </a>
+            </span>
             <span className="text-xs uppercase tracking-[0.28em] text-neutral-400 dark:text-neutral-500">
               NFC vault offline · Cloud-synced insights
             </span>
@@ -93,7 +101,7 @@ const LockyShowcaseSection = () => {
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </motion.a>
     </section>
   );
 };
