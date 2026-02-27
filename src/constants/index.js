@@ -78,8 +78,8 @@ export const heroContent = {
     },
   ],
   stats: [
-    { value: "3.5+ yrs", label: "Production experience" },
-    { value: "12 apps", label: "Shipped across stores" },
+    { value: "4+ yrs", label: "Production experience" },
+    { value: "15+ apps", label: "Shipped across stores" },
     { value: "Revenue", label: "Generated in crores" },
   ],
   primaryAction: { label: "Start a project", href: "/contact" },
