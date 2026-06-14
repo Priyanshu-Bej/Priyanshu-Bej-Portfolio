@@ -1,0 +1,17 @@
+{
+  "name": "Priyanshu Bej Portfolio",
+  "short_name": "Priyanshu Bej",
+  "description": "Senior Mobile Developer portfolio for Flutter, enterprise mobile apps, IoT workflows, and AI-enabled systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F8F4",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -124,6 +124,39 @@ Output directory: dist
 
 `vercel.json` rewrites all routes to `index.html`, so direct links like `/projects` work correctly.
 
+## SEO & Public Branding
+
+The site includes:
+
+- indexable meta tags in `index.html`
+- canonical URL
+- Open Graph and Twitter/X preview tags
+- Person/Profile structured data
+- `public/robots.txt`
+- `public/sitemap.xml`
+- web app manifest
+
+After deployment:
+
+1. Open Google Search Console.
+2. Add the production domain as a property.
+3. Submit:
+
+```text
+https://your-domain.com/sitemap.xml
+```
+
+4. Use URL Inspection for the homepage and request indexing.
+5. When a custom domain is added, update these files from `priyanshu-dev.vercel.app` to the final domain:
+
+```text
+index.html
+public/robots.txt
+public/sitemap.xml
+```
+
+For stronger Google coverage later, create dedicated pages for major projects and notes instead of keeping every detail only inside modals.
+
 ## Verification Checklist
 
 Before pushing:
