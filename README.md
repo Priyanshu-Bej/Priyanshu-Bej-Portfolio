@@ -1,130 +1,149 @@
-## Priyanshu.dev — React + Vite Portfolio
+# Priyanshu Bej Portfolio
 
-Modern single-page portfolio for showcasing Priyanshu Pritam Bej’s mobile engineering work. The redesign delivers a glassmorphism-inspired canvas with neon accents, soft particles, and performant motion that works across devices and themes.
+Premium minimal portfolio for **Priyanshu Bej**, Senior Mobile Developer at IRISS Inc.
 
-### ✨ Highlights
-- Responsive one-page layout with anchored navigation, sticky glass nav, and smooth scroll.
-- Dark / light themes with localStorage persistence, neon-accented surfaces, and floating particle depth.
-- Auto-scrolling glass project carousel (pauses on hover/click) with modal deep-dives, skill tag cloud, and press-worthy notes.
-- Framer Motion 3D hero tilt, reveal animations that respect reduced-motion, and lazy-loaded media for Lighthouse ≥ 90.
-- EmailJS-powered contact form wrapped in glass with animated focus states and quick info cards.
+This is the place where my mobile engineering work gets a proper stage: shipped apps, industrial products, Flutter systems, IoT workflows, AI/cloud learning, credentials, notes, and the small details that show how I think while building.
 
----
+The vibe is simple: clean interface, sharp content, no noisy portfolio circus.
+
+## What This Site Shows
+
+- Senior mobile engineering work across Flutter, Android, iOS, IoT, AI-enabled workflows, and hybrid cloud products.
+- Selected project case studies first, with smaller shipped apps tucked under **View all projects** so the page stays focused.
+- Light and dark mode with a restrained premium visual system.
+- Experience timeline, capability index, certifications showcase, mobile craft notes, resume, and direct contact.
+- Real app store links and product context instead of fake placeholder cards.
 
 ## Tech Stack
 
-- **Framework:** React 18 + Vite
-- **Styling:** Tailwind CSS (custom design tokens), CSS variables
-- **Animation:** Framer Motion
-- **Content:** Markdown notes parsed with a lightweight custom front-matter parser + React Markdown
-- **Forms:** EmailJS browser SDK
-- **Icons:** React Icons
+| Area | Stack |
+| --- | --- |
+| Frontend | React 19 + Vite 8 |
+| Styling | Tailwind CSS |
+| Motion | Framer Motion |
+| Routing | React Router |
+| Content | Markdown notes + React Markdown |
+| Contact | EmailJS browser SDK |
+| Icons | React Icons |
+| Runtime | Node 24.x |
 
-Project structure:
+## Project Structure
 
-```
+```text
 src/
 ├── App.jsx
+├── assets/              # Project previews and certification placeholders
+├── blog/                # Markdown notes with front matter
 ├── components/
-│   ├── layout/           # Navbar, Footer, Theme Toggle
-│   ├── projects/         # Glass cards + lazy modal
-│   ├── sections/         # Hero, About, Skills, Projects, Notes, Highlights, Contact
-│   └── ui/               # FloatingParticles, shared glass utilities
-├── config/designTokens.js
-├── constants/            # Content + metadata
-├── context/ThemeContext.jsx
-├── hooks/                # `useMediaQuery`
-├── utils/                # Motion variants, smooth scrolling
-└── blog/                 # Markdown notes with front matter
+│   ├── layout/          # Navbar, footer, theme toggle, scroll progress
+│   ├── projects/        # Project cards and modal
+│   └── sections/        # Hero, work, about, skills, notes, credentials, contact
+├── constants/           # Portfolio content, projects, credentials, links
+├── context/             # Theme persistence
+├── pages/               # Route pages
+└── utils/               # Animation helpers
 ```
 
----
+## Run Locally
 
-## Quick Start
+Use Node 24.x.
 
 ```bash
-git clone https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio.git
-cd Priyanshu-Bej-Portfolio
-npm install --legacy-peer-deps
+npm install
 npm run dev
 ```
 
-Local dev server runs on `http://localhost:5173` by default.
+Vite will print the local URL, usually:
 
-### Environment Variables (optional)
-
-Create `.env.local` with EmailJS overrides if you prefer not to use the embedded defaults:
-
+```text
+http://localhost:5173/
 ```
+
+## Useful Commands
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the local Vite server. |
+| `npm run build` | Creates the production build in `dist/`. |
+| `npm run preview` | Serves the production build locally. |
+| `npm run lint` | Runs ESLint for JS/JSX files. |
+| `npm audit --audit-level=moderate` | Checks dependency security status. |
+
+## Environment Variables
+
+The contact form uses EmailJS. Add this to `.env.local` if you want to override the configured defaults:
+
+```text
 VITE_EMAILJS_SERVICE_ID=your_service_id
 VITE_EMAILJS_TEMPLATE_ID=your_template_id
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
-When these values are absent, the form falls back to the project’s existing EmailJS credentials.
+## Content Updates
 
----
+Most portfolio content lives in:
 
-## Design Tokens
+```text
+src/constants/index.js
+```
 
-Defined in `src/config/designTokens.js` and Tailwind’s `extend` block.
+Common updates:
 
-| Token | Value |
-|-------|-------|
-| Primary (`brand.primary`) | `#00CFFF` |
-| Accent (`brand.accent`) | `#FF4D6D` |
-| Secondary (`brand.secondary`) | `#9B51E0` |
-| Background (light / dark) | `#F5F7FA` / `#0B0D17` |
-| Glass Layer | `rgba(255, 255, 255, 0.08)` |
-| Text (light / dark) | `#1A202C` / `#E5E5E5` |
-| Gradient Highlight | `linear-gradient(135deg, #00CFFF 0%, #9B51E0 100%)` |
+- Projects: edit the `projects` array.
+- Featured work: keep strong projects visible by default. Add `featured: false` for smaller apps that should stay under **View all projects**.
+- Notes: add Markdown files inside `src/blog/`.
+- Certifications: add certificate data in `certificationShowcase`, then place images in `src/assets/certifications/`.
+- Resume: update `resumeResource`.
+- Social links: update `heroContent`.
 
-- **Fonts:** `Poppins` for display headlines, `Inter` for interface/body copy.
-- **Spacing:** Section padding ~`5–7rem`, extended spacing scale (`theme.spacing`) for layout rhythm.
-- **Shadows & glow:** `shadow-soft-xl`, `shadow-glow`, `shadow-card-light/dark` emulate soft neon bloom.
-- **Motion:** `fade-up`, `shimmer`, `scroll-x`, `pulse-glow`, and `float` keyframes with eased transitions.
+## Design Notes
 
----
+This portfolio follows a premium minimal direction:
 
-## Scripts
-
-| Command               | Purpose |
-|-----------------------|---------|
-| `npm run dev`         | Start the Vite dev server. |
-| `npm run build`       | Create an optimized production build. |
-| `npm run preview`     | Serve the built app locally for testing. |
-| `npm run lint`        | Lint JS/JSX files with ESLint. |
-
----
+- clean typography with Plus Jakarta Sans and Inter
+- light/dark mode built around high contrast and readable surfaces
+- compact cards, thin borders, subtle shadows, and controlled animation
+- phone-style previews for mobile apps
+- no unnecessary local icon image files
+- content-first layout, because shipped work should do the talking
 
 ## Deployment
 
-The app is a static SPA—build output lives under `dist/`. Either platform below works well:
+Static SPA build:
 
-### 1. Vercel
-1. Push changes to GitHub.
-2. Import the repo in Vercel, select the Vite preset.
-3. Build command: `npm run build`, Output directory: `dist`.
-4. Add environment variables (EmailJS IDs) under Project Settings → Environment Variables if needed.
+```bash
+npm run build
+```
 
-### 2. Netlify
-1. `netlify init` (or connect via dashboard).
-2. Build command: `npm run build`, Publish directory: `dist`.
-3. Configure EmailJS env vars in Site settings → Build & deploy → Environment.
+Deploy settings:
 
-> **Note:** Deployments require credentials I can’t access from this workspace, so the final publish step must be completed in your Vercel/Netlify account.
+```text
+Build command: npm run build
+Output directory: dist
+```
 
----
+`vercel.json` rewrites all routes to `index.html`, so direct links like `/projects` work correctly.
 
-## Measuring Performance
+## Verification Checklist
 
-- Run `npm run build && npm run preview` then audit with Chrome Lighthouse to keep metrics ≥ 90.
-- Images are lazy-loaded; for further gains, replace PNGs with optimized WebP/AVIF variants and host remote assets locally.
-- Framer Motion respects `prefers-reduced-motion`; test keyboard navigation in both themes to maintain accessibility.
+Before pushing:
 
----
+```bash
+npm audit --audit-level=moderate
+npm run lint
+npm run build
+```
 
-## Credits & Contact
+Current verification status:
 
-Designed and built by **Priyanshu Pritam Bej**.  
-Questions or collaboration ideas? Reach out via [LinkedIn](https://www.linkedin.com/in/priyanshubej/) or email at `priyanshubej2001@gmail.com`.
+- `npm audit --audit-level=moderate` - 0 vulnerabilities
+- `npm run lint` - passing
+- `npm run build` - passing
+
+## Contact
+
+Built and maintained by **Priyanshu Bej**.
+
+- LinkedIn: https://www.linkedin.com/in/priyanshubej/
+- GitHub: https://github.com/Priyanshu-Bej
+- Email: priyanshubej2001@gmail.com

@@ -8,6 +8,7 @@ import {
   FiMail,
   FiMapPin,
   FiMessageCircle,
+  FiSend,
 } from "react-icons/fi";
 
 import { contactChannels, socialLinks } from "../../constants";
@@ -19,18 +20,18 @@ const initialForm = {
   message: "",
 };
 
-const serviceId =
-  import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "service_bwghn2g";
-const templateId =
-  import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "template_5rh5m2q";
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "service_bwghn2g";
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "template_5rh5m2q";
 const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "M_oVO06IX1XNdxP3k";
+
+const inputClass =
+  "w-full border-0 border-b border-line-light bg-transparent px-0 py-4 text-base text-ink-base outline-none transition placeholder:text-ink-muted focus:border-brand-primary dark:border-line-dark dark:text-ink-inverse dark:placeholder:text-ink-inverse/70 dark:focus:border-brand-secondary";
 
 const ContactSection = () => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: null, message: "" });
   const [loading, setLoading] = useState(false);
-  const [activeField, setActiveField] = useState(null);
   const [copied, setCopied] = useState(false);
 
   const validate = () => {
@@ -38,13 +39,10 @@ const ContactSection = () => {
     if (!form.name.trim()) newErrors.name = "Please enter your name.";
     if (!form.email.trim()) {
       newErrors.email = "Please enter your email.";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim().toLowerCase())
-    ) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim().toLowerCase())) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (!form.message.trim())
-      newErrors.message = "What would you like to discuss?";
+    if (!form.message.trim()) newErrors.message = "What would you like to discuss?";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -74,7 +72,7 @@ const ContactSection = () => {
       );
       setStatus({
         type: "success",
-        message: "Thanks for reaching out! I’ll respond within 1–2 business days.",
+        message: "Message sent. I will reply with a clear next step.",
       });
       setForm(initialForm);
       setErrors({});
@@ -83,7 +81,7 @@ const ContactSection = () => {
       setStatus({
         type: "error",
         message:
-          "Something went wrong while sending your message. Email me directly at priyanshubej2001@gmail.com.",
+          "The form could not send right now. Email me directly at priyanshubej2001@gmail.com.",
       });
     } finally {
       setLoading(false);
@@ -101,255 +99,184 @@ const ContactSection = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="section-wrapper relative overflow-hidden bg-white/12 backdrop-blur-2xl dark:bg-surface-base/55"
-      aria-labelledby="contact-title"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-50 dark:bg-grid-dark" />
-      <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-brand-primary/20 via-transparent to-transparent dark:from-brand-primary/25" />
-
-      <div className="relative mx-auto max-w-6xl px-4 md:px-6">
+    <section id="contact" className="bg-ink-strong text-white dark:bg-black" aria-labelledby="contact-title">
+      <div className="grid lg:grid-cols-[0.95fr,1.05fr]">
         <motion.div
           variants={staggered()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.25 }}
+          className="flex min-h-[70vh] flex-col justify-between border-b border-white/20 px-5 py-12 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:py-16"
         >
-          <motion.p variants={fadeInUp(0.1)} className="eyebrow">
-            Contact
-          </motion.p>
-          <motion.h2
-            id="contact-title"
-            variants={fadeInUp(0.18)}
-            className="mt-4 font-display text-[clamp(2rem,3vw,2.85rem)] text-neutral-900 dark:text-white"
-          >
-            Let’s shape your next launch with glassy precision.
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp(0.26)}
-            className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-600 dark:text-neutral-300 md:text-lg"
-          >
-            Share your idea, product roadblock, or collaboration spark. I’ll
-            respond quickly with ways we can design, build, and scale together.
-          </motion.p>
-        </motion.div>
-
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
-          <motion.div
-            variants={fadeInUp(0.28)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            className="relative overflow-hidden rounded-[2.75rem] border border-white/25 bg-white/14 p-8 shadow-card-light backdrop-blur-2xl dark:border-white/10 dark:bg-white/8 dark:shadow-card-dark"
-          >
-            <span className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 hover:opacity-100">
-              <span className="absolute inset-0 bg-gradient-to-br from-brand-primary/18 via-transparent to-brand-secondary-soft/20" />
-            </span>
-            <form
-              onSubmit={handleSubmit}
-              noValidate
-              className="space-y-6"
-              aria-describedby={status.type ? "contact-status" : undefined}
+          <div>
+            <motion.p variants={fadeInUp(0.05, 14)} className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-brand-secondary">
+              Contact
+            </motion.p>
+            <motion.h2
+              id="contact-title"
+              variants={fadeInUp(0.1, 16)}
+              className="mt-8 max-w-4xl text-balance text-[clamp(3rem,9vw,8rem)] font-extrabold leading-[0.88] text-white"
             >
-              {[
-                {
-                  id: "name",
-                  label: "Name",
-                  type: "text",
-                  placeholder: "How should I address you?",
-                },
-                {
-                  id: "email",
-                  label: "Email",
-                  type: "email",
-                  placeholder: "Where can I reach you back?",
-                },
-              ].map(({ id, label, type, placeholder }) => (
-                <div key={id}>
-                  <label
-                    htmlFor={id}
-                    className="text-sm font-medium text-neutral-600 dark:text-neutral-200"
-                  >
-                    {label}
-                  </label>
-                  <div
-                    className={`group mt-2 rounded-[1.75rem] border bg-white/8 px-1.5 py-1.5 shadow-inner transition dark:bg-white/5 ${
-                      errors[id]
-                        ? "border-brand-primary/80"
-                        : "border-white/20 hover:border-brand-primary/40"
-                    } ${
-                      activeField === id
-                        ? "border-brand-primary/80 shadow-glow"
-                        : ""
-                    }`}
-                  >
-                    <input
-                      id={id}
-                      name={id}
-                      type={type}
-                      placeholder={placeholder}
-                      autoComplete={id === "email" ? "email" : "name"}
-                      value={form[id]}
-                      onChange={handleChange}
-                      onFocus={() => setActiveField(id)}
-                      onBlur={() => setActiveField(null)}
-                      className="w-full rounded-[1.5rem] border-0 bg-transparent px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-400 focus:outline-none dark:text-neutral-100 dark:placeholder:text-neutral-500"
-                    />
+              Send the brief. I will map the build.
+            </motion.h2>
+          </div>
+
+          <motion.div variants={fadeInUp(0.18, 16)} className="mt-12 grid gap-4 sm:grid-cols-3">
+            {contactChannels.map((channel) => {
+              const iconMap = {
+                email: <FiMail />,
+                location: <FiMapPin />,
+                freelance: <FiMessageCircle />,
+              };
+
+              return (
+                <div key={channel.label} className="border-t border-white/20 pt-4">
+                  <div className="text-brand-secondary">{iconMap[channel.type] ?? <FiMessageCircle />}</div>
+                  <p className="mt-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
+                    {channel.label}
+                  </p>
+                  <div className="mt-2 text-sm font-semibold text-white/90">
+                    {channel.href ? (
+                      <a href={channel.href} className="break-all transition hover:text-brand-secondary">
+                        {channel.value}
+                      </a>
+                    ) : (
+                      channel.value
+                    )}
                   </div>
-                  {errors[id] && (
-                    <p className="mt-1 text-xs text-brand-primary">{errors[id]}</p>
+                  {channel.type === "email" && (
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(channel.value)}
+                      className="mt-3 rounded-md border border-white/30 bg-white/10 px-2.5 py-1 text-xs font-semibold text-white transition hover:border-brand-secondary hover:bg-white/20 hover:text-brand-secondary"
+                    >
+                      {copied ? "Copied" : "Copy"}
+                    </button>
                   )}
                 </div>
-              ))}
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="text-sm font-medium text-neutral-600 dark:text-neutral-200"
-                >
-                  Project details
-                </label>
-                <div
-                  className={`group mt-2 rounded-[1.75rem] border bg-white/8 px-1.5 py-1.5 shadow-inner transition dark:bg-white/5 ${
-                    errors.message
-                      ? "border-brand-accent"
-                      : "border-white/20 hover:border-brand-secondary-soft/40"
-                  } ${
-                    activeField === "message" ? "border-brand-secondary-soft shadow-glow" : ""
-                  }`}
-                >
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    placeholder="Tell me about the problem, timeline, or dream outcome."
-                    value={form.message}
-                    onChange={handleChange}
-                    onFocus={() => setActiveField("message")}
-                    onBlur={() => setActiveField(null)}
-                    className="w-full rounded-[1.5rem] border-0 bg-transparent px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-400 focus:outline-none dark:text-neutral-100 dark:placeholder:text-neutral-500"
-                  />
-                </div>
-                {errors.message && (
-                  <p className="mt-1 text-xs text-brand-accent">{errors.message}</p>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="group inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-brand-primary px-6 py-3 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                <span>{loading ? "Sending…" : "Send message"}</span>
-                <span className="absolute inset-0 translate-x-[-120%] bg-white/35 blur-xl transition duration-500 group-hover:translate-x-[120%]" />
-              </button>
-
-              {status.type && (
-                <div
-                  id="contact-status"
-                  className={`flex items-center gap-2 rounded-2xl border px-3 py-2 text-sm ${
-                    status.type === "success"
-                      ? "border-success/40 bg-success/10 text-success"
-                      : "border-brand-accent/40 bg-brand-accent/10 text-brand-accent"
-                  }`}
-                >
-                  <FiCheckCircle />
-                  <span>{status.message}</span>
-                </div>
-              )}
-            </form>
+              );
+            })}
           </motion.div>
+        </motion.div>
 
-          <motion.div
-            variants={fadeInUp(0.34)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            className="relative overflow-hidden rounded-[2.75rem] border border-white/25 bg-white/14 p-8 shadow-card-light backdrop-blur-2xl dark:border-white/10 dark:bg-white/8 dark:shadow-card-dark"
-          >
-            <p className="text-sm font-semibold uppercase tracking-[0.26em] text-neutral-500 dark:text-neutral-400">
-              Quick info
-            </p>
-            <ul className="mt-6 space-y-4 text-sm text-neutral-600 dark:text-neutral-300">
-              {contactChannels.map((channel) => {
-                const iconMap = {
-                  email: <FiMail />,
-                  location: <FiMapPin />,
-                  freelance: <FiMessageCircle />,
-                };
+        <motion.form
+          variants={fadeInUp(0.14, 16)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          onSubmit={handleSubmit}
+          noValidate
+          className="bg-canvas-light px-5 py-12 text-ink-base dark:bg-surface-dark dark:text-ink-inverse sm:px-8 lg:px-12 lg:py-16"
+          aria-describedby={status.type ? "contact-status" : undefined}
+        >
+          <p className="eyebrow">Project Brief</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div>
+              <label htmlFor="name" className="text-sm font-bold">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                autoComplete="name"
+                value={form.name}
+                onChange={handleChange}
+                className={inputClass}
+              />
+              {errors.name && (
+                <p className="mt-2 text-xs font-semibold text-red-600 dark:text-red-300">
+                  {errors.name}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="email" className="text-sm font-bold">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                autoComplete="email"
+                value={form.email}
+                onChange={handleChange}
+                className={inputClass}
+              />
+              {errors.email && (
+                <p className="mt-2 text-xs font-semibold text-red-600 dark:text-red-300">
+                  {errors.email}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <label htmlFor="message" className="text-sm font-bold">
+              What are we building?
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={8}
+              placeholder="App idea, workflow, timeline, platform, or what is currently broken."
+              value={form.message}
+              onChange={handleChange}
+              className={inputClass}
+            />
+            {errors.message && (
+              <p className="mt-2 text-xs font-semibold text-red-600 dark:text-red-300">
+                {errors.message}
+              </p>
+            )}
+          </div>
+
+          <button type="submit" disabled={loading} className="button-primary mt-8">
+            <span>{loading ? "Sending..." : "Send brief"}</span>
+            <FiSend />
+          </button>
+
+          {status.type && (
+            <div
+              id="contact-status"
+              className={`mt-6 flex items-start gap-2 rounded-md border px-4 py-3 text-sm ${
+                status.type === "success"
+                  ? "border-green-700/30 bg-green-700/10 text-green-700 dark:border-green-300/30 dark:bg-green-300/10 dark:text-green-300"
+                  : "border-red-600/30 bg-red-600/10 text-red-600 dark:border-red-300/30 dark:bg-red-300/10 dark:text-red-300"
+              }`}
+            >
+              <FiCheckCircle className="mt-0.5 shrink-0" />
+              <span>{status.message}</span>
+            </div>
+          )}
+
+          <div className="mt-12 border-t border-line-light pt-6 dark:border-line-dark">
+            <p className="text-sm font-bold">Elsewhere</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {socialLinks.map(({ label, href, handle }) => {
+                const icon =
+                  label === "LinkedIn" ? FiLinkedin : label === "GitHub" ? FiGithub : FiMail;
+                const Icon = icon;
+
                 return (
-                  <li
-                    key={channel.label}
-                    className="flex items-start gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-lg dark:border-white/10 dark:bg-white/5"
+                  <a
+                    key={label}
+                    href={href}
+                    target={label === "Email" ? "_self" : "_blank"}
+                    rel={label === "Email" ? undefined : "noreferrer"}
+                    className="button-secondary px-4 py-2.5"
                   >
-                    <span className="mt-1 text-brand-primary">
-                      {iconMap[channel.type] ?? <FiMessageCircle />}
-                    </span>
-                    <div>
-                      <p className="text-[11px] uppercase tracking-[0.36em] text-neutral-400 dark:text-neutral-500">
-                        {channel.label}
-                      </p>
-                      <div className="mt-2 flex items-center gap-3">
-                        {channel.href ? (
-                          <a
-                            href={channel.href}
-                            className="text-sm font-semibold text-neutral-800 transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-neutral-100"
-                          >
-                            {channel.value}
-                          </a>
-                        ) : (
-                          <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">
-                            {channel.value}
-                          </p>
-                        )}
-                        {channel.type === "email" && (
-                          <button
-                            type="button"
-                            onClick={() => handleCopy(channel.value)}
-                            className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-primary transition hover:border-brand-primary/50 hover:text-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-white/10 dark:bg-white/10 dark:text-neutral-100"
-                          >
-                            {copied ? "Copied" : "Copy"}
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </li>
+                    <Icon />
+                    <span>{handle}</span>
+                  </a>
                 );
               })}
-            </ul>
-
-            <div className="mt-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.26em] text-neutral-500 dark:text-neutral-400">
-                Social
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                {socialLinks.map(({ label, href, handle }) => {
-                  const icon =
-                    label === "LinkedIn"
-                      ? FiLinkedin
-                      : label === "GitHub"
-                      ? FiGithub
-                      : FiMail;
-                  const Icon = icon;
-
-                  return (
-                    <a
-                      key={label}
-                      href={href}
-                      target={label === "Email" ? "_self" : "_blank"}
-                      rel={label === "Email" ? undefined : "noreferrer"}
-                      className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-neutral-600 shadow-card-light backdrop-blur transition hover:-translate-y-0.5 hover:border-brand-primary/40 hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-white/10 dark:bg-white/5 dark:text-neutral-200"
-                    >
-                      <Icon />
-                      {handle}
-                    </a>
-                  );
-                })}
-              </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.form>
       </div>
     </section>
   );

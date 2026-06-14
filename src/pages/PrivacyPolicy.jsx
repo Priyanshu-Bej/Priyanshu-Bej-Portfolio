@@ -59,63 +59,59 @@ const policySections = [
 
 const PrivacyPolicy = () => {
   return (
-    <PageContainer className="gap-12">
-      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/20 bg-white/12 p-8 shadow-card-light backdrop-blur-2xl dark:border-white/10 dark:bg-white/6 dark:shadow-card-dark">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-primary/12 via-transparent to-brand-secondary-soft/14" />
-        <div className="relative space-y-4">
+    <PageContainer>
+      <div className="section-shell py-18 md:py-26">
+        <section className="border-y border-line-light py-10 dark:border-line-dark">
           <p className="eyebrow">Privacy Policy</p>
-          <h1 className="font-display text-[clamp(2.25rem,3vw,3rem)] text-neutral-900 dark:text-white">
+          <h1 className="mt-4 max-w-4xl text-balance text-[clamp(2.4rem,6vw,5rem)] font-extrabold leading-[1.02]">
             Protecting your data while you use my Google Play apps.
           </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-300">
-            This Privacy Policy explains how I, Priyanshu Pritam Bej, collect, use, and safeguard
+          <p className="mt-5 max-w-3xl text-lg text-ink-muted dark:text-ink-inverse/80">
+            This Privacy Policy explains how I, Priyanshu Bej, collect, use, and safeguard
             information when you install or use the mobile applications published under my developer
             account on Google Play. If you have any questions, please reach out.
           </p>
-          <p className="text-sm uppercase tracking-[0.28em] text-neutral-400 dark:text-neutral-500">
+          <p className="mt-6 font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
             Last updated: 08 Jan 2025
           </p>
-        </div>
-      </section>
+        </section>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        {policySections.map((section) => (
-          <article
-            key={section.title}
-            className="relative overflow-hidden rounded-3xl border border-white/18 bg-white/10 p-6 shadow-card-light backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/6 dark:shadow-card-dark"
-          >
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-primary/8 via-transparent to-brand-secondary-soft/12 opacity-70" />
-            <div className="relative">
-              <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">{section.title}</h2>
-              <ul className="mt-4 space-y-3 text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          {policySections.map((section) => (
+            <article key={section.title} className="premium-card p-6">
+              <h2 className="text-xl font-bold">{section.title}</h2>
+              <ul className="mt-4 space-y-3 text-sm text-ink-muted dark:text-ink-inverse/80">
                 {section.points.map((point) => (
                   <li key={point} className="flex gap-3">
-                    <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-primary" aria-hidden />
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-primary dark:bg-brand-secondary"
+                      aria-hidden
+                    />
                     <span>{point}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-          </article>
-        ))}
-      </div>
+            </article>
+          ))}
+        </div>
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/14 p-6 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/8 dark:shadow-card-dark">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-primary/12 via-transparent to-brand-secondary-soft/12" />
-        <div className="relative flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <section className="premium-card mt-6 p-6">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">Questions or requests?</h2>
-            <p className="mt-2 max-w-2xl text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+            <h2 className="text-xl font-bold">Questions or requests?</h2>
+            <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-ink-inverse/80">
               I aim to respond to privacy inquiries within a reasonable timeframe. Contact me for data access,
               correction, or deletion requests related to any of my apps.
             </p>
           </div>
-          <div className="flex flex-col items-start gap-2 rounded-2xl border border-brand-primary/30 bg-brand-primary/10 px-4 py-3 text-sm font-semibold text-brand-primary shadow-glow">
+          <div className="rounded-md border border-line-light bg-surface-muted px-4 py-3 text-sm font-semibold text-ink-strong dark:border-white/20 dark:bg-surface-dark-elevated dark:text-ink-inverse">
             <span>Contact: priyanshubej2001@gmail.com</span>
+            <br />
             <span>Bengaluru, India</span>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
+      </div>
     </PageContainer>
   );
 };

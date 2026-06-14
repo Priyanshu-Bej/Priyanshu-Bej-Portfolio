@@ -1,14 +1,14 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
-import { FiClock, FiExternalLink, FiX } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiClock, FiExternalLink, FiX } from "react-icons/fi";
 
 import { fadeInUp, staggered } from "../../utils/animations";
 
 const rawNotes = import.meta.glob("../../blog/*.md", {
   eager: true,
-  as: "raw",
+  import: "default",
+  query: "?raw",
 });
 
 const sanitizeValue = (value) => {
@@ -50,9 +50,7 @@ const parseFrontMatter = (raw) => {
     .filter(Boolean)
     .reduce((acc, line) => {
       const separatorIndex = line.indexOf(":");
-      if (separatorIndex === -1) {
-        return acc;
-      }
+      if (separatorIndex === -1) return acc;
 
       const key = line.slice(0, separatorIndex).trim();
       const value = sanitizeValue(line.slice(separatorIndex + 1));
@@ -66,8 +64,7 @@ const parseFrontMatter = (raw) => {
       ) {
         const normalized = value.replace(/'/g, '"');
         try {
-          const parsed = JSON.parse(normalized);
-          acc[key] = parsed;
+          acc[key] = JSON.parse(normalized);
         } catch {
           acc[key] = value;
         }
@@ -89,10 +86,7 @@ const parseNotes = () =>
     .map(([path, rawContent]) => {
       const { data, content } = parseFrontMatter(rawContent);
       const slug = path.split("/").pop().replace(".md", "");
-      const readingTime = Math.max(
-        1,
-        Math.ceil(content.split(/\s+/).length / 180)
-      );
+      const readingTime = Math.max(1, Math.ceil(content.split(/\s+/).length / 180));
 
       return {
         slug,
@@ -118,15 +112,11 @@ const NoteModal = ({ note, onClose }) => {
     dialogRef.current?.focus();
 
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+      if (event.key === "Escape") onClose();
     };
 
     const handlePointerDown = (event) => {
-      if (dialogRef.current && !dialogRef.current.contains(event.target)) {
-        onClose();
-      }
+      if (dialogRef.current && !dialogRef.current.contains(event.target)) onClose();
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -142,35 +132,39 @@ const NoteModal = ({ note, onClose }) => {
   }, [note, onClose]);
 
   if (!note) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-surface-base/70 backdrop-blur-[12px]" role="presentation">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/58 p-4 backdrop-blur-sm"
+      role="presentation"
+    >
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="note-modal-title"
         tabIndex={-1}
-        className="relative max-h-[85vh] w-full max-w-3xl overflow-hidden rounded-[2.75rem] border border-white/20 bg-white/95 p-10 shadow-[0_40px_120px_-40px_rgba(15,23,42,0.55)] backdrop-blur-[18px] dark:border-white/10 dark:bg-surface-elevated/95"
+        className="premium-card relative max-h-[88vh] w-full max-w-3xl overflow-hidden"
       >
         <button
           type="button"
           aria-label="Close note"
           onClick={onClose}
-          className="absolute right-6 top-6 rounded-full border border-neutral-200/80 bg-white/80 p-3 text-neutral-500 shadow-card-light transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-white/10 dark:bg-surface-elevated/70 dark:text-neutral-200"
+          className="icon-button absolute right-4 top-4 z-10"
         >
           <FiX className="text-lg" />
         </button>
-        <div className="scrollbar-glass max-h-[68vh] space-y-6 overflow-y-auto px-10 py-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500">
+        <div className="scrollbar-premium max-h-[88vh] overflow-y-auto p-6 md:p-10">
+          <p className="eyebrow">
             {note.date} · {note.readingTime} min read
           </p>
           <h3
             id="note-modal-title"
-            className="mt-4 font-display text-[clamp(1.9rem,3.2vw,2.4rem)] leading-tight text-neutral-900 dark:text-neutral-50"
+            className="mt-4 text-balance text-3xl font-extrabold leading-tight md:text-4xl"
           >
             {note.title}
           </h3>
-          <div className="prose prose-lg prose-neutral max-w-none leading-relaxed dark:prose-invert">
+          <div className="prose prose-neutral mt-8 max-w-none leading-relaxed dark:prose-invert">
             <ReactMarkdown>{note.content}</ReactMarkdown>
           </div>
         </div>
@@ -181,104 +175,139 @@ const NoteModal = ({ note, onClose }) => {
 
 const NotesSection = () => {
   const [selectedNote, setSelectedNote] = useState(null);
+  const scrollerRef = useRef(null);
+
+  const scrollNotes = (direction) => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    scroller.scrollBy({
+      left: direction * Math.min(scroller.clientWidth * 0.82, 620),
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <section
-      id="notes"
-      className="section-wrapper relative overflow-hidden border border-white/15 bg-white/12 backdrop-blur-2xl dark:border-white/10 dark:bg-white/8"
-      aria-labelledby="notes-title"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark/70" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-brand-secondary-soft/18 via-transparent to-transparent dark:from-brand-secondary-soft/26" />
-
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+    <section id="notes" className="section-wrapper" aria-labelledby="notes-title">
+      <div className="section-shell">
         <motion.div
           variants={staggered()}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
+          className="grid gap-6 border-y border-line-light py-10 dark:border-line-dark lg:grid-cols-[0.8fr,1.2fr] lg:items-end"
         >
-          <motion.p variants={fadeInUp(0.1)} className="eyebrow">
-            Notes
-          </motion.p>
-          <motion.h2
-            id="notes-title"
-            variants={fadeInUp(0.18)}
-            className="mt-4 font-display text-[clamp(2rem,3vw,2.75rem)] text-neutral-900 dark:text-neutral-50"
-          >
-            Thinking out loud about mobile craft and product strategy.
-          </motion.h2>
+          <div>
+            <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
+              Notes
+            </motion.p>
+            <motion.h2
+              id="notes-title"
+              variants={fadeInUp(0.1, 16)}
+              className="mt-4 text-balance text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05]"
+            >
+              Short notes on mobile craft and product judgment.
+            </motion.h2>
+          </div>
           <motion.p
-            variants={fadeInUp(0.26)}
-            className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-600 dark:text-neutral-300 md:text-lg"
+            variants={fadeInUp(0.16, 16)}
+            className="text-pretty text-lg text-ink-muted dark:text-ink-inverse/80"
           >
-            Short-form learnings, architecture explorations, and retros for the
-            products I help ship. Expect honest notes over polished narratives.
+            A small writing surface for architecture lessons, release notes, and
+            practical product observations from shipped mobile work.
           </motion.p>
         </motion.div>
 
         {notes.length === 0 ? (
           <motion.div
-            variants={fadeInUp(0.3)}
+            variants={fadeInUp(0.2, 14)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mt-10 rounded-[2.5rem] border border-dashed border-brand-primary/45 bg-white/12 p-10 text-center shadow-card-light backdrop-blur-xl dark:border-brand-primary/35 dark:bg-white/10"
+            className="premium-card mt-10 p-8 text-center"
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.26em] text-brand-primary">
-              Coming soon
-            </p>
-            <p className="mt-4 text-neutral-600 dark:text-neutral-300">
-              Subscribe on LinkedIn to get notified when the first note drops.
+            <p className="eyebrow">Coming Soon</p>
+            <p className="mt-4 text-ink-muted dark:text-ink-inverse/80">
+              Notes are being edited into clearer, shorter pieces.
             </p>
           </motion.div>
         ) : (
           <motion.div
-            variants={staggered(0.12, 0.24)}
+            variants={staggered(0.08, 0.18)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="grid gap-8 md:grid-cols-2"
+            viewport={{ once: true, amount: 0.25 }}
+            className="mt-10"
           >
-            {notes.map((note, index) => (
-              <motion.article
-                key={note.slug}
-                variants={fadeInUp(0.12 * (index + 1))}
-                className="group relative flex h-full flex-col gap-5 rounded-[2.5rem] border border-white/20 bg-white/14 p-8 shadow-card-light backdrop-blur-2xl transition duration-500 hover:-translate-y-1 hover:shadow-soft-xl dark:border-white/10 dark:bg-white/10 dark:shadow-card-dark"
-              >
-                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
-                  <span>{note.date}</span>
-                  <span className="inline-flex items-center gap-1 text-brand-primary">
-                    <FiClock className="text-xs" /> {note.readingTime} min
-                  </span>
-                </div>
-                <h3 className="text-xl font-semibold leading-snug text-neutral-900 dark:text-neutral-50">
-                  {note.title}
-                </h3>
-                <p className="text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-300">
-                  {note.excerpt}
-                </p>
-                {note.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {note.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-brand-primary/25 bg-brand-primary/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary dark:border-brand-primary/35 dark:bg-brand-primary/20 dark:text-neutral-100"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
+                {String(notes.length).padStart(2, "0")} field notes
+              </p>
+              <div className="flex gap-2">
                 <button
                   type="button"
-                  onClick={() => setSelectedNote(note)}
-                  className="inline-flex items-center gap-2 self-start rounded-full border border-brand-primary/35 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-primary transition duration-300 hover:-translate-y-0.5 hover:border-brand-primary/55 hover:text-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-brand-primary/30 dark:bg-white/5 dark:text-white"
+                  aria-label="Previous notes"
+                  onClick={() => scrollNotes(-1)}
+                  className="icon-button"
                 >
-                  Read the full note <FiExternalLink className="text-xs" />
+                  <FiArrowLeft />
                 </button>
-              </motion.article>
-            ))}
+                <button
+                  type="button"
+                  aria-label="Next notes"
+                  onClick={() => scrollNotes(1)}
+                  className="icon-button"
+                >
+                  <FiArrowRight />
+                </button>
+              </div>
+            </div>
+
+            <div
+              ref={scrollerRef}
+              className="scrollbar-premium -mx-5 grid snap-x snap-mandatory auto-cols-[minmax(18rem,21rem)] grid-flow-col gap-4 overflow-x-auto px-5 pb-5 sm:-mx-6 sm:auto-cols-[minmax(20rem,24rem)] sm:px-6 lg:-mx-10 lg:auto-cols-[minmax(22rem,26rem)] lg:px-10"
+            >
+              {notes.map((note, index) => (
+                <motion.article
+                  key={note.slug}
+                  variants={fadeInUp(0.04 * index, 14)}
+                  className="premium-card premium-card-hover flex min-h-[26rem] snap-start flex-col p-6"
+                >
+                  <div className="flex items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.16em] meta-text">
+                    <span>{note.date}</span>
+                    <span className="inline-flex items-center gap-1">
+                      <FiClock /> {note.readingTime} min
+                    </span>
+                  </div>
+                  <h3 className="mt-5 text-balance text-2xl font-extrabold leading-tight">
+                    {note.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-muted dark:text-ink-inverse/80">
+                    {note.excerpt}
+                  </p>
+                  {note.tags.length > 0 && (
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {note.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="chip"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedNote(note)}
+                    className="button-secondary mt-auto self-start px-4 py-2.5"
+                  >
+                    Read note
+                    <FiExternalLink />
+                  </button>
+                </motion.article>
+              ))}
+            </div>
           </motion.div>
         )}
       </div>
@@ -286,19 +315,6 @@ const NotesSection = () => {
       <NoteModal note={selectedNote} onClose={() => setSelectedNote(null)} />
     </section>
   );
-};
-
-NoteModal.propTypes = {
-  note: PropTypes.shape({
-    slug: PropTypes.string,
-    title: PropTypes.string,
-    date: PropTypes.string,
-    excerpt: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string),
-    content: PropTypes.string,
-    readingTime: PropTypes.number,
-  }),
-  onClose: PropTypes.func.isRequired,
 };
 
 export default NotesSection;

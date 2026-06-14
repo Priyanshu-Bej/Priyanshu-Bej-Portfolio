@@ -1,168 +1,94 @@
 import { motion } from "framer-motion";
 
-import { heroContent, skillGroups, skillIcons, skillKeywords } from "../../constants";
+import { skillGroups, skillIcons } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
 
-const SkillTag = ({ label, index }) => (
-  <motion.span
-    variants={fadeInUp(0.02 * index, 18)}
-    className="inline-flex items-center rounded-full border border-brand-primary/40 bg-white/15 px-3 py-1 text-xs font-semibold text-brand-primary shadow-card-light backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:shadow-soft-xl dark:border-brand-primary/40 dark:bg-white/10 dark:text-neutral-100"
-  >
-    {label}
-  </motion.span>
-);
-
 const SkillsSection = () => (
-  <section
-    id="skills"
-    className="section-wrapper relative overflow-hidden border border-white/15 bg-white/12 backdrop-blur-2xl dark:border-white/10 dark:bg-white/8"
-    aria-labelledby="skills-title"
-  >
-    <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-35 dark:bg-grid-dark/70" />
-    <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-brand-primary/18 via-transparent to-transparent dark:from-brand-primary/28" />
-
-    <div className="mx-auto max-w-6xl px-4 md:px-6">
+  <section id="skills" className="border-b border-line-light dark:border-line-dark" aria-labelledby="skills-title">
+    <div className="grid lg:grid-cols-[17rem,1fr]">
       <motion.div
-        variants={staggered()}
+        variants={fadeInUp(0.06, 14)}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.35 }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="border-b border-line-light px-5 py-12 dark:border-line-dark sm:px-8 lg:border-b-0 lg:border-r lg:px-8 lg:py-16"
       >
-        <motion.p variants={fadeInUp(0.1)} className="eyebrow">
-          Skills
-        </motion.p>
-        <motion.h2
+        <p className="eyebrow">Capability Index</p>
+        <h2
           id="skills-title"
-          variants={fadeInUp(0.18)}
-          className="mt-4 font-display text-[clamp(2rem,3vw,2.75rem)] text-neutral-900 dark:text-neutral-50"
+          className="mt-5 text-balance text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[0.95] lg:[writing-mode:vertical-rl]"
         >
-          Pragmatic tooling for reliable, beautiful mobile experiences.
-        </motion.h2>
-        <motion.p
-          variants={fadeInUp(0.26)}
-          className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-600 dark:text-neutral-300 md:text-lg"
-        >
-          I obsess over the invisible details that make apps feel effortless —
-          well-structured architecture, resilient networking, thoughtful
-          animation, and a design system mindset that keeps teams aligned.
-        </motion.p>
+          Stack, systems, release.
+        </h2>
       </motion.div>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
+      <div>
         <motion.div
-          variants={staggered()}
+          variants={staggered(0.08, 0.12)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="space-y-6"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          {skillGroups.map(({ title, description, items }) => (
-            <motion.div
+          {skillGroups.map(({ title, description, items }, index) => (
+            <motion.article
               key={title}
-              variants={fadeInUp(0.12)}
-              className="group relative overflow-hidden rounded-3xl border border-white/25 bg-white/12 p-6 shadow-card-light backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:shadow-soft-xl dark:border-white/10 dark:bg-white/8 dark:shadow-card-dark"
+              variants={fadeInUp(0.04 * index, 14)}
+              className="grid gap-8 border-b border-line-light px-5 py-10 dark:border-line-dark sm:px-8 lg:grid-cols-[0.55fr,1.45fr] lg:px-12"
             >
-              <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-                <span className="absolute left-0 top-0 h-full w-full bg-gradient-to-br from-brand-primary/25 via-transparent to-brand-secondary-soft/20" />
+              <div>
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
+                  Module {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-5 text-3xl font-extrabold">{title}</h3>
+                <p className="mt-4 max-w-md text-sm text-ink-muted dark:text-ink-inverse/80">
+                  {description}
+                </p>
               </div>
-              <h3 className="relative text-lg font-semibold text-neutral-900 dark:text-neutral-50">
-                {title}
-              </h3>
-              <p className="relative mt-3 text-sm text-neutral-600 dark:text-neutral-300">
-                {description}
-              </p>
-              <div className="relative mt-4 flex flex-wrap gap-2">
+              <div className="flex flex-wrap content-start gap-3">
                 {items.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full bg-brand-primary/12 px-3 py-1 text-xs font-medium text-brand-primary shadow-inner dark:bg-brand-primary/20 dark:text-neutral-100"
+                    className="inline-flex min-h-12 items-center rounded-md border border-line-light bg-white px-4 py-3 text-sm font-extrabold text-ink-strong shadow-subtle transition hover:border-brand-primary hover:text-brand-primary dark:border-white/10 dark:bg-surface-dark-elevated dark:text-ink-inverse dark:shadow-dark-subtle dark:hover:border-brand-secondary dark:hover:text-brand-secondary"
                   >
                     {item}
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </motion.article>
           ))}
-
-          <motion.div
-            variants={fadeInUp(0.15)}
-            className="relative overflow-hidden rounded-3xl border border-white/25 bg-white/12 p-6 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/8 dark:shadow-card-dark"
-            aria-label="Tooling & platforms"
-          >
-            <p className="text-sm font-semibold uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
-              Everyday toolkit
-            </p>
-            <div className="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-6">
-              {skillIcons.map(({ name, icon }) => (
-                <div
-                  key={name}
-                  className="flex flex-col items-center gap-2 rounded-2xl border border-white/25 bg-white/15 p-3 text-center text-xs text-neutral-600 shadow-card-light backdrop-blur-lg transition duration-500 hover:-translate-y-1 hover:shadow-soft-xl dark:border-white/10 dark:bg-white/10 dark:text-neutral-200"
-                >
-                  <img
-                    src={icon}
-                    alt={name}
-                    loading="lazy"
-                    className="h-10 w-10 object-contain"
-                  />
-                  <span>{name}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
 
         <motion.div
-          variants={staggered()}
+          variants={fadeInUp(0.14, 16)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="space-y-8"
+          viewport={{ once: true, amount: 0.2 }}
+          className="px-5 py-12 sm:px-8 lg:px-12 lg:py-16"
         >
-          <motion.div
-            variants={fadeInUp(0.1)}
-            className="relative overflow-hidden rounded-3xl border border-white/25 bg-white/15 p-6 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:shadow-card-dark"
-          >
-            <p className="text-sm font-semibold uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
-              Skill cloud
+          <div className="grid gap-6 lg:grid-cols-[0.42fr,1fr] lg:items-end">
+            <div>
+              <p className="eyebrow">Tools I Reach For</p>
+              <h3 className="mt-4 max-w-md text-balance text-[clamp(2rem,4vw,4rem)] font-extrabold leading-[0.95]">
+                Practical tools for shipping stable mobile systems.
+              </h3>
+            </div>
+            <p className="max-w-2xl text-pretty text-base text-ink-muted dark:text-ink-inverse/80">
+              A focused stack I use across architecture, development, debugging,
+              cloud integrations, automation, and product handoff.
             </p>
-            <motion.div
-              variants={staggered(0.04, 0)}
-              className="mt-4 flex flex-wrap gap-2"
-            >
-              {skillKeywords.map((keyword, index) => (
-                <SkillTag key={keyword} label={keyword} index={index} />
-              ))}
-            </motion.div>
-          </motion.div>
-          {(heroContent.workflow.length > 0 || heroContent.passion?.trim()) && (
-            <motion.div
-              variants={fadeInUp(0.18)}
-              className="relative overflow-hidden rounded-3xl border border-white/25 bg-white/15 p-6 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:shadow-card-dark"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.26em] text-neutral-400 dark:text-neutral-500">
-                Workflow DNA
-              </p>
-              <div className="mt-4 space-y-4">
-                {heroContent.workflow.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {heroContent.workflow.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold text-neutral-700 shadow-inner backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-neutral-100"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                {heroContent.passion?.trim() && (
-                  <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                    {heroContent.passion}
-                  </p>
-                )}
+          </div>
+
+          <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-line-light bg-line-light dark:border-line-dark dark:bg-line-dark sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
+            {skillIcons.map(({ name, icon: Icon }) => (
+              <div
+                key={name}
+                className="group flex aspect-square flex-col items-center justify-center gap-3 bg-surface-elevated p-4 text-center text-xs font-bold text-ink-strong transition hover:bg-surface-muted hover:text-brand-primary dark:bg-surface-dark-elevated dark:text-ink-inverse dark:hover:bg-surface-dark-muted dark:hover:text-brand-secondary"
+              >
+                <Icon className="h-9 w-9 text-brand-primary transition group-hover:scale-110 dark:text-brand-secondary" aria-hidden />
+                <span>{name}</span>
               </div>
-            </motion.div>
-          )}
+            ))}
+          </div>
         </motion.div>
       </div>
     </div>

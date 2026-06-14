@@ -1,324 +1,202 @@
-import { useCallback } from "react";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { FiLinkedin } from "react-icons/fi";
+import { motion } from "framer-motion";
+import { FiArrowRight, FiLinkedin, FiMapPin } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
-import { heroContent, resumeResource } from "../../constants";
+import { heroContent, projects, resumeResource } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
-import FloatingParticles from "../ui/FloatingParticles";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const {
     eyebrow,
-    title,
-    highlight,
+    name,
+    role,
     bio = [],
     toolbox = [],
     workflow = [],
-    passion = "",
+    availability,
+    location,
     stats,
-    linkedin = null,
-    heroLogos,
+    linkedin,
     primaryAction,
     secondaryAction,
-    portrait,
   } = heroContent;
 
-  const bioIntro = bio.slice(0, 2).filter(Boolean);
-  const toolboxLine = bio[2];
-  const workflowLine = bio[3];
-  const loveLine = passion?.trim();
-  const hasToolboxContent = (toolboxLine && toolboxLine.trim()) || toolbox.length > 0;
-  const hasWorkflowContent = (workflowLine && workflowLine.trim()) || workflow.length > 0 || loveLine;
-  const showMetaCard = hasToolboxContent || hasWorkflowContent;
-
-  const tiltX = useMotionValue(0);
-  const tiltY = useMotionValue(0);
-  const tiltTransform = useMotionTemplate`
-    perspective(900px)
-    rotateX(${tiltY}deg)
-    rotateY(${tiltX}deg)
-  `;
-
-  const handleMouseMove = useCallback(
-    (event) => {
-      const bounds = event.currentTarget.getBoundingClientRect();
-      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 18;
-      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -18;
-      tiltX.set(x);
-      tiltY.set(y);
-    },
-    [tiltX, tiltY]
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    tiltX.set(0);
-    tiltY.set(0);
-  }, [tiltX, tiltY]);
+  const featuredProjects = projects.slice(0, 3);
 
   return (
     <section
       id="hero"
-      className="section-wrapper relative overflow-hidden pb-16 pt-28 sm:pt-32"
+      className="relative min-h-screen border-b border-line-light dark:border-line-dark"
       aria-labelledby="hero-title"
     >
-      <div className="pointer-events-none absolute inset-0 bg-hero-gradient opacity-90 dark:bg-hero-dark" />
-      <FloatingParticles className="opacity-75" />
-
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 md:grid-cols-[1.1fr,0.9fr] md:px-6">
+      <div className="grid min-h-screen lg:grid-cols-[minmax(0,1fr),17rem]">
         <motion.div
-          variants={staggered(0.08, 0.1)}
+          variants={staggered(0.08, 0.08)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.45 }}
-          className="relative flex flex-col gap-8"
+          animate="show"
+          className="flex flex-col justify-between px-5 py-12 sm:px-8 lg:px-12 lg:py-14"
         >
-          <motion.span
-            variants={fadeInUp(0.1)}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.48em] text-neutral-900 shadow-card-light backdrop-blur-md dark:border-white/10 dark:text-neutral-100"
-          >
-            {eyebrow}
-          </motion.span>
+          <div>
+            <motion.div
+              variants={fadeInUp(0, 14)}
+              className="flex flex-wrap items-center gap-3"
+            >
+              <span className="eyebrow">{eyebrow}</span>
+              <span className="chip">
+                {availability}
+              </span>
+            </motion.div>
 
-          <motion.div variants={fadeInUp(0.16)} className="relative max-w-xl">
-            <h1
+            <motion.h1
               id="hero-title"
-              className="font-display text-[clamp(2.7rem,5vw,4.35rem)] font-semibold leading-[1.05] text-neutral-900 drop-shadow-[0_18px_45px_rgba(0,0,0,0.12)] dark:text-white"
+              variants={fadeInUp(0.04, 18)}
+              className="mt-10 max-w-6xl text-balance text-[clamp(3.6rem,12vw,9.5rem)] font-extrabold leading-[0.88]"
             >
-              {title.replace(
-                highlight,
-                `__${highlight}__`
-              )
-                .split("__")
-                .map((chunk, index) =>
-                  index % 2 === 1 ? (
-                    <motion.span
-                      key={chunk}
-                      className="relative inline-block text-transparent"
-                      animate={{
-                        textShadow: [
-                          "0 0 24px rgba(0, 174, 239, 0.35)",
-                          "0 0 46px rgba(147, 51, 234, 0.35)",
-                          "0 0 24px rgba(0, 174, 239, 0.35)",
-                        ],
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        duration: 6,
-                      }}
-                    >
-                      <span className="bg-gradient-to-r from-brand-primary via-brand-secondary-soft to-brand-accent bg-clip-text text-transparent">
-                        {chunk}
-                      </span>
-                    </motion.span>
-                  ) : (
-                    <span key={chunk}>{chunk}</span>
-                  )
-                )}
-            </h1>
-            <div className="absolute -left-16 top-6 hidden h-24 w-24 rounded-full bg-brand-primary/35 blur-[85px] sm:block" />
-          </motion.div>
+              Mobile products with release discipline.
+            </motion.h1>
 
-          {bioIntro.length > 0 && (
             <motion.div
-              variants={fadeInUp(0.24)}
-              className="space-y-3 text-base leading-relaxed text-neutral-600 dark:text-neutral-200 md:text-lg"
+              variants={fadeInUp(0.1, 18)}
+              className="mt-10 grid gap-8 lg:grid-cols-[0.9fr,1.1fr]"
             >
-              {bioIntro.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+              <div>
+                <p className="font-display text-2xl font-bold leading-tight md:text-3xl">
+                  {name}
+                </p>
+                <p className="mt-4 text-pretty text-lg text-ink-muted dark:text-ink-inverse/80">
+                  {role}
+                </p>
+              </div>
+
+              <div className="space-y-3 text-base text-ink-muted dark:text-ink-inverse/80 md:text-lg">
+                {bio.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={fadeInUp(0.18, 16)}
+            className="mt-12 grid gap-8 xl:grid-cols-[1fr,1.1fr]"
+          >
+            <div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => navigate(primaryAction.href)}
+                  className="button-primary"
+                >
+                  {primaryAction.label}
+                  <FiArrowRight />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navigate(secondaryAction.href)}
+                  className="button-secondary"
+                >
+                  {secondaryAction.label}
+                </button>
+                <a
+                  href={resumeResource.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="button-secondary"
+                >
+                  Resume
+                </a>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                {toolbox.map((item) => (
+                  <span
+                    key={item}
+                    className="chip chip-lg"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="border-t border-line-light pt-4 dark:border-line-dark"
+                >
+                  <p className="text-3xl font-extrabold text-ink-strong dark:text-ink-inverse">
+                    {stat.value}
+                  </p>
+                  <p className="mt-2 text-sm text-ink-muted dark:text-ink-inverse/80">
+                    {stat.label}
+                  </p>
+                </div>
               ))}
-            </motion.div>
-          )}
-
-          {showMetaCard && (
-            <motion.div
-              variants={fadeInUp(0.3)}
-              className="grid gap-4 rounded-3xl border border-white/25 bg-white/12 p-5 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:shadow-card-dark"
-            >
-              {hasToolboxContent && (
-                <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-neutral-500 dark:text-neutral-400">
-                    🛠 My Toolbox
-                  </p>
-                  {toolboxLine && (
-                    <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
-                      {toolboxLine}
-                    </p>
-                  )}
-                  {toolbox.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {toolbox.map((item) => (
-                        <span
-                          key={item}
-                          className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-brand-primary shadow-inner backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-neutral-100"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-              {hasWorkflowContent && (
-                <div className="grid gap-3 rounded-2xl border border-white/15 bg-white/8 p-4 shadow-inner backdrop-blur dark:border-white/10 dark:bg-white/5">
-                  <p className="text-xs uppercase tracking-[0.35em] text-neutral-500 dark:text-neutral-400">
-                    🔧 How I Work
-                  </p>
-                  {workflowLine && (
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                      {workflowLine}
-                    </p>
-                  )}
-                  {workflow.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {workflow.map((item) => (
-                        <span
-                          key={item}
-                          className="rounded-full bg-brand-secondary-soft/15 px-3 py-1 text-xs font-semibold text-brand-primary dark:bg-brand-secondary-soft/25 dark:text-neutral-100"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  {loveLine && (
-                    <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                      {loveLine}
-                    </p>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          )}
-
-          <motion.div
-            variants={fadeInUp(0.32)}
-            className="relative flex flex-col gap-3 sm:flex-row"
-          >
-            <button
-              type="button"
-              onClick={() => navigate(primaryAction.href)}
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-brand-primary px-7 py-3 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-            >
-              <span className="relative z-10">{primaryAction.label}</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-brand-secondary-soft/45 to-brand-accent/40 opacity-0 blur-xl transition group-hover:opacity-100" />
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate(secondaryAction.href)}
-              className="group inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-7 py-3 text-sm font-semibold text-brand-primary backdrop-blur-lg transition duration-300 hover:-translate-y-0.5 hover:border-brand-primary/60 hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-white"
-            >
-              {secondaryAction.label}
-            </button>
-          </motion.div>
-
-          {linkedin && (
-            <motion.a
-              variants={fadeInUp(0.36)}
-              href={linkedin.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex w-fit items-center gap-4 rounded-full border border-brand-primary/50 bg-brand-primary/10 px-7 py-3 text-sm font-semibold text-brand-primary shadow-lg backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-brand-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-brand-primary/40 dark:bg-brand-primary/15 dark:text-white"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-primary text-white shadow-md transition group-hover:bg-white group-hover:text-brand-primary">
-                <FiLinkedin className="h-5 w-5" />
-              </span>
-              <span className="flex flex-col text-left tracking-normal">
-                <span className="text-[11px] uppercase tracking-[0.35em] text-brand-primary/80 transition group-hover:text-white/80 dark:text-white/80">
-                  {linkedin.label}
-                </span>
-                <span className="text-lg font-semibold text-brand-primary transition group-hover:text-white dark:text-white">
-                  {linkedin.handle}
-                </span>
-              </span>
-            </motion.a>
-          )}
-
-          <motion.dl
-            variants={staggered(0.05, 0.35)}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-3"
-          >
-            {stats.map(({ value, label }) => (
-              <motion.div
-                key={label}
-                variants={fadeInUp(0.18)}
-                className="relative overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-4 text-left shadow-card-light backdrop-blur-xl transition duration-500 hover:-translate-y-1.5 hover:shadow-soft-xl dark:border-white/5 dark:bg-white/5 dark:shadow-card-dark"
-              >
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-brand-primary/15 opacity-0 transition-opacity duration-500 hover:opacity-100" />
-                <dt className="text-[10px] uppercase tracking-[0.45em] text-neutral-500 dark:text-neutral-400">
-                  {label}
-                </dt>
-                <dd className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white">
-                  {value}
-                </dd>
-              </motion.div>
-            ))}
-          </motion.dl>
-
-          <motion.div
-            variants={fadeInUp(0.4)}
-            className="flex flex-wrap items-center gap-4"
-          >
-            {heroLogos.map((logo) => (
-              <span
-                key={logo.name}
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold text-neutral-600 shadow-card-light backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-neutral-200"
-              >
-                <img
-                  src={logo.image}
-                  alt={logo.name}
-                  loading="lazy"
-                  className="h-6 w-6 rounded-full object-contain"
-                />
-                {logo.name}
-              </span>
-            ))}
+            </div>
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex items-center justify-center"
+        <motion.aside
+          variants={fadeInUp(0.22, 18)}
+          initial="hidden"
+          animate="show"
+          className="border-t border-line-light bg-surface-elevated p-5 dark:border-line-dark dark:bg-surface-dark lg:border-l lg:border-t-0"
         >
-          <motion.div
-            style={{ transform: tiltTransform }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="group relative w-full max-w-[420px] overflow-hidden rounded-[2.75rem] border border-white/25 bg-white/10 p-6 shadow-glow backdrop-blur-2xl transition duration-500 dark:border-white/10 dark:bg-white/5"
-          >
-            <span className="absolute inset-0 rounded-[2.75rem] border border-white/20 opacity-70" />
-            <span className="absolute inset-12 rounded-[2rem] bg-gradient-to-br from-brand-primary/20 via-transparent to-brand-accent/20 opacity-0 transition duration-700 group-hover:opacity-100" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/25">
-              <img
-                src={portrait}
-                alt="Portrait of Priyanshu Pritam Bej"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
+          <div className="sticky top-6 space-y-6">
+            <div>
+              <p className="eyebrow">Current Signal</p>
+              <p className="mt-4 text-lg font-bold text-ink-strong dark:text-ink-inverse">
+                {workflow.join(" / ")}
+              </p>
+              <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-ink-muted dark:text-ink-inverse/90">
+                <FiMapPin />
+                {location}
+              </p>
             </div>
-            <div className="relative mt-6 rounded-2xl border border-white/25 bg-white/20 p-4 backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
-              <p className="text-sm font-semibold text-neutral-900 dark:text-white">
-                Mobile-first Specialist
-              </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-300">
-                Flutter · Kotlin · Realtime Ops
-              </p>
+
+            <div className="space-y-3">
+              {featuredProjects.map((project, index) => (
+                <button
+                  key={project.id}
+                  type="button"
+                  onClick={() => navigate("/projects")}
+                  className="group grid w-full grid-cols-[3.75rem,1fr] gap-3 rounded-md border border-line-light bg-canvas-light p-2 text-left transition hover:border-brand-primary dark:border-white/20 dark:bg-surface-dark-elevated dark:hover:border-brand-secondary dark:hover:bg-surface-dark-muted"
+                >
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className="aspect-square rounded object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                  <span>
+                    <span className="block text-sm font-bold text-ink-strong dark:text-ink-inverse">
+                      {project.title}
+                    </span>
+                    <span className="mt-1 block text-xs font-semibold text-ink-muted dark:text-ink-inverse/80">
+                      {project.category}
+                    </span>
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {linkedin && (
               <a
-                href={resumeResource.href}
+                href={linkedin.href}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-brand-primary transition hover:text-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-white"
+                className="group inline-flex items-center gap-3 text-sm font-semibold text-ink-muted transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
               >
-                Tiny resume ↓
+                <span className="icon-button">
+                  <FiLinkedin />
+                </span>
+                <span>{linkedin.handle}</span>
               </a>
-            </div>
-          </motion.div>
-        </motion.div>
+            )}
+          </div>
+        </motion.aside>
       </div>
     </section>
   );

@@ -1,63 +1,30 @@
-import close from "./close.svg";
-import github from "./github.png";
 import lockyLogo from "./locky.png";
-import menu from "./menu.svg";
-import me from "./priyanshu_bej_code_theme.jpg";
-import aboutPortrait from "./priyanshubej.png";
+import abcApp from "./abc.png";
+import letsFunApp from "./letsfun.png";
+import railkafeApp from "./railkafe.png";
+import typofApp from "./typof.png";
 
-import iosLogo from "./ios.png";
-import android from "./tech/android.png";
-import androidStudio from "./tech/androidStudio.png";
-import awsLogo from "./tech/aws.png";
-import bloc from "./tech/bloc.png";
-import dart from "./tech/dart.png";
-import figma from "./tech/figma.png";
-import firebase from "./tech/firebase.png";
-import flutter from "./tech/flutter.png";
-import gcpLogo from "./tech/GCP.png";
-import git from "./tech/git.png";
-import githubLogo from "./tech/github.png";
-import kotlin from "./tech/kotlin.png";
-import mongo from "./tech/mongo.png";
-import nodejs from "./tech/nodejs.png";
-import postman from "./tech/postman.png";
+const certificationAssets = import.meta.glob(
+  "./certifications/*.{png,jpg,jpeg,webp}",
+  {
+    eager: true,
+    import: "default",
+    query: "?url",
+  },
+);
 
-import freelancerLogo from "./company/freelancer.png";
-import irissLogo from "./company/iriss.png";
-import kodsLogo from "./company/kods.png";
-import typoflogo from "./company/typof.png";
-import baripadCollege from "./education/baripadacollege.png";
-import gift from "./education/gift.png";
-import kv from "./education/kv.png";
+const certificationImagesByFile = Object.fromEntries(
+  Object.entries(certificationAssets).map(([path, image]) => [
+    path.split("/").pop(),
+    image,
+  ]),
+);
 
 export {
-  android,
-  androidStudio,
-  awsLogo,
-  baripadCollege,
-  bloc,
-  close,
-  dart,
-  figma,
-  firebase,
-  flutter,
-  freelancerLogo,
-  gcpLogo,
-  gift,
-  git,
-  github,
-  githubLogo,
-  iosLogo,
-  irissLogo,
-  kodsLogo,
-  kotlin,
   lockyLogo,
-  kv,
-  me,
-  aboutPortrait,
-  menu,
-  mongo,
-  nodejs,
-  postman,
-  typoflogo,
+  abcApp,
+  certificationImagesByFile,
+  letsFunApp,
+  railkafeApp,
+  typofApp,
 };

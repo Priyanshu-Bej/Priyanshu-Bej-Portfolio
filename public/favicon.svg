@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Priyanshu Bej favicon">
+  <style>
+    .mark-bg {
+      fill: #080a0d;
+    }
+
+    .mark-border {
+      fill: none;
+      stroke: #2a2f36;
+      stroke-width: 2;
+    }
+
+    .mark-primary {
+      fill: #2563eb;
+    }
+
+    .mark-secondary {
+      fill: #14b8a6;
+    }
+
+    .mark-text {
+      fill: #f6f5f0;
+      font-family: "Plus Jakarta Sans", Inter, Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+  </style>
+  <rect class="mark-bg" x="4" y="4" width="56" height="56" rx="12" />
+  <rect class="mark-border" x="5" y="5" width="54" height="54" rx="11" />
+  <rect class="mark-primary" x="10" y="12" width="5" height="40" rx="2.5" />
+  <rect class="mark-secondary" x="18" y="10" width="20" height="4" rx="2" />
+  <text class="mark-text" x="37" y="41" text-anchor="middle">PB</text>
+</svg>

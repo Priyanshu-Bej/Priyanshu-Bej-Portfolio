@@ -1,20 +1,54 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { FiDownloadCloud, FiMenu, FiX } from "react-icons/fi";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { FiArrowUpRight, FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { navItems, resumeResource } from "../../constants";
+import { heroContent, navItems, resumeResource } from "../../constants";
 import ThemeToggle from "./ThemeToggle";
+
+const getPathHash = (path) => {
+  const [pathname, hash = ""] = path.split("#");
+  return { pathname: pathname || "/", hash: hash ? `#${hash}` : "" };
+};
+
+const NavItem = ({ item, currentPathname, currentHash, onNavigate }) => {
+  const { pathname, hash } = getPathHash(item.path);
+  const isActive =
+    hash.length > 0
+      ? currentHash === hash
+      : currentPathname === pathname && currentHash.length === 0;
+
+  return (
+    <button
+      type="button"
+      onClick={() => onNavigate(item.path)}
+      className={`group flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-semibold transition ${
+        isActive
+          ? "bg-ink-strong text-white dark:bg-ink-inverse dark:text-ink-strong"
+          : "text-ink-muted hover:bg-surface-muted hover:text-ink-strong dark:text-ink-inverse/90 dark:hover:bg-surface-dark-muted dark:hover:text-ink-inverse"
+      }`}
+    >
+      <span>{item.label}</span>
+      <span className={`text-xs transition ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+        <FiArrowUpRight />
+      </span>
+    </button>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
+
+  const visibleNavItems = useMemo(
+    () => navItems.filter((item) => item.id !== "home"),
+    []
+  );
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 18);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 18);
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -23,134 +57,160 @@ const Navbar = () => {
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [pathname]);
+  }, [pathname, hash]);
 
-  const resumeLabel = resumeResource.label ?? "Resume";
+  const goTo = (path) => {
+    navigate(path);
+    setMobileOpen(false);
+  };
+
   const resumeDownloadProps = resumeResource.fileName
     ? { download: resumeResource.fileName }
     : {};
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-[60] transition-[transform,opacity] duration-500 ${
-        isScrolled ? "backdrop-blur-xl" : ""
-      }`}
-    >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
-      <nav
-        className={`mx-auto flex w-full max-w-6xl items-center justify-between px-4 transition-all duration-300 md:px-6 ${
-          isScrolled
-            ? "mt-3 rounded-full border border-white/10 bg-white/8 py-2.5 shadow-[0_20px_60px_-35px_rgba(15,23,42,0.45)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5"
-            : "mt-6 rounded-full border border-white/5 bg-white/6 py-3 shadow-[0_25px_70px_-40px_rgba(15,23,42,0.55)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/10"
-        }`}
-      >
+    <>
+      <aside className="fixed inset-y-0 left-0 z-[55] hidden w-[19rem] border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
         <Link
           to="/"
-          className="font-display text-lg font-semibold tracking-tight text-neutral-900 transition hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-neutral-100"
+          className="font-display text-2xl font-extrabold leading-none text-ink-strong transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
         >
           Priyanshu
-          <span className="ml-1 rounded-full bg-gradient-to-r from-brand-primary via-brand-secondary-soft to-brand-accent bg-clip-text text-transparent">
-            dev
-          </span>
+          <span className="block meta-text">Bej</span>
         </Link>
 
-        <div className="hidden items-center gap-6 lg:flex">
-          <ul className="flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-1.5 py-1 text-xs font-medium uppercase tracking-[0.28em] text-neutral-600 shadow-[0_18px_40px_-32px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-neutral-200">
-            {navItems.map(({ id, label, path }) => (
-              <li key={id}>
-                <NavLink to={path} end={path === "/"} className="no-underline">
-                  {({ isActive }) => (
-                    <span
-                      className={`group relative inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary ${
-                        isActive
-                          ? "text-brand-primary"
-                          : "text-neutral-500 hover:text-brand-primary dark:text-neutral-300"
-                      }`}
-                    >
-                      <span
-                        className={`pointer-events-none absolute inset-0 rounded-full bg-brand-primary/12 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
-                          isActive ? "opacity-100" : ""
-                        }`}
-                        aria-hidden
-                      />
-                      <span className="relative z-10 tracking-[0.32em]">{label}</span>
-                    </span>
-                  )}
-                </NavLink>
-              </li>
+        <div className="mt-8 overflow-hidden rounded-md border border-line-light bg-surface-elevated p-2 dark:border-line-dark dark:bg-surface-dark">
+          <div className="flex aspect-[4/3] w-full flex-col justify-between rounded bg-ink-strong p-4 text-white dark:bg-ink-inverse dark:text-ink-strong">
+            <div className="flex items-start justify-between">
+              <span className="font-display text-5xl font-extrabold leading-none">PB</span>
+              <span className="rounded border border-white/20 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] dark:border-black/20">
+                4+ yrs
+              </span>
+            </div>
+            <p className="max-w-[11rem] text-sm font-semibold leading-tight text-white/90 dark:text-ink-strong">
+              Mobile systems, release discipline, product craft.
+            </p>
+          </div>
+          <div className="p-3">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-primary dark:text-brand-secondary">
+              {heroContent.eyebrow}
+            </p>
+            <p className="mt-2 text-sm text-ink-muted dark:text-ink-inverse/80">
+              {heroContent.location}
+            </p>
+          </div>
+        </div>
+
+        <nav aria-label="Primary navigation" className="mt-8">
+          <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] meta-text">
+            Index
+          </p>
+          <div className="space-y-1">
+            {visibleNavItems.map((item) => (
+              <NavItem
+                key={item.id}
+                item={item}
+                currentPathname={pathname}
+                currentHash={hash}
+                onNavigate={goTo}
+              />
             ))}
-          </ul>
-          <div className="flex items-center gap-3">
+          </div>
+        </nav>
+
+        <div className="mt-auto space-y-3 border-t border-line-light pt-5 dark:border-line-dark">
+          <div className="grid grid-cols-3 gap-2">
+            {heroContent.stats.map((stat) => (
+              <div key={stat.label} className="rounded-md border border-transparent bg-surface-muted p-2 dark:border-white/10 dark:bg-surface-dark-elevated">
+                <p className="text-sm font-bold text-ink-strong dark:text-ink-inverse">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-[10px] font-semibold leading-tight text-ink-muted dark:text-ink-inverse/80">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
             <a
               href={resumeResource.href}
               target="_blank"
               rel="noreferrer"
               {...resumeDownloadProps}
-              className="group inline-flex items-center gap-2 rounded-full border border-brand-primary/30 bg-brand-primary px-4 py-2 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-brand-primary-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+              className="button-primary flex-1 px-3 py-2.5"
             >
-              <FiDownloadCloud />
-              <span>{resumeLabel}</span>
+              <FiDownload />
+              Resume
             </a>
             <ThemeToggle />
           </div>
         </div>
+      </aside>
 
-        <div className="flex items-center gap-3 lg:hidden">
-          <a
-            href={resumeResource.href}
-            target="_blank"
-            rel="noreferrer"
-            {...resumeDownloadProps}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/20 text-neutral-600 shadow-card-light backdrop-blur-lg transition hover:text-brand-primary dark:border-white/10 dark:bg-white/10 dark:text-neutral-100"
-            aria-label="View resume"
+      <header className="fixed inset-x-0 top-0 z-[60] px-4 pt-4 lg:hidden">
+        <nav
+          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border px-3 py-3 transition duration-300 ease-premium ${
+            isScrolled
+              ? "border-line-light bg-canvas-light/90 shadow-subtle backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/88"
+              : "border-line-light/70 bg-canvas-light/78 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/78"
+          }`}
+        >
+          <Link
+            to="/"
+            className="font-display text-base font-bold text-ink-strong dark:text-ink-inverse"
           >
-            <FiDownloadCloud className="text-lg" />
-          </a>
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileOpen}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/20 text-neutral-600 shadow-card-light backdrop-blur-lg transition hover:text-brand-primary dark:border-white/10 dark:bg-white/10 dark:text-neutral-100"
-          >
-            {mobileOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
-          </button>
-        </div>
-      </nav>
+            Priyanshu Bej
+          </Link>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            className="lg:hidden"
-          >
-            <div className="mx-4 mb-4 rounded-3xl border border-white/20 bg-white/15 p-4 shadow-card-light backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-neutral-100">
-              <ul className="space-y-2">
-                {navItems.map(({ id, label, path }) => (
-                  <li key={id}>
-                    <NavLink to={path} end={path === "/"} className="no-underline">
-                      {({ isActive }) => (
-                        <span
-                          className={`group relative block w-full rounded-2xl px-5 py-3 text-left text-lg font-semibold transition hover:bg-brand-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-brand-primary/25 ${
-                            isActive ? "bg-brand-primary text-white shadow-soft-xl" : ""
-                          }`}
-                        >
-                          {label}
-                        </span>
-                      )}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileOpen}
+              className="icon-button"
+            >
+              {mobileOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
+            </button>
+          </div>
+        </nav>
+
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="mx-auto mt-2 max-w-6xl rounded-lg border border-line-light bg-canvas-light p-2 shadow-lift dark:border-line-dark dark:bg-canvas-dark">
+                <div className="space-y-1">
+                  {navItems.map((item) => (
+                    <NavItem
+                      key={item.id}
+                      item={item}
+                      currentPathname={pathname}
+                      currentHash={hash}
+                      onNavigate={goTo}
+                    />
+                  ))}
+                </div>
+                <a
+                  href={resumeResource.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  {...resumeDownloadProps}
+                  className="button-primary mt-2 w-full"
+                >
+                  <FiDownload />
+                  {resumeResource.label}
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </>
   );
 };
 

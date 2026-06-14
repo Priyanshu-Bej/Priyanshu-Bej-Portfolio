@@ -7,7 +7,7 @@ export const fadeInUp = (delay = 0, distance = 24) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.46,
       delay,
       ease: [0.22, 1, 0.36, 1],
     },
@@ -21,7 +21,7 @@ export const fadeIn = (delay = 0) => ({
   show: {
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.38,
       delay,
       ease: [0.4, 0, 0.2, 1],
     },

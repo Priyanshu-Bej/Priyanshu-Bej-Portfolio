@@ -1,37 +1,50 @@
 import {
-  aboutPortrait,
-  android,
-  androidStudio,
-  awsLogo,
-  baripadCollege,
-  bloc,
-  dart,
-  figma,
-  firebase,
-  flutter,
-  freelancerLogo,
-  gcpLogo,
-  gift,
-  git,
-  githubLogo,
-  iosLogo,
-  irissLogo,
-  kodsLogo,
-  kotlin,
-  kv,
-  me,
-  mongo,
-  nodejs,
-  postman,
-  typoflogo,
+  abcApp,
+  letsFunApp,
+  lockyLogo,
+  railkafeApp,
+  typofApp,
 } from "../assets";
+import {
+  FiAward,
+  FiBookOpen,
+  FiBox,
+  FiCloud,
+  FiCode,
+  FiCpu,
+  FiDatabase,
+  FiLayers,
+  FiShield,
+  FiTerminal,
+} from "react-icons/fi";
+import {
+  SiAndroid,
+  SiAndroidstudio,
+  SiApple,
+  SiAmazonwebservices,
+  SiDart,
+  SiFigma,
+  SiFirebase,
+  SiFlutter,
+  SiGit,
+  SiGithub,
+  SiGithubactions,
+  SiGooglecloud,
+  SiKotlin,
+  SiMongodb,
+  SiNodedotjs,
+  SiOpenai,
+  SiPostman,
+} from "react-icons/si";
 
 export const navItems = [
   { id: "home", label: "Home", path: "/" },
+  { id: "projects", label: "Work", path: "/#projects" },
   { id: "about", label: "About", path: "/#about" },
-  { id: "projects", label: "Projects", path: "/#projects" },
+  { id: "experience", label: "Experience", path: "/#experience" },
   { id: "skills", label: "Skills", path: "/#skills" },
   { id: "notes", label: "Notes", path: "/#notes" },
+  { id: "certifications", label: "Credentials", path: "/#certifications" },
   { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
@@ -49,61 +62,52 @@ export const resumeResource = {
 };
 
 export const heroContent = {
-  eyebrow: "Lead Mobile App Engineer",
-  title: "Shipping human-centered mobile journeys",
-  highlight: "mobile journeys",
-  bio: [],
-  toolbox: [],
-  workflow: [],
-  passion: "",
+  eyebrow: "Senior Mobile Developer @ IRISS Inc.",
+  name: "Priyanshu Bej",
+  role: "Engineering enterprise mobile apps, IoT workflows, AI-enabled systems, and hybrid cloud solutions from Bengaluru.",
+  title: "Priyanshu Bej",
+  highlight: "Priyanshu",
+  bio: [
+    "Flutter-focused mobile developer with 4+ years of experience building smooth cross-platform apps for Android and iOS.",
+    "I care about intuitive user experiences, reliable architecture, readable code, and production-ready delivery for real-world products.",
+  ],
+  availability: "Engineering Enterprise Mobile, IoT, AI & Hybrid Cloud Solutions",
+  location: "Bengaluru, Karnataka, India",
+  toolbox: ["Flutter", "Dart", "Clean Architecture", "SOLID", "GitHub Actions"],
+  workflow: ["Clean Architecture", "Agile teams", "CI/CD pipelines"],
+  passion: "I cannot ignore messy code. I refactor until it is clean, readable, and production ready.",
   linkedin: {
     href: "https://www.linkedin.com/in/priyanshubej/",
     handle: "@priyanshubej",
     label: "Connect on LinkedIn",
   },
-  portrait: me,
-  aboutPortrait,
-  heroLogos: [
-    {
-      name: "Flutter",
-      image: flutter,
-    },
-    {
-      name: "Android",
-      image: android,
-    },
-    {
-      name: "iOS",
-      image: iosLogo,
-    },
-  ],
   stats: [
     { value: "4+ yrs", label: "Production experience" },
     { value: "15+ apps", label: "Shipped across stores" },
-    { value: "Revenue", label: "Generated in crores" },
+    { value: "Crores", label: "Revenue influenced" },
   ],
-  primaryAction: { label: "Start a project", href: "/contact" },
-  secondaryAction: { label: "View projects", href: "/projects" },
+  primaryAction: { label: "View selected work", href: "/projects" },
+  secondaryAction: { label: "Start a conversation", href: "/contact" },
 };
 
 export const aboutContent = {
-  headline: "Full-stack mobile execution with a product mindset.",
-  body: `I'm Priyanshu Pritam Bej — a Bengaluru-based Mobile App Engineer focused on building resilient mobile ecosystems for hyper-growth teams. I partner with design, product, and backend squads to transform ambitious ideas into polished experiences that scale.`,
+  headline: "Flutter specialist building enterprise mobile systems with clean architecture.",
+  body: `Hello World. I'm Priyanshu Bej, a Senior Mobile Developer at IRISS Inc. I specialize in Flutter and build cross-platform applications that are easy to use, enjoyable, reliable, and maintainable. My work sits at the intersection of mobile apps, industrial IoT, AI-enabled workflows, and hybrid cloud systems.`,
   qualities: [
     {
-      title: "End-to-end delivery",
+      title: "Clean architecture mindset",
       description:
-        "From ideation and UX flows to analytics, error budgets, and store releases — I enjoy owning the full lifecycle.",
+        "I follow Clean Architecture, SOLID principles, and strong OOP foundations so applications stay organized, readable, and easier to scale.",
     },
     {
-      title: "Systems thinking",
+      title: "Release discipline",
       description:
-        "Design systems, clean architecture, and automated QA pipelines keep the team moving quickly without losing quality.",
+        "I enjoy Agile collaboration and CI/CD pipelines with GitHub Actions because smoother deployments keep teams moving with confidence.",
     },
     {
-      title: "Collaborative leadership",
+      title: "Meaningful mobile experiences",
       description:
-        "I mentor juniors, facilitate tech choices, and keep roadmaps honest through transparent communication.",
+        "For me, mobile development is about creating digital experiences that simplify real workflows and make everyday interactions better.",
     },
   ],
 };
@@ -111,26 +115,45 @@ export const aboutContent = {
 export const experienceTimeline = [
   {
     company: "IRISS Inc",
-    title: "Mobile App Developer",
+    title: "Mobile engineering progression",
     period: "Dec 2024 – Present",
-    location: "Bengaluru, India",
-    icon: irissLogo,
-    bullets: [
-      "Leading eSentry — an asset management platform that pairs industrial IoT sensors with field-ready mobile workflows.",
-      "Architected offline-first modules with NFC scanning and maintenance automation that reduced manual audits by 40%.",
-      "Built executive dashboards with actionable telemetry, boosting preventative maintenance adoption across clients.",
+    location: "Florida, United States x Bengaluru, India | Hybrid",
+    icon: FiCpu,
+    summary:
+      "One company journey: from owning the E-Sentry mobile experience to senior-level work across mobile, IoT, AI, and industrial innovation.",
+    roles: [
+      {
+        title: "Senior Mobile Developer",
+        period: "Jan 2026 – Present",
+        label: "Current role",
+        bullets: [
+          "Working at the intersection of mobile, IoT, AI, and industrial innovation.",
+          "Building E Sentry Systems and IRISS SiteWalk across NFC asset inspection, thermal site workflows, offline sync, cloud reporting, and admin operations.",
+          "Contributing to next-generation product work while continuing to support the E-Sentry ecosystem.",
+        ],
+      },
+      {
+        title: "Mobile App Developer",
+        period: "Dec 2024 – Jan 2026",
+        label: "Previous role",
+        bullets: [
+          "Led mobile development for E-Sentry, a next-generation asset management platform for industrial environments worldwide.",
+          "Owned the mobile experience from architecture to deployment, with focus on scalability, performance, and reliability.",
+          "Worked across hardware integrations, global requirements, and large-scale data flows where precision and safety matter.",
+        ],
+      },
     ],
   },
   {
     company: "Kods Technologies",
     title: "Flutter Developer",
-    period: "Dec 2023 – Dec 2024",
+    period: "Dec 2023 – Nov 2024",
     location: "Bengaluru, India",
-    icon: kodsLogo,
+    icon: FiCode,
     bullets: [
-      "Shipped cross-platform service apps spanning EdTech, on-demand logistics, and ride booking with 30% faster release cadences.",
-      "Introduced Bloc- and Provider-driven state patterns with analytics instrumentation for user journey insights.",
-      "Collaborated with backend teams to optimize REST APIs and push notification delivery, increasing retention by 18%.",
+      "Worked in a fast-paced Bengaluru product environment where ideas moved quickly from concept to shipped apps.",
+      "Built cross-platform Flutter products while solving end-to-end product and engineering problems at scale.",
+      "Guided implementation decisions and supported teammates through higher-stakes delivery cycles.",
     ],
   },
   {
@@ -138,10 +161,10 @@ export const experienceTimeline = [
     title: "Flutter Developer",
     period: "Dec 2022 – Dec 2023",
     location: "Bhubaneswar, India",
-    icon: typoflogo,
+    icon: FiBox,
     bullets: [
-      "Modernized seller tooling for e-commerce partners with real-time inventory sync, media uploads, and automated settlements.",
-      "Established CI/CD pipelines with staged rollouts and monitoring, cutting hotfix cycles from days to hours.",
+      "Built in a startup environment where real users depended on fast, practical product decisions.",
+      "Solved production problems under pressure while growing deeper ownership of mobile product delivery.",
     ],
   },
   {
@@ -149,109 +172,188 @@ export const experienceTimeline = [
     title: "Flutter Developer",
     period: "Mar 2022 – Dec 2022",
     location: "Remote",
-    icon: freelancerLogo,
+    icon: FiTerminal,
     bullets: [
-      "Rapid prototyping for startups, piloting MVPs and collaborating closely with non-technical founders.",
+      "Started independently with no fixed roadmap, taking ideas from uncertainty into working mobile products.",
+      "Built early MVPs and learned to solve real problems directly with clients and users.",
     ],
   },
 ];
 
 export const educationTimeline = [
   {
-    school: "Gandhi Institute for Technology",
-    program: "Master of Computer Applications",
-    period: "2021 – 2023",
-    icon: gift,
+    school: "Gandhi Institute for Technology [GIFT], Bhubaneswar",
+    program: "Master of Computer Applications - Computer Software Engineering",
+    period: "Nov 2021 – Dec 2023",
+    icon: FiBookOpen,
   },
   {
     school: "Baripada Degree College",
     program: "Bachelor of Science",
     period: "2018 – 2021",
-    icon: baripadCollege,
+    icon: FiBookOpen,
   },
   {
     school: "Baripada Jr. College",
     program: "Intermediate (Class 12)",
     period: "2016 – 2018",
-    icon: baripadCollege,
+    icon: FiBookOpen,
   },
   {
     school: "Kendriya Vidyalaya Kendujhar",
     program: "Matriculation",
     period: "2016",
-    icon: kv,
+    icon: FiBookOpen,
   },
-];
-
-export const skillKeywords = [
-  "Flutter",
-  "Dart",
-  "Kotlin",
-  "Jetpack Compose",
-  "Firebase",
-  "Supabase",
-  "Node.js",
-  "MongoDB",
-  "Socket.IO",
-  "REST APIs",
-  "GraphQL",
-  "Generative AI",
-  "CI/CD",
-  "Bloc",
-  "Provider",
-  "Clean Architecture",
-  "MVC",
-  "Design Systems",
-  "Motion Design",
-  "Figma",
-  "App Store Ops",
-  "Play Store Ops",
-  "Analytics",
-  "A/B Testing",
-  "Automated QA",
-  "Unit Testing",
 ];
 
 export const skillGroups = [
   {
-    title: "Mobile platforms",
+    title: "Enterprise mobile platforms",
     description:
-      "Flutter, native Android, and integrations that keep experiences feeling fast and intuitive.",
+      "Cross-platform Android and iOS applications built with smooth UX, maintainable architecture, and production reliability.",
     items: ["Flutter", "Dart", "Kotlin", "Android Studio", "Jetpack Compose"],
   },
   {
-    title: "Architecture & tooling",
+    title: "Architecture & delivery",
     description:
-      "Predictable state management, modular codebases, and automation that scales with the product roadmap.",
-    items: ["Bloc", "Provider", "Clean Architecture", "CI/CD", "Git + GitHub"],
+      "Clean Architecture, SOLID principles, OOP foundations, and CI/CD workflows that keep code readable and releases smooth.",
+    items: ["Clean Architecture", "SOLID", "OOP", "GitHub Actions", "CI/CD"],
   },
   {
-    title: "Cloud & data",
+    title: "IoT, AI & hybrid cloud",
     description:
-      "Realtime sync, resilient APIs, and observability to keep products trustworthy under load.",
-    items: ["Firebase", "MongoDB", "Node.js", "Supabase", "Socket.IO"],
+      "Mobile systems connected to hardware, realtime data, cloud services, and emerging AI-enabled industrial workflows.",
+    items: ["Industrial IoT", "Firebase", "Node.js", "Hybrid Cloud", "AI Workflows"],
   },
 ];
 
 export const skillIcons = [
-  { name: "Flutter", icon: flutter },
-  { name: "Dart", icon: dart },
-  { name: "Bloc", icon: bloc },
-  { name: "Kotlin", icon: kotlin },
-  { name: "Firebase", icon: firebase },
-  { name: "Google Cloud", icon: gcpLogo },
-  { name: "AWS", icon: awsLogo },
-  { name: "Android", icon: android },
-  { name: "Node.js", icon: nodejs },
-  { name: "Git", icon: git },
-  { name: "GitHub", icon: githubLogo },
-  { name: "MongoDB", icon: mongo },
-  { name: "Android Studio", icon: androidStudio },
-  { name: "Postman", icon: postman },
-  { name: "Figma", icon: figma },
+  { name: "Flutter", icon: SiFlutter },
+  { name: "Dart", icon: SiDart },
+  { name: "Bloc", icon: FiLayers },
+  { name: "Kotlin", icon: SiKotlin },
+  { name: "Firebase", icon: SiFirebase },
+  { name: "Google Cloud", icon: SiGooglecloud },
+  { name: "AWS", icon: SiAmazonwebservices },
+  { name: "Android", icon: SiAndroid },
+  { name: "iOS", icon: SiApple },
+  { name: "Node.js", icon: SiNodedotjs },
+  { name: "Git", icon: SiGit },
+  { name: "GitHub", icon: SiGithub },
+  { name: "GitHub Actions", icon: SiGithubactions },
+  { name: "MongoDB", icon: SiMongodb },
+  { name: "Android Studio", icon: SiAndroidstudio },
+  { name: "Postman", icon: SiPostman },
+  { name: "Figma", icon: SiFigma },
+  { name: "AI Workflows", icon: SiOpenai },
 ];
 
 export const projects = [
+  {
+    id: "e-sentry-systems",
+    title: "E Sentry Systems",
+    category: "NFC Asset Management",
+    timeframe: "2024 – Present",
+    description:
+      "Industrial asset inspection platform where NFC-compatible devices activate tags, submit check-ins, sync inspection history to the cloud, and help admins manage routes and asset trends.",
+    impact: [
+      "Built for NFC asset tags, assigned routes, check-in capture, inspection progress, and cloud-synced asset history across industrial environments.",
+      "Supports admin review for completed and assigned routes, route creation, inspection history, trend conversion, and Excel-compatible exports.",
+      "Recent release work includes dark mode, app lock, real-time push notifications, refreshed UI, faster performance, and stronger protection.",
+    ],
+    tech: ["Flutter", "NFC", "Industrial IoT", "Cloud Sync", "Push Notifications", "App Lock"],
+    tags: ["IRISS", "Enterprise", "iOS + Android"],
+    image:
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/5b/39/e1/5b39e17c-660e-c530-1685-940435bce284/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+    preview: "app-icon",
+    facts: [
+      { label: "iOS version", value: "3.1.7" },
+      { label: "iOS updated", value: "Apr 16, 2026" },
+      { label: "Android updated", value: "Apr 18, 2026" },
+      { label: "Category", value: "Utilities / Business" },
+      { label: "Minimum iOS", value: "15.6+" },
+      { label: "Google Play", value: "50+ downloads" },
+      { label: "Privacy", value: "iOS: Data Not Collected" },
+      { label: "Price", value: "Free" },
+    ],
+    links: {
+      live: "https://apps.apple.com/us/app/e-sentry-systems/id6444192723",
+      repo: null,
+    },
+    storeLinks: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/e-sentry-systems/id6444192723",
+      },
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.iriss.esentryconnect&hl=en",
+      },
+    ],
+  },
+  {
+    id: "iriss-sitewalk",
+    title: "IRISS SiteWalk",
+    category: "Industrial Inspection & Reporting",
+    timeframe: "2026 – Present",
+    description:
+      "Guided field inspection app for thermal imaging setups, built around structured site capture, asset documentation, IR window marking, PDF reporting, offline drafts, and background sync.",
+    impact: [
+      "Designed around a clear inspection flow from site information to final review so field teams keep every room, asset, contact, and note organized.",
+      "Supports camera and gallery capture for nameplate, thermal, wide-angle, and close-up asset photos with IR window and sensor placement annotations.",
+      "Generates professional PDF reports with on-site preview, share, print, draft history, queued submissions, and automatic background sync.",
+    ],
+    tech: ["Flutter", "PDF Reports", "Offline Sync", "Camera", "Cloud Sync", "Admin Workflows"],
+    tags: ["IRISS", "Business", "iOS + Android"],
+    image:
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4c/38/a6/4c38a629-e992-8846-2891-24b11b8cb0fe/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+    preview: "app-icon",
+    facts: [
+      { label: "iOS version", value: "1.1.5" },
+      { label: "iOS updated", value: "May 20, 2026" },
+      { label: "Android updated", value: "May 19, 2026" },
+      { label: "Category", value: "Business / Productivity" },
+      { label: "Minimum iOS", value: "16.6+" },
+      { label: "Google Play", value: "10+ downloads" },
+      { label: "Privacy", value: "No data collected on Google Play" },
+      { label: "Price", value: "Free" },
+    ],
+    links: {
+      live: "https://apps.apple.com/us/app/iriss-sitewalk/id6759625809",
+      repo: null,
+    },
+    storeLinks: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/iriss-sitewalk/id6759625809",
+      },
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.iriss.sitewalk&hl=en",
+      },
+    ],
+  },
+  {
+    id: "locky",
+    title: "Locky",
+    category: "NFC Wallet & Finance",
+    timeframe: "2025",
+    description:
+      "Offline-first NFC wallet, encrypted notes, subscription tracking, and everyday expense insights in one mobile app.",
+    impact: [
+      "Designed for instant card scanning with encrypted local storage.",
+      "Built expense and subscription views that make recurring spend easier to understand.",
+      "Optimized core flows for low-latency access without depending on constant connectivity.",
+    ],
+    tech: ["Flutter", "NFC", "Local Encryption", "Cloud Sync"],
+    tags: ["Fintech", "Offline-first", "NFC"],
+    image: lockyLogo,
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.locky.priyanshubej",
+      repo: null,
+    },
+  },
   {
     id: "railkafe",
     title: "RailKafe",
@@ -266,8 +368,7 @@ export const projects = [
     ],
     tech: ["Flutter", "Node.js", "Socket.IO", "Firebase", "PhonePe SDK"],
     tags: ["Production", "Realtime", "Consumer"],
-    image:
-      "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/blob/main/src/assets/railkafe.png?raw=true",
+    image: railkafeApp,
     links: {
       live: "https://play.google.com/store/apps/details?id=com.railkafe.app",
       repo: null,
@@ -308,8 +409,7 @@ export const projects = [
     ],
     tech: ["Flutter", "Provider", "MongoDB", "Firebase", "Razorpay"],
     tags: ["EdTech", "Product"],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/ABC-Learning-APP/refs/heads/main/abc.png",
+    image: abcApp,
     links: {
       live: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
       repo: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
@@ -320,6 +420,7 @@ export const projects = [
     title: "Typof Sellers",
     category: "E-commerce Ops",
     timeframe: "2022",
+    featured: false,
     description:
       "Seller command center for Typof with inventory sync, logistics tracking, and revenue dashboards.",
     impact: [
@@ -329,18 +430,115 @@ export const projects = [
     ],
     tech: ["Flutter", "REST APIs", "Firebase", "Laravel", "Node.js"],
     tags: ["B2B", "Commerce"],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Typof-app/refs/heads/main/typof.png",
+    image: typofApp,
     links: {
       live: "https://play.google.com/store/apps/details?id=com.typof",
       repo: null,
     },
   },
   {
+    id: "integer-gst-billing",
+    title: "Integer",
+    category: "GST Billing & Invoicing",
+    timeframe: "2023",
+    featured: false,
+    description:
+      "GST billing and invoice management app for creating invoices, managing customers and vendors, tracking bills, sales orders, inventory items, and business analytics.",
+    impact: [
+      "Built a cross-platform billing workspace with GST invoices, customizable templates, customer/vendor management, bills, sales orders, and item tracking.",
+      "Integrated Firebase for secure data handling and realtime synchronization, with RESTful APIs connecting external commerce and business systems.",
+      "Used GetX for responsive state management across analytics, reporting, SKU generation, inventory records, and daily business workflows.",
+    ],
+    tech: ["Flutter", "Firebase", "GetX", "REST APIs", "Analytics", "Invoice Templates"],
+    tags: ["Business", "GST", "Billing"],
+    image:
+      "https://play-lh.googleusercontent.com/90llVpKhZaCCwAkIMASs_Vp8IMliIj_Cod9Y2FynX83bp3rVRgejRLTyaiQ7cfYoy4FKJHOkXok5Kx6_CNQ8VA",
+    preview: "app-icon",
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.typof.integer&hl=en_US",
+      repo: null,
+    },
+  },
+  {
+    id: "gst-invoice-generator",
+    title: "GST Invoice Generator",
+    category: "GST Invoicing Utility",
+    timeframe: "2023",
+    featured: false,
+    description:
+      "Minimal Flutter invoicing app for creating GST-compliant invoices, calculating taxes automatically, managing clients, tracking invoice history, and exporting PDFs.",
+    impact: [
+      "Built a clean business tool that helps small businesses and freelancers create GST-compliant invoices without unnecessary workflow friction.",
+      "Implemented automatic GST tax calculations, branded invoice details, PDF downloads, client records, and invoicing history for everyday financial operations.",
+      "Kept the experience focused on fast invoice creation, simple record keeping, and a lightweight interface suitable for non-technical users.",
+    ],
+    tech: ["Flutter", "GetX", "PDF Export", "GST", "Client Management"],
+    tags: ["Business", "Invoice", "Utility"],
+    image:
+      "https://play-lh.googleusercontent.com/U8d1V4dYjPkAwjzafg-E34BemN0Ua3Pe72jROSPIL80gbNviKrGoWp02ccHeIAR1T-8QlRaKK5atzLQLmppTnpc",
+    preview: "app-icon",
+    facts: [
+      { label: "Category", value: "Business" },
+      { label: "Updated", value: "Sept 7, 2023" },
+      { label: "Google Play", value: "5K+ downloads" },
+      { label: "Rating", value: "4.1 star / 34 reviews" },
+      { label: "Content rating", value: "Rated for 3+" },
+      { label: "Privacy", value: "No data collected or shared" },
+    ],
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.gstinvoicegenerator_app&hl=en_IN",
+      repo: null,
+    },
+    storeLinks: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.gstinvoicegenerator_app&hl=en_IN",
+      },
+    ],
+  },
+  {
+    id: "sku-generator",
+    title: "SKU Generator",
+    category: "Inventory Utility",
+    timeframe: "2023",
+    featured: false,
+    description:
+      "Flutter and GetX inventory utility for creating custom SKU codes, organizing product attributes and variations, and exporting SKU data as CSV for external systems.",
+    impact: [
+      "Created a focused SKU workflow for generating custom inventory codes based on product attributes, categories, and variations.",
+      "Added CSV export so inventory data can move into external systems without manual re-entry or spreadsheet cleanup.",
+      "Used a streamlined Material interface to make stock organization faster for business users managing repeat catalog tasks.",
+    ],
+    tech: ["Flutter", "GetX", "Material Design", "CSV Export", "Inventory"],
+    tags: ["Productivity", "Inventory", "Utility"],
+    image:
+      "https://play-lh.googleusercontent.com/azvTNCMTzMQBel06BkfeL_oiQLAP6rtl_8d0EmeM1pBasQnWQa0rzLSpxJAjiH1hWSw",
+    preview: "app-icon",
+    facts: [
+      { label: "Category", value: "Productivity" },
+      { label: "Updated", value: "Aug 25, 2023" },
+      { label: "Google Play", value: "1K+ downloads" },
+      { label: "Content rating", value: "Rated for 3+" },
+      { label: "Export", value: "CSV" },
+      { label: "Privacy", value: "No data collected or shared" },
+    ],
+    links: {
+      live: "https://play.google.com/store/apps/details?id=com.sku.generator.app.android&hl=en_IN",
+      repo: null,
+    },
+    storeLinks: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.sku.generator.app.android&hl=en_IN",
+      },
+    ],
+  },
+  {
     id: "lets-fun",
     title: "Let's Fun",
     category: "Social",
     timeframe: "2022",
+    featured: false,
     description:
       "Modern dating platform with video, audio, and instant chat built on secure real-time infrastructure.",
     impact: [
@@ -350,8 +548,7 @@ export const projects = [
     ],
     tech: ["Flutter", "Laravel", "Firebase", "Aroga SDK"],
     tags: ["Social", "Realtime"],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio/refs/heads/main/src/assets/letsfun.png",
+    image: letsFunApp,
     links: {
       live: "https://play.google.com/store/apps/details?id=com.letsFun.user",
       repo: null,
@@ -362,6 +559,7 @@ export const projects = [
     title: "ATOMS",
     category: "EdTech",
     timeframe: "2021",
+    featured: false,
     description:
       "Academic and school management system connecting students, parents, and educators.",
     impact: [
@@ -382,24 +580,129 @@ export const projects = [
 
 export const certificationShowcase = [
   {
+    id: "claude-platform-101",
+    title: "Claude Platform 101",
+    issuer: "Anthropic",
+    issued: "Jun 2026",
+    skills: ["Claude API", "Tool use", "Context"],
+    summary:
+      "Hands-on foundation in Claude API message format, tool use, context management, and choosing agents versus simple calls.",
+    imageFile: "claude-platform-101.png",
+    featured: true,
+    icon: FiCpu,
+  },
+  {
+    id: "oracle-ai-foundations-2025",
+    title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    issuer: "Oracle",
+    issued: "Dec 2025",
+    expires: "Dec 2027",
+    credentialId: "324810983OCI25AICFA",
+    skills: ["Oracle Cloud", "Oracle AI", "ML fundamentals"],
+    summary:
+      "Validates AI and machine learning fundamentals across Oracle Cloud Infrastructure and applied AI concepts.",
+    imageFile: "oracle-ai-foundations-2025.png",
+    featured: true,
+    icon: FiCloud,
+  },
+  {
+    id: "pluralsight-security-champion",
     title: "Developer Security Champion",
     issuer: "Pluralsight",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pluralsight_logo.png",
+    issued: "Jun 2025",
+    skills: ["AppSec", "Secure coding", "Security review"],
+    summary:
+      "Security-focused training for safer application design, secure coding practices, and developer-owned risk awareness.",
+    imageFile: "pluralsight-security-champion.png",
+    featured: true,
+    icon: FiShield,
   },
   {
+    id: "great-learning-flutter",
     title: "Flutter Certification",
     issuer: "Great Learning",
-    logo: "https://yt3.googleusercontent.com/Jpdh9vywgq6ZbxUT9OmuN2JkingCOhv1UuEmz9X6M8IKJSeD1wCzaYUV6PW8Gmp6agZGRWT_gw=s900-c-k-c0x00ffffff-no-rj",
+    issued: "Sep 2024",
+    skills: ["Flutter", "Flutter iOS", "Mobile UI"],
+    summary:
+      "Flutter-focused certification supporting cross-platform Android and iOS application development.",
+    imageFile: "great-learning-flutter.png",
+    featured: true,
+    icon: SiFlutter,
   },
   {
-    title: "Introduction to IoT",
-    issuer: "NPTEL · IIT Kharagpur",
-    logo: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
+    id: "nptel-iot",
+    title: "NPTEL Introduction to Internet of Things Certification",
+    issuer: "IIT Kharagpur",
+    issued: "May 2023",
+    skills: ["IoT", "Sensors", "Connected systems"],
+    summary:
+      "Covers IoT fundamentals, device connectivity, applications, and the concepts behind connected technology systems.",
+    imageFile: "nptel-iot.png",
+    featured: true,
+    icon: FiCpu,
   },
   {
+    id: "nptel-cloud-computing",
+    title: "NPTEL Cloud Computing Certification",
+    issuer: "IIT Kharagpur",
+    issued: "May 2023",
+    skills: ["Cloud computing", "Infrastructure", "Distributed systems"],
+    summary:
+      "Builds cloud fundamentals that support hybrid cloud thinking, scalable systems, and platform-aware mobile delivery.",
+    imageFile: "nptel-cloud-computing.png",
+    featured: true,
+    icon: FiCloud,
+  },
+  {
+    id: "nptel-mis",
     title: "Management Information System",
-    issuer: "NPTEL · IIT Kharagpur",
-    logo: "https://github.com/Priyanshu-Bej/Priyanshu-Bej-Portfolio-/blob/main/src/assets/IIT.png?raw=true",
+    issuer: "IIT Kharagpur",
+    issued: "Jan 2023",
+    credentialId: "NPTEL23MG87S733000135",
+    skills: ["MIS", "Business systems", "Decision support"],
+    summary:
+      "Covers management information systems and how structured information supports operational and business decisions.",
+    imageFile: "nptel-mis.png",
+    featured: false,
+    icon: FiDatabase,
+  },
+  {
+    id: "simplilearn-flutter",
+    title: "Flutter Certification",
+    issuer: "Simplilearn",
+    issued: "Sep 2024",
+    credentialId: "Certificate code: 7349326",
+    skills: ["Flutter", "Dart", "API integration"],
+    summary:
+      "Cross-platform mobile training covering responsive UI, state management, API integration, and production-ready app delivery.",
+    imageFile: "simplilearn-flutter.png",
+    featured: false,
+    icon: SiFlutter,
+  },
+  {
+    id: "odisha-intel-ai",
+    title: "AI Appreciated Certificate",
+    issuer: "E&IT Department, Government of Odisha + Intel",
+    issued: "Jan 2023",
+    skills: ["AI fundamentals", "Applied AI", "Intel"],
+    summary:
+      "Recognition for early AI learning and dedication from the E&IT Department, Government of Odisha, and Intel.",
+    imageFile: "odisha-intel-ai.png",
+    featured: false,
+    icon: FiAward,
+  },
+  {
+    id: "codekaze-2023",
+    title: "Codekaze Sep'23 Round 2",
+    issuer: "Coding Ninjas",
+    issued: "Sep 2023",
+    credentialId: "368174",
+    skills: ["DSA", "Problem solving", "Software development"],
+    summary:
+      "Nationwide coding competition participation during Naukri Engineers Week, focused on data structures, algorithms, and problem solving.",
+    imageFile: "codekaze-2023.png",
+    featured: false,
+    icon: FiCode,
   },
 ];
 
