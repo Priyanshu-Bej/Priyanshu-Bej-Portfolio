@@ -64,12 +64,11 @@ export const resumeResource = {
 export const heroContent = {
   eyebrow: "Senior Mobile Developer @ IRISS Inc.",
   name: "Priyanshu Bej",
-  role: "Engineering enterprise mobile apps, IoT workflows, AI-enabled systems, and hybrid cloud solutions from Bengaluru.",
+  role: "Creative engineer shaping apps, IoT workflows, and AI systems from Bengaluru.",
   title: "Priyanshu Bej",
   highlight: "Priyanshu",
   bio: [
-    "Flutter-focused mobile developer with 4+ years of experience building smooth cross-platform apps for Android and iOS.",
-    "I care about intuitive user experiences, reliable architecture, readable code, and production-ready delivery for real-world products.",
+    "I blend product taste, clean architecture, and sharp execution to ship software that feels polished and reliable.",
   ],
   availability: "Engineering Enterprise Mobile, IoT, AI & Hybrid Cloud Solutions",
   location: "Bengaluru, Karnataka, India",

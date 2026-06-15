@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { heroContent, projects, resumeResource } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
 
+const getCapabilityTags = (value) =>
+  value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
 const HeroSection = () => {
   const navigate = useNavigate();
   const {
@@ -23,6 +29,7 @@ const HeroSection = () => {
   } = heroContent;
 
   const featuredProjects = projects.slice(0, 3);
+  const capabilityTags = getCapabilityTags(availability);
 
   return (
     <section
@@ -40,20 +47,32 @@ const HeroSection = () => {
           <div>
             <motion.div
               variants={fadeInUp(0, 14)}
-              className="flex flex-wrap items-center gap-3"
+              className="max-w-5xl"
             >
-              <span className="eyebrow">{eyebrow}</span>
-              <span className="chip">
-                {availability}
-              </span>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-primary dark:text-brand-secondary">
+                  {eyebrow}
+                </p>
+                <div className="hidden h-px w-10 bg-line-light dark:bg-line-dark sm:block" />
+                <div className="flex flex-wrap gap-2">
+                  {capabilityTags.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-sm border border-line-light px-2.5 py-1 text-xs font-semibold text-ink-muted dark:border-line-dark dark:text-ink-inverse/80"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             <motion.h1
               id="hero-title"
               variants={fadeInUp(0.04, 18)}
-              className="mt-10 max-w-6xl text-balance text-[clamp(3.6rem,12vw,9.5rem)] font-extrabold leading-[0.88]"
+              className="mt-10 max-w-6xl text-balance text-[clamp(2.6rem,8.5vw,7rem)] font-extrabold leading-[0.92]"
             >
-              Mobile products with release discipline.
+              Products engineered for performance, reliability, and scale.
             </motion.h1>
 
             <motion.div
