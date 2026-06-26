@@ -31,14 +31,14 @@ const ProjectsSection = () => {
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
-              Selected Work
+              Engineered Work
             </motion.p>
             <motion.p
               variants={fadeInUp(0.1, 16)}
               className="mt-6 max-w-sm text-sm text-ink-muted dark:text-ink-inverse/80"
             >
-              Real mobile products, shown as product stories rather than decorative
-              thumbnails.
+              Product builds shaped through architecture, constraints, and real
+              user workflows.
             </motion.p>
           </div>
           <motion.h2

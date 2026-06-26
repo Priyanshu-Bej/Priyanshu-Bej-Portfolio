@@ -9,11 +9,11 @@ import TestimonialsSection from "../components/sections/TestimonialsSection";
 const Home = () => (
   <>
     <HeroSection />
-    <ProjectsSection />
     <AboutSection />
     <SkillsSection />
-    <NotesSection />
+    <ProjectsSection />
     <TestimonialsSection />
+    <NotesSection />
     <ContactSection />
   </>
 );

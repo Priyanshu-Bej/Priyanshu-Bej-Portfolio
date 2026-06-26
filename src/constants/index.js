@@ -1,5 +1,6 @@
 import {
   abcApp,
+  certificationImageFiles,
   letsFunApp,
   lockyLogo,
   railkafeApp,
@@ -39,12 +40,12 @@ import {
 
 export const navItems = [
   { id: "home", label: "Home", path: "/" },
-  { id: "projects", label: "Work", path: "/#projects" },
   { id: "about", label: "About", path: "/#about" },
   { id: "experience", label: "Experience", path: "/#experience" },
   { id: "skills", label: "Skills", path: "/#skills" },
+  { id: "projects", label: "Engineered Work", path: "/#projects" },
+  { id: "certifications", label: "Certifications", path: "/#certifications" },
   { id: "notes", label: "Notes", path: "/#notes" },
-  { id: "certifications", label: "Credentials", path: "/#certifications" },
   { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
@@ -64,12 +65,11 @@ export const resumeResource = {
 export const heroContent = {
   eyebrow: "Senior Mobile Developer @ IRISS Inc.",
   name: "Priyanshu Bej",
-  role: "Engineering enterprise mobile apps, IoT workflows, AI-enabled systems, and hybrid cloud solutions from Bengaluru.",
+  role: "Creative engineer shaping apps, IoT workflows, and AI systems from Bengaluru.",
   title: "Priyanshu Bej",
   highlight: "Priyanshu",
   bio: [
-    "Flutter-focused mobile developer with 4+ years of experience building smooth cross-platform apps for Android and iOS.",
-    "I care about intuitive user experiences, reliable architecture, readable code, and production-ready delivery for real-world products.",
+    "I blend product taste, clean architecture, and sharp execution to ship software that feels polished and reliable.",
   ],
   availability: "Engineering Enterprise Mobile, IoT, AI & Hybrid Cloud Solutions",
   location: "Bengaluru, Karnataka, India",
@@ -84,9 +84,9 @@ export const heroContent = {
   stats: [
     { value: "4+ yrs", label: "Production experience" },
     { value: "15+ apps", label: "Shipped across stores" },
-    { value: "Crores", label: "Revenue influenced" },
+    { value: "Crores", label: "Revenue impact" },
   ],
-  primaryAction: { label: "View selected work", href: "/projects" },
+  primaryAction: { label: "View engineered work", href: "/projects" },
   secondaryAction: { label: "Start a conversation", href: "/contact" },
 };
 
@@ -587,7 +587,7 @@ export const certificationShowcase = [
     skills: ["Claude API", "Tool use", "Context"],
     summary:
       "Hands-on foundation in Claude API message format, tool use, context management, and choosing agents versus simple calls.",
-    imageFile: "claude-platform-101.png",
+    imageFile: certificationImageFiles.claudePlatform101,
     featured: true,
     icon: FiCpu,
   },
@@ -596,12 +596,11 @@ export const certificationShowcase = [
     title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
     issuer: "Oracle",
     issued: "Dec 2025",
-    expires: "Dec 2027",
     credentialId: "324810983OCI25AICFA",
     skills: ["Oracle Cloud", "Oracle AI", "ML fundamentals"],
     summary:
       "Validates AI and machine learning fundamentals across Oracle Cloud Infrastructure and applied AI concepts.",
-    imageFile: "oracle-ai-foundations-2025.png",
+    imageFile: certificationImageFiles.oracleAiFoundations2025,
     featured: true,
     icon: FiCloud,
   },
@@ -613,7 +612,7 @@ export const certificationShowcase = [
     skills: ["AppSec", "Secure coding", "Security review"],
     summary:
       "Security-focused training for safer application design, secure coding practices, and developer-owned risk awareness.",
-    imageFile: "pluralsight-security-champion.png",
+    imageFile: certificationImageFiles.pluralsightSecurityChampion,
     featured: true,
     icon: FiShield,
   },
@@ -625,7 +624,7 @@ export const certificationShowcase = [
     skills: ["Flutter", "Flutter iOS", "Mobile UI"],
     summary:
       "Flutter-focused certification supporting cross-platform Android and iOS application development.",
-    imageFile: "great-learning-flutter.png",
+    imageFile: certificationImageFiles.greatLearningFlutter,
     featured: true,
     icon: SiFlutter,
   },
@@ -637,7 +636,7 @@ export const certificationShowcase = [
     skills: ["IoT", "Sensors", "Connected systems"],
     summary:
       "Covers IoT fundamentals, device connectivity, applications, and the concepts behind connected technology systems.",
-    imageFile: "nptel-iot.png",
+    imageFile: certificationImageFiles.nptelIot,
     featured: true,
     icon: FiCpu,
   },
@@ -649,7 +648,7 @@ export const certificationShowcase = [
     skills: ["Cloud computing", "Infrastructure", "Distributed systems"],
     summary:
       "Builds cloud fundamentals that support hybrid cloud thinking, scalable systems, and platform-aware mobile delivery.",
-    imageFile: "nptel-cloud-computing.png",
+    imageFile: certificationImageFiles.nptelCloudComputing,
     featured: true,
     icon: FiCloud,
   },
@@ -662,7 +661,7 @@ export const certificationShowcase = [
     skills: ["MIS", "Business systems", "Decision support"],
     summary:
       "Covers management information systems and how structured information supports operational and business decisions.",
-    imageFile: "nptel-mis.png",
+    imageFile: certificationImageFiles.nptelMis,
     featured: false,
     icon: FiDatabase,
   },
@@ -675,7 +674,7 @@ export const certificationShowcase = [
     skills: ["Flutter", "Dart", "API integration"],
     summary:
       "Cross-platform mobile training covering responsive UI, state management, API integration, and production-ready app delivery.",
-    imageFile: "simplilearn-flutter.png",
+    imageFile: certificationImageFiles.simplilearnFlutter,
     featured: false,
     icon: SiFlutter,
   },
@@ -687,7 +686,7 @@ export const certificationShowcase = [
     skills: ["AI fundamentals", "Applied AI", "Intel"],
     summary:
       "Recognition for early AI learning and dedication from the E&IT Department, Government of Odisha, and Intel.",
-    imageFile: "odisha-intel-ai.png",
+    imageFile: certificationImageFiles.odishaIntelAi,
     featured: false,
     icon: FiAward,
   },
@@ -700,7 +699,7 @@ export const certificationShowcase = [
     skills: ["DSA", "Problem solving", "Software development"],
     summary:
       "Nationwide coding competition participation during Naukri Engineers Week, focused on data structures, algorithms, and problem solving.",
-    imageFile: "codekaze-2023.png",
+    imageFile: certificationImageFiles.codekaze2023,
     featured: false,
     icon: FiCode,
   },

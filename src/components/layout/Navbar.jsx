@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
-import { FiArrowUpRight, FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { heroContent, navItems, resumeResource } from "../../constants";
+import { heroContent, navItems } from "../../constants";
 import ThemeToggle from "./ThemeToggle";
 
 const getPathHash = (path) => {
@@ -64,10 +64,6 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
-  const resumeDownloadProps = resumeResource.fileName
-    ? { download: resumeResource.fileName }
-    : {};
-
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-[55] hidden w-[19rem] border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
@@ -88,7 +84,7 @@ const Navbar = () => {
               </span>
             </div>
             <p className="max-w-[11rem] text-sm font-semibold leading-tight text-white/90 dark:text-ink-strong">
-              Mobile systems, release discipline, product craft.
+              Products, systems, product craft.
             </p>
           </div>
           <div className="p-3">
@@ -131,16 +127,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href={resumeResource.href}
-              target="_blank"
-              rel="noreferrer"
-              {...resumeDownloadProps}
-              className="button-primary flex-1 px-3 py-2.5"
-            >
-              <FiDownload />
-              Resume
-            </a>
             <ThemeToggle />
           </div>
         </div>
@@ -148,15 +134,15 @@ const Navbar = () => {
 
       <header className="fixed inset-x-0 top-0 z-[60] px-4 pt-4 lg:hidden">
         <nav
-          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border px-3 py-3 transition duration-300 ease-premium ${
+          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border px-3 py-3 text-ink-strong transition duration-300 ease-premium dark:text-ink-inverse ${
             isScrolled
-              ? "border-line-light bg-canvas-light/90 shadow-subtle backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/88"
-              : "border-line-light/70 bg-canvas-light/78 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/78"
+              ? "border-line-light bg-white/96 shadow-subtle backdrop-blur-xl dark:border-white/15 dark:bg-black/92"
+              : "border-line-light bg-white/94 shadow-subtle backdrop-blur-xl dark:border-white/15 dark:bg-black/88"
           }`}
         >
           <Link
             to="/"
-            className="font-display text-base font-bold text-ink-strong dark:text-ink-inverse"
+            className="font-display text-base font-bold text-current"
           >
             Priyanshu Bej
           </Link>
@@ -183,7 +169,7 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="mx-auto mt-2 max-w-6xl rounded-lg border border-line-light bg-canvas-light p-2 shadow-lift dark:border-line-dark dark:bg-canvas-dark">
+              <div className="mx-auto mt-2 max-w-6xl rounded-lg border border-line-light bg-white p-2 text-ink-strong shadow-lift dark:border-white/15 dark:bg-black dark:text-ink-inverse">
                 <div className="space-y-1">
                   {navItems.map((item) => (
                     <NavItem
@@ -195,16 +181,6 @@ const Navbar = () => {
                     />
                   ))}
                 </div>
-                <a
-                  href={resumeResource.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  {...resumeDownloadProps}
-                  className="button-primary mt-2 w-full"
-                >
-                  <FiDownload />
-                  {resumeResource.label}
-                </a>
               </div>
             </motion.div>
           )}

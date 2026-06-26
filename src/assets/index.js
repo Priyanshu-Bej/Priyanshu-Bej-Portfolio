@@ -20,9 +20,23 @@ const certificationImagesByFile = Object.fromEntries(
   ]),
 );
 
+const certificationImageFiles = Object.freeze({
+  claudePlatform101: "claude-platform-101.jpeg",
+  oracleAiFoundations2025: "oracle-ai-foundations-2025.jpeg",
+  pluralsightSecurityChampion: "pluralsight-security-champion.jpeg",
+  greatLearningFlutter: "great-learning-flutter.jpeg",
+  nptelIot: "nptel-iot.jpeg",
+  nptelCloudComputing: "nptel-cloud-computing.jpeg",
+  nptelMis: "nptel-mis.jpeg",
+  simplilearnFlutter: "simplilearn-flutter.jpeg",
+  odishaIntelAi: "odisha-intel-ai.jpeg",
+  codekaze2023: "codekaze-2023.jpeg",
+});
+
 export {
   lockyLogo,
   abcApp,
+  certificationImageFiles,
   certificationImagesByFile,
   letsFunApp,
   railkafeApp,
