@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiX } from "react-icons/fi";
 
@@ -16,7 +17,9 @@ const CertificatePreview = ({ certification, image, size = "card" }) => {
   return (
     <div
       className={`relative overflow-hidden rounded-md border border-line-light bg-white shadow-subtle dark:border-white/15 dark:bg-surface-dark-elevated ${
-        isModal ? "min-h-[360px]" : "aspect-[4/3]"
+        isModal
+          ? "h-64 sm:h-80 md:h-96 lg:h-full lg:min-h-[420px] lg:flex-1"
+          : "aspect-[4/3]"
       }`}
     >
       {image ? (
@@ -80,24 +83,16 @@ const CertificationCard = ({ certification, index, onSelect }) => {
           {certification.issuer}
         </p>
 
-        <div className="mt-4 space-y-2 text-xs text-ink-muted dark:text-ink-inverse/80">
-          {certification.expires && (
-            <p>
-              <span className="font-bold text-ink-strong dark:text-ink-inverse">
-                Expires:
-              </span>{" "}
-              {certification.expires}
-            </p>
-          )}
-          {certification.credentialId && (
+        {certification.credentialId && (
+          <div className="mt-4 space-y-2 text-xs text-ink-muted dark:text-ink-inverse/80">
             <p className="break-words">
               <span className="font-bold text-ink-strong dark:text-ink-inverse">
                 ID:
               </span>{" "}
               {certification.credentialId}
             </p>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="mt-auto flex flex-wrap gap-2 pt-5">
           {certification.skills.slice(0, 3).map((skill) => (
@@ -119,119 +114,128 @@ const CertificationModal = ({ certification, onClose }) => {
       if (event.key === "Escape") onClose();
     };
 
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalOverflow;
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [certification, onClose]);
 
-  if (!certification) return null;
+  if (typeof document === "undefined") return null;
 
-  const image = getCertificateImage(certification.imageFile);
-  const Icon = certification.icon;
-  const facts = [
-    { label: "Issuer", value: certification.issuer },
-    { label: "Issued", value: certification.issued },
-    certification.expires && { label: "Expires", value: certification.expires },
-    certification.credentialId && {
-      label: "Credential ID",
-      value: certification.credentialId,
-    },
-  ].filter(Boolean);
+  const image = certification ? getCertificateImage(certification.imageFile) : null;
+  const Icon = certification?.icon;
+  const facts = certification
+    ? [
+        { label: "Issuer", value: certification.issuer },
+        { label: "Issued", value: certification.issued },
+        certification.credentialId && {
+          label: "Credential ID",
+          value: certification.credentialId,
+        },
+      ].filter(Boolean)
+    : [];
 
-  return (
+  return createPortal(
     <AnimatePresence>
-      <motion.div
-        key={certification.id}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/58 p-4 backdrop-blur-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onMouseDown={(event) => {
-          if (event.target === event.currentTarget) onClose();
-        }}
-      >
+      {certification && (
         <motion.div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="certification-modal-title"
-          className="premium-card relative grid max-h-[90vh] w-full max-w-5xl overflow-hidden lg:grid-cols-[1fr,1fr]"
-          initial={{ y: 16, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 12, opacity: 0 }}
-          transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          key={certification.id}
+          className="fixed inset-0 z-[100] flex min-h-[100dvh] items-start justify-center overflow-y-auto overscroll-contain bg-black/58 px-4 py-5 backdrop-blur-sm sm:px-6 lg:items-center lg:p-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) onClose();
+          }}
         >
-          <button
-            type="button"
-            aria-label="Close certification details"
-            onClick={onClose}
-            className="icon-button absolute right-4 top-4 z-10"
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="certification-modal-title"
+            className="premium-card relative my-auto grid w-full max-w-5xl overflow-hidden lg:max-h-[calc(100dvh-4rem)] lg:grid-cols-[minmax(0,1.05fr),minmax(0,0.95fr)]"
+            initial={{ y: 16, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 12, opacity: 0 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
           >
-            <FiX className="text-lg" />
-          </button>
+            <button
+              type="button"
+              aria-label="Close certification details"
+              onClick={onClose}
+              className="icon-button absolute right-4 top-4 z-10"
+            >
+              <FiX className="text-lg" />
+            </button>
 
-          <div className="bg-surface-muted p-5 dark:bg-surface-dark-muted sm:p-8">
-            <CertificatePreview certification={certification} image={image} size="modal" />
-          </div>
-
-          <div className="scrollbar-premium max-h-[90vh] overflow-y-auto p-6 md:p-8">
-            <p className="eyebrow">Credential Detail</p>
-            <div className="mt-5 flex items-start gap-3">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-line-light bg-white text-xl text-brand-primary dark:border-white/15 dark:bg-surface-dark-muted dark:text-brand-secondary">
-                <Icon aria-hidden />
-              </span>
-              <div>
-                <h3
-                  id="certification-modal-title"
-                  className="text-balance text-3xl font-extrabold leading-tight text-ink-strong dark:text-ink-inverse"
-                >
-                  {certification.title}
-                </h3>
-                <p className="mt-2 text-sm font-semibold text-ink-muted dark:text-ink-inverse/80">
-                  {certification.issuer}
-                </p>
-              </div>
+            <div className="bg-surface-muted p-4 dark:bg-surface-dark-muted sm:p-6 lg:flex lg:min-h-0 lg:p-8">
+              <CertificatePreview
+                certification={certification}
+                image={image}
+                size="modal"
+              />
             </div>
 
-            <p className="mt-6 text-pretty text-base text-ink-muted dark:text-ink-inverse/80">
-              {certification.summary}
-            </p>
-
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {facts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="rounded-md border border-line-light bg-surface-muted p-3 dark:border-white/20 dark:bg-surface-dark-elevated"
-                >
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] meta-text">
-                    {fact.label}
-                  </p>
-                  <p className="mt-1 break-words text-sm font-bold text-ink-strong dark:text-ink-inverse">
-                    {fact.value}
+            <div className="scrollbar-premium min-h-0 p-5 sm:p-6 md:p-8 lg:max-h-[calc(100dvh-4rem)] lg:overflow-y-auto">
+              <p className="eyebrow">Credential Detail</p>
+              <div className="mt-5 flex items-start gap-3 pr-12 sm:pr-0">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-line-light bg-white text-xl text-brand-primary dark:border-white/15 dark:bg-surface-dark-muted dark:text-brand-secondary">
+                  <Icon aria-hidden />
+                </span>
+                <div>
+                  <h3
+                    id="certification-modal-title"
+                    className="text-balance text-2xl font-extrabold leading-tight text-ink-strong dark:text-ink-inverse sm:text-3xl"
+                  >
+                    {certification.title}
+                  </h3>
+                  <p className="mt-2 text-sm font-semibold text-ink-muted dark:text-ink-inverse/80">
+                    {certification.issuer}
                   </p>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="mt-8 border-t border-line-light pt-6 dark:border-line-dark">
-              <p className="text-sm font-bold text-ink-strong dark:text-ink-inverse">
-                Skills
+              <p className="mt-6 text-pretty text-base text-ink-muted dark:text-ink-inverse/80">
+                {certification.summary}
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {certification.skills.map((skill) => (
-                  <span key={skill} className="chip px-3 py-1.5">
-                    {skill}
-                  </span>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {facts.map((fact) => (
+                  <div
+                    key={fact.label}
+                    className="rounded-md border border-line-light bg-surface-muted p-3 dark:border-white/20 dark:bg-surface-dark-elevated"
+                  >
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] meta-text">
+                      {fact.label}
+                    </p>
+                    <p className="mt-1 break-words text-sm font-bold text-ink-strong dark:text-ink-inverse">
+                      {fact.value}
+                    </p>
+                  </div>
                 ))}
               </div>
+
+              <div className="mt-8 border-t border-line-light pt-6 dark:border-line-dark">
+                <p className="text-sm font-bold text-ink-strong dark:text-ink-inverse">
+                  Skills
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {certification.skills.map((skill) => (
+                    <span key={skill} className="chip px-3 py-1.5">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      )}
+    </AnimatePresence>,
+    document.body,
   );
 };
 
@@ -267,7 +271,7 @@ const TestimonialsSection = () => {
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
-              Credentials
+              Certifications
             </motion.p>
             <motion.h2
               id="certifications-title"

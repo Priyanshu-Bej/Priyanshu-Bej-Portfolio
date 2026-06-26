@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
-import { FiArrowUpRight, FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { heroContent, navItems, resumeResource } from "../../constants";
+import { heroContent, navItems } from "../../constants";
 import ThemeToggle from "./ThemeToggle";
 
 const getPathHash = (path) => {
@@ -64,10 +64,6 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
-  const resumeDownloadProps = resumeResource.fileName
-    ? { download: resumeResource.fileName }
-    : {};
-
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-[55] hidden w-[19rem] border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
@@ -88,7 +84,7 @@ const Navbar = () => {
               </span>
             </div>
             <p className="max-w-[11rem] text-sm font-semibold leading-tight text-white/90 dark:text-ink-strong">
-              Mobile systems, release discipline, product craft.
+              Products, systems, product craft.
             </p>
           </div>
           <div className="p-3">
@@ -131,16 +127,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href={resumeResource.href}
-              target="_blank"
-              rel="noreferrer"
-              {...resumeDownloadProps}
-              className="button-primary flex-1 px-3 py-2.5"
-            >
-              <FiDownload />
-              Resume
-            </a>
             <ThemeToggle />
           </div>
         </div>
@@ -195,16 +181,6 @@ const Navbar = () => {
                     />
                   ))}
                 </div>
-                <a
-                  href={resumeResource.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  {...resumeDownloadProps}
-                  className="button-primary mt-2 w-full"
-                >
-                  <FiDownload />
-                  {resumeResource.label}
-                </a>
               </div>
             </motion.div>
           )}
