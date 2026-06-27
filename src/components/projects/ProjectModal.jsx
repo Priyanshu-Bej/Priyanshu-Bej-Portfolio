@@ -7,6 +7,14 @@ import ProjectArtwork from "./ProjectArtwork";
 const focusableSelectors =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex="0"]';
 
+const getLinkLabel = (href, fallback = "Open project") => {
+  const normalizedHref = href?.toLowerCase() || "";
+  if (normalizedHref.includes("play.google.com")) return "Play Store";
+  if (normalizedHref.includes("apps.apple.com")) return "App Store";
+  if (normalizedHref.includes("github.com")) return "GitHub";
+  return fallback;
+};
+
 const ProjectModal = ({ project, onClose }) => {
   const dialogRef = useRef(null);
 
@@ -64,10 +72,13 @@ const ProjectModal = ({ project, onClose }) => {
   } = project;
   const externalLinks =
     storeLinks.length > 0
-      ? storeLinks
+      ? storeLinks.map((link) => ({
+          ...link,
+          label: getLinkLabel(link.href, link.label || "Open project"),
+        }))
       : [
-          links.live && { label: "Explore live", href: links.live },
-          links.repo && { label: "View source", href: links.repo },
+          links.live && { label: getLinkLabel(links.live), href: links.live },
+          links.repo && { label: getLinkLabel(links.repo, "View source"), href: links.repo },
         ].filter(Boolean);
 
   return (

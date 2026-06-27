@@ -438,6 +438,12 @@ export const projects = [
       live: "https://play.google.com/store/apps/details?id=com.typof",
       repo: null,
     },
+    storeLinks: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.typof",
+      },
+    ],
   },
   {
     id: "integer-gst-billing",

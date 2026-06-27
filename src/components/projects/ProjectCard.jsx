@@ -4,6 +4,14 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { fadeInUp } from "../../utils/animations";
 import ProjectArtwork from "./ProjectArtwork";
 
+const getLinkLabel = (href, fallback = "Open project") => {
+  const normalizedHref = href?.toLowerCase() || "";
+  if (normalizedHref.includes("play.google.com")) return "Play Store";
+  if (normalizedHref.includes("apps.apple.com")) return "App Store";
+  if (normalizedHref.includes("github.com")) return "GitHub";
+  return fallback;
+};
+
 const ProjectCard = ({ project, index, onOpen }) => {
   const {
     title,
@@ -18,6 +26,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
   } = project;
   const reverse = index % 2 === 1;
   const number = String(index + 1).padStart(2, "0");
+  const fallbackLinkLabel = getLinkLabel(links?.live);
 
   return (
     <motion.article
@@ -96,7 +105,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
                   rel="noreferrer"
                   className="button-secondary px-4 py-2.5"
                 >
-                  Open project
+                  {fallbackLinkLabel}
                 </a>
               )}
               {storeLinks.map((link) => (
@@ -107,7 +116,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
                   rel="noreferrer"
                   className="button-secondary px-4 py-2.5"
                 >
-                  {link.label}
+                  {getLinkLabel(link.href, link.label || "Open project")}
                   <FiArrowUpRight />
                 </a>
               ))}
