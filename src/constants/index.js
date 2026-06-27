@@ -32,12 +32,10 @@ import {
 
 export const navItems = [
   { id: "home", label: "Home", path: "/" },
-  { id: "about", label: "About", path: "/#about" },
-  { id: "experience", label: "Experience", path: "/#experience" },
-  { id: "skills", label: "Skills", path: "/#skills" },
+  { id: "about", label: "Profile", path: "/#about" },
+  { id: "experience", label: "Experience Log", path: "/#experience" },
   { id: "projects", label: "Engineered Work", path: "/#projects" },
   { id: "certifications", label: "Certifications", path: "/#certifications" },
-  { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
 export const legalLinks = [
