@@ -83,7 +83,7 @@ export const heroContent = {
 
 export const aboutContent = {
   headline: "Flutter specialist building enterprise mobile systems with clean architecture.",
-  body: `Hello World. I'm Priyanshu Bej, a Senior Mobile Developer at IRISS Inc. I specialize in Flutter and build cross-platform applications that are easy to use, enjoyable, reliable, and maintainable. My work sits at the intersection of mobile apps, industrial IoT, AI-enabled workflows, and hybrid cloud systems.`,
+  body: `Hello World. I am Priyanshu Bej, a Senior Mobile Developer at IRISS Inc, building end-to-end digital products from concept to scale across mobile, industrial IoT, AI workflows, and hybrid cloud systems.`,
   qualities: [
     {
       title: "Clean architecture mindset",
