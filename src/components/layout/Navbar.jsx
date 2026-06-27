@@ -196,7 +196,7 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="mx-auto mt-2 max-w-6xl rounded-lg border border-line-light bg-white p-2 text-ink-strong shadow-lift dark:border-white/15 dark:bg-black dark:text-ink-inverse">
+              <div className="mx-auto mt-2 max-h-[70vh] max-w-6xl overflow-y-auto rounded-lg border border-line-light bg-white p-2 text-ink-strong shadow-lift dark:border-white/15 dark:bg-black dark:text-ink-inverse">
                 <div className="space-y-1">
                   {navItems.map((item) => (
                     <NavItem

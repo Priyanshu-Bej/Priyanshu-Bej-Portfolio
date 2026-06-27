@@ -121,18 +121,18 @@ const HeroSection = () => {
           variants={staggered(0.08, 0.08)}
           initial="hidden"
           animate="show"
-          className="flex flex-col gap-4 px-5 py-12 sm:px-8 lg:gap-6 lg:px-12 lg:py-16 xl:px-14"
+          className="flex min-w-0 flex-col gap-4 px-4 py-10 sm:px-8 lg:gap-6 lg:px-12 lg:py-16 xl:px-14"
         >
-          <div>
+          <div className="min-w-0">
             <motion.div
               variants={fadeInUp(0, 14)}
-              className="max-w-4xl"
+              className="w-full max-w-4xl"
             >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-primary dark:text-brand-secondary">
                   {eyebrow}
                 </p>
-                <div className="hidden h-px w-10 bg-line-light dark:bg-line-dark sm:block" />
+                <div className="hidden h-px w-10 bg-line-light dark:bg-line-dark md:block" />
                 <div className="flex flex-wrap gap-2">
                   {visibleCapabilityTags.map((item) => (
                     <span
@@ -154,7 +154,7 @@ const HeroSection = () => {
             <motion.h1
               id="hero-title"
               variants={fadeInUp(0.04, 18)}
-              className="mt-11 max-w-5xl text-balance text-[clamp(2.6rem,8.5vw,7rem)] font-extrabold leading-[0.92] lg:mt-12"
+              className="mt-9 max-w-5xl text-balance text-[clamp(1.95rem,8.2vw,7rem)] font-extrabold leading-[0.95] sm:mt-10 lg:mt-12"
             >
               Products engineered for performance, reliability, and scale.
             </motion.h1>
@@ -163,7 +163,7 @@ const HeroSection = () => {
               variants={fadeInUp(0.1, 18)}
               className={`mt-9 ${
                 primaryBio
-                  ? "grid gap-7 lg:grid-cols-[0.92fr,1.08fr] lg:items-start lg:gap-10"
+                  ? "grid min-w-0 gap-7 lg:grid-cols-[0.92fr,1.08fr] lg:items-start lg:gap-10"
                   : ""
               }`}
             >
@@ -184,7 +184,7 @@ const HeroSection = () => {
                     {[...marqueeSkills, ...marqueeSkills].map(({ label, Icon }, idx) => (
                       <span
                         key={`${label}-${idx}`}
-                        className="group inline-flex min-h-11 shrink-0 items-center gap-2.5 rounded-md border border-line-light bg-white px-3 py-2 text-xs font-extrabold whitespace-nowrap text-ink-strong shadow-subtle transition hover:border-brand-primary hover:text-brand-primary dark:border-white/10 dark:bg-surface-dark-elevated dark:text-ink-inverse dark:shadow-dark-subtle dark:hover:border-brand-secondary dark:hover:text-brand-secondary"
+                        className="group inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md border border-line-light bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-ink-strong shadow-subtle transition hover:border-brand-primary hover:text-brand-primary sm:min-h-11 sm:gap-2.5 sm:px-3 sm:py-2 sm:text-xs dark:border-white/10 dark:bg-surface-dark-elevated dark:text-ink-inverse dark:shadow-dark-subtle dark:hover:border-brand-secondary dark:hover:text-brand-secondary"
                         title={label}
                         aria-label={label}
                       >
@@ -199,7 +199,7 @@ const HeroSection = () => {
 
             <motion.div
               variants={fadeInUp(0.18, 16)}
-              className="mt-6"
+              className="mt-5 sm:mt-6"
             >
               <div className="grid gap-3.5 lg:grid-cols-[auto,1fr] lg:items-center">
                 <div className="flex flex-col gap-3.5 sm:flex-row sm:items-center">
@@ -213,7 +213,7 @@ const HeroSection = () => {
                   </button>
                 </div>
 
-                <p className="rounded-md border border-line-light bg-canvas-light px-5 py-3.5 text-sm font-semibold leading-relaxed text-ink-muted dark:border-white/15 dark:bg-surface-dark-elevated dark:text-ink-inverse/80">
+                <p className="rounded-md border border-line-light bg-canvas-light px-4 py-3 text-sm font-semibold leading-relaxed text-ink-muted sm:px-5 sm:py-3.5 dark:border-white/15 dark:bg-surface-dark-elevated dark:text-ink-inverse/80">
                   I build end-to-end products across mobile, IoT, AI, and hybrid cloud to deliver reliable systems at scale.
                 </p>
               </div>
@@ -245,7 +245,7 @@ const HeroSection = () => {
                   key={project.id}
                   type="button"
                   onClick={() => navigate("/projects")}
-                  className="group grid w-full grid-cols-[3.75rem,1fr] gap-3.5 rounded-md border border-line-light bg-canvas-light p-2.5 text-left transition hover:border-brand-primary dark:border-white/20 dark:bg-surface-dark-elevated dark:hover:border-brand-secondary dark:hover:bg-surface-dark-muted"
+                  className="group grid w-full grid-cols-[3.25rem,minmax(0,1fr)] gap-3 rounded-md border border-line-light bg-canvas-light p-2.5 text-left transition hover:border-brand-primary sm:grid-cols-[3.75rem,1fr] sm:gap-3.5 dark:border-white/20 dark:bg-surface-dark-elevated dark:hover:border-brand-secondary dark:hover:bg-surface-dark-muted"
                 >
                   <img
                     src={project.image}
@@ -253,11 +253,11 @@ const HeroSection = () => {
                     className="aspect-square rounded object-cover"
                     loading={index === 0 ? "eager" : "lazy"}
                   />
-                  <span>
-                    <span className="block text-sm font-bold text-ink-strong dark:text-ink-inverse">
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-bold text-ink-strong dark:text-ink-inverse">
                       {project.title}
                     </span>
-                    <span className="mt-1 block text-xs font-semibold text-ink-muted dark:text-ink-inverse/80">
+                    <span className="mt-1 block truncate text-xs font-semibold text-ink-muted dark:text-ink-inverse/80">
                       {project.category}
                     </span>
                   </span>
