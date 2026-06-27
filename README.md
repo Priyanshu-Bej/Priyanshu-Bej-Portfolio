@@ -2,7 +2,7 @@
 
 Premium minimal portfolio for **Priyanshu Bej**, Senior Mobile Developer at IRISS Inc.
 
-This is the place where my mobile engineering work gets a proper stage: shipped apps, industrial products, Flutter systems, IoT workflows, AI/cloud learning, credentials, notes, and the small details that show how I think while building.
+This is the place where my mobile engineering work gets a proper stage: shipped apps, industrial products, Flutter systems, IoT workflows, AI/cloud learning, credentials, and the small details that show how I think while building.
 
 The vibe is simple: clean interface, sharp content, no noisy portfolio circus.
 
@@ -11,7 +11,7 @@ The vibe is simple: clean interface, sharp content, no noisy portfolio circus.
 - Senior mobile engineering work across Flutter, Android, iOS, IoT, AI-enabled workflows, and hybrid cloud products.
 - Selected project case studies first, with smaller shipped apps tucked under **View all projects** so the page stays focused.
 - Light and dark mode with a restrained premium visual system.
-- Experience timeline, capability index, certifications showcase, mobile craft notes, resume, and direct contact.
+- Experience timeline, capability index, certifications showcase, resume, and direct contact.
 - Real app store links and product context instead of fake placeholder cards.
 
 ## Tech Stack
@@ -22,7 +22,6 @@ The vibe is simple: clean interface, sharp content, no noisy portfolio circus.
 | Styling | Tailwind CSS |
 | Motion | Framer Motion |
 | Routing | React Router |
-| Content | Markdown notes + React Markdown |
 | Contact | EmailJS browser SDK |
 | Icons | React Icons |
 | Runtime | Node 24.x |
@@ -33,11 +32,10 @@ The vibe is simple: clean interface, sharp content, no noisy portfolio circus.
 src/
 ├── App.jsx
 ├── assets/              # Project previews and certification placeholders
-├── blog/                # Markdown notes with front matter
 ├── components/
 │   ├── layout/          # Navbar, footer, theme toggle, scroll progress
 │   ├── projects/        # Project cards and modal
-│   └── sections/        # Hero, work, about, skills, notes, credentials, contact
+│   └── sections/        # Hero, work, about, skills, credentials, contact
 ├── constants/           # Portfolio content, projects, credentials, links
 ├── context/             # Theme persistence
 ├── pages/               # Route pages
@@ -91,7 +89,6 @@ Common updates:
 
 - Projects: edit the `projects` array.
 - Featured work: keep strong projects visible by default. Add `featured: false` for smaller apps that should stay under **View all projects**.
-- Notes: add Markdown files inside `src/blog/`.
 - Certifications: add certificate data in `certificationShowcase`, then place images in `src/assets/certifications/`.
 - Resume: update `resumeResource`.
 - Social links: update `heroContent`.
@@ -155,7 +152,7 @@ public/robots.txt
 public/sitemap.xml
 ```
 
-For stronger Google coverage later, create dedicated pages for major projects and notes instead of keeping every detail only inside modals.
+For stronger Google coverage later, create dedicated pages for major projects instead of keeping every detail only inside modals.
 
 ## Verification Checklist
 

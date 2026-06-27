@@ -22,7 +22,6 @@ import {
   SiAndroid,
   SiAndroidstudio,
   SiApple,
-  SiAmazonwebservices,
   SiDart,
   SiFigma,
   SiFirebase,
@@ -45,7 +44,6 @@ export const navItems = [
   { id: "skills", label: "Skills", path: "/#skills" },
   { id: "projects", label: "Engineered Work", path: "/#projects" },
   { id: "certifications", label: "Certifications", path: "/#certifications" },
-  { id: "notes", label: "Notes", path: "/#notes" },
   { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
@@ -235,7 +233,7 @@ export const skillIcons = [
   { name: "Kotlin", icon: SiKotlin },
   { name: "Firebase", icon: SiFirebase },
   { name: "Google Cloud", icon: SiGooglecloud },
-  { name: "AWS", icon: SiAmazonwebservices },
+  { name: "AWS", icon: FiCloud },
   { name: "Android", icon: SiAndroid },
   { name: "iOS", icon: SiApple },
   { name: "Node.js", icon: SiNodedotjs },
