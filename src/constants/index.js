@@ -1,11 +1,4 @@
-import {
-  abcApp,
-  certificationImageFiles,
-  letsFunApp,
-  lockyLogo,
-  railkafeApp,
-  typofApp,
-} from "../assets";
+import { certificationImageFiles, projectLogos } from "../assets";
 import {
   FiAward,
   FiBookOpen,
@@ -39,12 +32,10 @@ import {
 
 export const navItems = [
   { id: "home", label: "Home", path: "/" },
-  { id: "about", label: "About", path: "/#about" },
-  { id: "experience", label: "Experience", path: "/#experience" },
-  { id: "skills", label: "Skills", path: "/#skills" },
+  { id: "about", label: "Profile", path: "/#about" },
+  { id: "experience", label: "Experience Log", path: "/#experience" },
   { id: "projects", label: "Engineered Work", path: "/#projects" },
   { id: "certifications", label: "Certifications", path: "/#certifications" },
-  { id: "contact", label: "Contact", path: "/#contact" },
 ];
 
 export const legalLinks = [
@@ -63,14 +54,12 @@ export const resumeResource = {
 export const heroContent = {
   eyebrow: "Senior Mobile Developer @ IRISS Inc.",
   name: "Priyanshu Bej",
-  role: "Creative engineer shaping apps, IoT workflows, and AI systems from Bengaluru.",
+  role: "I build end-to-end products across mobile, IoT, AI, and hybrid cloud to deliver reliable systems at scale.",
   title: "Priyanshu Bej",
   highlight: "Priyanshu",
-  bio: [
-    "I blend product taste, clean architecture, and sharp execution to ship software that feels polished and reliable.",
-  ],
+  bio: [],
   availability: "Engineering Enterprise Mobile, IoT, AI & Hybrid Cloud Solutions",
-  location: "Bengaluru, Karnataka, India",
+  location: "Bengaluru, India",
   toolbox: ["Flutter", "Dart", "Clean Architecture", "SOLID", "GitHub Actions"],
   workflow: ["Clean Architecture", "Agile teams", "CI/CD pipelines"],
   passion: "I cannot ignore messy code. I refactor until it is clean, readable, and production ready.",
@@ -84,13 +73,13 @@ export const heroContent = {
     { value: "15+ apps", label: "Shipped across stores" },
     { value: "Crores", label: "Revenue impact" },
   ],
-  primaryAction: { label: "View engineered work", href: "/projects" },
+  primaryAction: { label: "View engineered work", href: "/#projects" },
   secondaryAction: { label: "Start a conversation", href: "/contact" },
 };
 
 export const aboutContent = {
   headline: "Flutter specialist building enterprise mobile systems with clean architecture.",
-  body: `Hello World. I'm Priyanshu Bej, a Senior Mobile Developer at IRISS Inc. I specialize in Flutter and build cross-platform applications that are easy to use, enjoyable, reliable, and maintainable. My work sits at the intersection of mobile apps, industrial IoT, AI-enabled workflows, and hybrid cloud systems.`,
+  body: `Hello World. I am Priyanshu Bej, a Senior Mobile Developer at IRISS Inc, building end-to-end digital products from concept to scale across mobile, industrial IoT, AI workflows, and hybrid cloud systems.`,
   qualities: [
     {
       title: "Clean architecture mindset",
@@ -262,8 +251,7 @@ export const projects = [
     ],
     tech: ["Flutter", "NFC", "Industrial IoT", "Cloud Sync", "Push Notifications", "App Lock"],
     tags: ["IRISS", "Enterprise", "iOS + Android"],
-    image:
-      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/5b/39/e1/5b39e17c-660e-c530-1685-940435bce284/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+    image: projectLogos["e-sentry-systems"],
     preview: "app-icon",
     facts: [
       { label: "iOS version", value: "3.1.7" },
@@ -304,8 +292,7 @@ export const projects = [
     ],
     tech: ["Flutter", "PDF Reports", "Offline Sync", "Camera", "Cloud Sync", "Admin Workflows"],
     tags: ["IRISS", "Business", "iOS + Android"],
-    image:
-      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4c/38/a6/4c38a629-e992-8846-2891-24b11b8cb0fe/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+    image: projectLogos["iriss-sitewalk"],
     preview: "app-icon",
     facts: [
       { label: "iOS version", value: "1.1.5" },
@@ -346,7 +333,8 @@ export const projects = [
     ],
     tech: ["Flutter", "NFC", "Local Encryption", "Cloud Sync"],
     tags: ["Fintech", "Offline-first", "NFC"],
-    image: lockyLogo,
+    image: projectLogos.locky,
+    preview: "app-icon",
     links: {
       live: "https://play.google.com/store/apps/details?id=com.locky.priyanshubej",
       repo: null,
@@ -366,7 +354,8 @@ export const projects = [
     ],
     tech: ["Flutter", "Node.js", "Socket.IO", "Firebase", "PhonePe SDK"],
     tags: ["Production", "Realtime", "Consumer"],
-    image: railkafeApp,
+    image: projectLogos.railkafe,
+    preview: "app-icon",
     links: {
       live: "https://play.google.com/store/apps/details?id=com.railkafe.app",
       repo: null,
@@ -386,12 +375,22 @@ export const projects = [
     ],
     tech: ["Flutter", "Node.js", "Firebase", "Razorpay"],
     tags: ["Mobility", "Marketplace"],
-    image:
-      "https://raw.githubusercontent.com/Priyanshu-Bej/VDriv-Book-Drivers-online/refs/heads/main/vdriv.png",
+    image: projectLogos.vdriv,
+    preview: "app-icon",
     links: {
-      live: "https://play.google.com/store/apps/details?id=com.vdriv.user",
+      live: "https://apps.apple.com/in/app/vdriv-car-drivers-on-demand/id6743806441",
       repo: null,
     },
+    storeLinks: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/in/app/vdriv-car-drivers-on-demand/id6743806441",
+      },
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.vdriv.user",
+      },
+    ],
   },
   {
     id: "abc-learning",
@@ -407,7 +406,8 @@ export const projects = [
     ],
     tech: ["Flutter", "Provider", "MongoDB", "Firebase", "Razorpay"],
     tags: ["EdTech", "Product"],
-    image: abcApp,
+    image: projectLogos["abc-learning"],
+    preview: "app-icon",
     links: {
       live: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
       repo: "https://github.com/Priyanshu-Bej/ABC-Learning-APP",
@@ -428,11 +428,18 @@ export const projects = [
     ],
     tech: ["Flutter", "REST APIs", "Firebase", "Laravel", "Node.js"],
     tags: ["B2B", "Commerce"],
-    image: typofApp,
+    image: projectLogos.typof,
+    preview: "app-icon",
     links: {
       live: "https://play.google.com/store/apps/details?id=com.typof",
       repo: null,
     },
+    storeLinks: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.typof",
+      },
+    ],
   },
   {
     id: "integer-gst-billing",
@@ -449,13 +456,18 @@ export const projects = [
     ],
     tech: ["Flutter", "Firebase", "GetX", "REST APIs", "Analytics", "Invoice Templates"],
     tags: ["Business", "GST", "Billing"],
-    image:
-      "https://play-lh.googleusercontent.com/90llVpKhZaCCwAkIMASs_Vp8IMliIj_Cod9Y2FynX83bp3rVRgejRLTyaiQ7cfYoy4FKJHOkXok5Kx6_CNQ8VA",
+    image: projectLogos["integer-gst-billing"],
     preview: "app-icon",
     links: {
       live: "https://play.google.com/store/apps/details?id=com.typof.integer&hl=en_US",
       repo: null,
     },
+    storeLinks: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.typof.integer&hl=en_US",
+      },
+    ],
   },
   {
     id: "gst-invoice-generator",
@@ -472,8 +484,7 @@ export const projects = [
     ],
     tech: ["Flutter", "GetX", "PDF Export", "GST", "Client Management"],
     tags: ["Business", "Invoice", "Utility"],
-    image:
-      "https://play-lh.googleusercontent.com/U8d1V4dYjPkAwjzafg-E34BemN0Ua3Pe72jROSPIL80gbNviKrGoWp02ccHeIAR1T-8QlRaKK5atzLQLmppTnpc",
+    image: projectLogos["gst-invoice-generator"],
     preview: "app-icon",
     facts: [
       { label: "Category", value: "Business" },
@@ -509,8 +520,7 @@ export const projects = [
     ],
     tech: ["Flutter", "GetX", "Material Design", "CSV Export", "Inventory"],
     tags: ["Productivity", "Inventory", "Utility"],
-    image:
-      "https://play-lh.googleusercontent.com/azvTNCMTzMQBel06BkfeL_oiQLAP6rtl_8d0EmeM1pBasQnWQa0rzLSpxJAjiH1hWSw",
+    image: projectLogos["sku-generator"],
     preview: "app-icon",
     facts: [
       { label: "Category", value: "Productivity" },
@@ -546,11 +556,18 @@ export const projects = [
     ],
     tech: ["Flutter", "Laravel", "Firebase", "Aroga SDK"],
     tags: ["Social", "Realtime"],
-    image: letsFunApp,
+    image: projectLogos["lets-fun"],
+    preview: "app-icon",
     links: {
       live: "https://play.google.com/store/apps/details?id=com.letsFun.user",
       repo: null,
     },
+    storeLinks: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.letsFun.user",
+      },
+    ],
   },
   {
     id: "atoms",
@@ -567,8 +584,8 @@ export const projects = [
     ],
     tech: ["Flutter", "Provider", "Laravel", "Razorpay"],
     tags: ["Education", "B2B"],
-    image:
-      "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System/blob/main/Atoms.png?raw=true",
+    image: projectLogos.atoms,
+    preview: "app-icon",
     links: {
       live: "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System.git",
       repo: "https://github.com/Priyanshu-Bej/ATOMS-Academic-School-Management-System.git",

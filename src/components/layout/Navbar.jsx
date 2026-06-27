@@ -11,22 +11,31 @@ const getPathHash = (path) => {
   return { pathname: pathname || "/", hash: hash ? `#${hash}` : "" };
 };
 
-const NavItem = ({ item, currentPathname, currentHash, onNavigate }) => {
+const NavItem = ({ item, currentPathname, currentHash, onNavigate, variant = "default" }) => {
   const { pathname, hash } = getPathHash(item.path);
   const isActive =
     hash.length > 0
       ? currentHash === hash
       : currentPathname === pathname && currentHash.length === 0;
 
+  const baseClassName =
+    variant === "sidebar-index"
+      ? `group flex w-full items-center justify-between px-4 py-3.5 text-left text-sm font-semibold transition ${
+          isActive
+            ? "bg-surface-muted text-brand-primary dark:bg-surface-dark-muted dark:text-brand-secondary"
+            : "text-ink-muted hover:bg-surface-muted hover:text-ink-strong dark:text-ink-inverse/90 dark:hover:bg-surface-dark-muted dark:hover:text-ink-inverse"
+        }`
+      : `group flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-semibold transition ${
+          isActive
+            ? "bg-ink-strong text-white dark:bg-ink-inverse dark:text-ink-strong"
+            : "text-ink-muted hover:bg-surface-muted hover:text-ink-strong dark:text-ink-inverse/90 dark:hover:bg-surface-dark-muted dark:hover:text-ink-inverse"
+        }`;
+
   return (
     <button
       type="button"
       onClick={() => onNavigate(item.path)}
-      className={`group flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-semibold transition ${
-        isActive
-          ? "bg-ink-strong text-white dark:bg-ink-inverse dark:text-ink-strong"
-          : "text-ink-muted hover:bg-surface-muted hover:text-ink-strong dark:text-ink-inverse/90 dark:hover:bg-surface-dark-muted dark:hover:text-ink-inverse"
-      }`}
+      className={baseClassName}
     >
       <span>{item.label}</span>
       <span className={`text-xs transition ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
@@ -64,9 +73,18 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
+  const goTop = () => {
+    if (pathname !== "/" || hash) {
+      navigate("/");
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
-      <aside className="fixed inset-y-0 left-0 z-[55] hidden w-[19rem] border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
+      <aside className="scrollbar-premium fixed inset-y-0 left-0 z-[55] hidden w-[19rem] overflow-y-auto border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
         <Link
           to="/"
           className="font-display text-2xl font-extrabold leading-none text-ink-strong transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
@@ -75,7 +93,12 @@ const Navbar = () => {
           <span className="block meta-text">Bej</span>
         </Link>
 
-        <div className="mt-8 overflow-hidden rounded-md border border-line-light bg-surface-elevated p-2 dark:border-line-dark dark:bg-surface-dark">
+        <button
+          type="button"
+          onClick={goTop}
+          className="mt-8 overflow-hidden rounded-md border border-line-light bg-surface-elevated p-2 text-left transition hover:border-brand-primary dark:border-line-dark dark:bg-surface-dark dark:hover:border-brand-secondary"
+          aria-label="Scroll to top"
+        >
           <div className="flex aspect-[4/3] w-full flex-col justify-between rounded bg-ink-strong p-4 text-white dark:bg-ink-inverse dark:text-ink-strong">
             <div className="flex items-start justify-between">
               <span className="font-display text-5xl font-extrabold leading-none">PB</span>
@@ -95,13 +118,16 @@ const Navbar = () => {
               {heroContent.location}
             </p>
           </div>
-        </div>
+        </button>
 
-        <nav aria-label="Primary navigation" className="mt-8">
-          <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] meta-text">
+        <nav
+          aria-label="Primary navigation"
+          className="mt-7 overflow-hidden border border-line-light bg-surface-elevated dark:border-line-dark dark:bg-surface-dark"
+        >
+          <p className="border-b border-line-light px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-primary dark:border-line-dark dark:text-brand-secondary">
             Index
           </p>
-          <div className="space-y-1">
+          <div className="grid divide-y divide-line-light dark:divide-line-dark">
             {visibleNavItems.map((item) => (
               <NavItem
                 key={item.id}
@@ -109,12 +135,13 @@ const Navbar = () => {
                 currentPathname={pathname}
                 currentHash={hash}
                 onNavigate={goTo}
+                variant="sidebar-index"
               />
             ))}
           </div>
         </nav>
 
-        <div className="mt-auto space-y-3 border-t border-line-light pt-5 dark:border-line-dark">
+        <div className="mt-7 space-y-3 border-t border-line-light pt-6 dark:border-line-dark">
           <div className="grid grid-cols-3 gap-2">
             {heroContent.stats.map((stat) => (
               <div key={stat.label} className="rounded-md border border-transparent bg-surface-muted p-2 dark:border-white/10 dark:bg-surface-dark-elevated">
@@ -169,7 +196,7 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="mx-auto mt-2 max-w-6xl rounded-lg border border-line-light bg-white p-2 text-ink-strong shadow-lift dark:border-white/15 dark:bg-black dark:text-ink-inverse">
+              <div className="mx-auto mt-2 max-h-[70vh] max-w-6xl overflow-y-auto rounded-lg border border-line-light bg-white p-2 text-ink-strong shadow-lift dark:border-white/15 dark:bg-black dark:text-ink-inverse">
                 <div className="space-y-1">
                   {navItems.map((item) => (
                     <NavItem

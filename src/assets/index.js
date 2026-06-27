@@ -1,9 +1,3 @@
-import lockyLogo from "./locky.png";
-import abcApp from "./abc.png";
-import letsFunApp from "./letsfun.png";
-import railkafeApp from "./railkafe.png";
-import typofApp from "./typof.png";
-
 const certificationAssets = import.meta.glob(
   "./certifications/*.{png,jpg,jpeg,webp}",
   {
@@ -15,6 +9,19 @@ const certificationAssets = import.meta.glob(
 
 const certificationImagesByFile = Object.fromEntries(
   Object.entries(certificationAssets).map(([path, image]) => [
+    path.split("/").pop(),
+    image,
+  ]),
+);
+
+const projectLogoAssets = import.meta.glob("./projects/logos/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const projectLogosByFile = Object.fromEntries(
+  Object.entries(projectLogoAssets).map(([path, image]) => [
     path.split("/").pop(),
     image,
   ]),
@@ -33,12 +40,34 @@ const certificationImageFiles = Object.freeze({
   codekaze2023: "codekaze-2023.jpeg",
 });
 
+const projectLogoFiles = Object.freeze({
+  "e-sentry-systems": "e-sentry-systems.jpg",
+  "iriss-sitewalk": "iriss-sitewalk.jpg",
+  locky: "locky.png",
+  railkafe: "railkafe.png",
+  vdriv: "vdriv.png",
+  "abc-learning": "abc-learning.png",
+  typof: "typof.png",
+  "integer-gst-billing": "integer-gst-billing.png",
+  "gst-invoice-generator": "gst-invoice-generator.png",
+  "sku-generator": "sku-generator.png",
+  "lets-fun": "lets-fun.png",
+  atoms: "atoms.png",
+});
+
+const projectLogos = Object.freeze(
+  Object.fromEntries(
+    Object.entries(projectLogoFiles).map(([projectId, fileName]) => [
+      projectId,
+      projectLogosByFile[fileName],
+    ]),
+  ),
+);
+
 export {
-  lockyLogo,
-  abcApp,
   certificationImageFiles,
   certificationImagesByFile,
-  letsFunApp,
-  railkafeApp,
-  typofApp,
+  projectLogoFiles,
+  projectLogos,
+  projectLogosByFile,
 };

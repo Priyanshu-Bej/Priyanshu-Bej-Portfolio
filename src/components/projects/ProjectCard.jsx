@@ -2,35 +2,15 @@ import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
 import { fadeInUp } from "../../utils/animations";
+import ProjectArtwork from "./ProjectArtwork";
 
-const getPreviewImageClass = (project) =>
-  project.preview === "app-icon" || project.id === "locky"
-    ? "object-contain p-10"
-    : "object-cover";
-
-const DevicePreview = ({ project }) => (
-  <div className="relative min-h-[380px] overflow-hidden bg-surface-muted p-6 dark:bg-surface-dark-muted md:min-h-[500px]">
-    <div className="absolute inset-x-0 top-0 h-px bg-line-light dark:bg-line-dark" />
-    <div className="absolute left-0 top-0 h-24 w-px bg-brand-primary dark:bg-brand-secondary" />
-    <motion.div
-      className="mx-auto flex h-full max-w-[285px] items-center justify-center"
-      whileHover={{ y: -8, rotate: -1 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <div className="relative w-full rounded-[2.2rem] border-[11px] border-ink-strong bg-ink-strong p-1 shadow-lift dark:border-black">
-        <div className="absolute left-1/2 top-2 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-white/18" />
-        <div className="aspect-[9/16] overflow-hidden rounded-[1.45rem] bg-white">
-          <img
-            src={project.image}
-            alt={`${project.title} app preview`}
-            loading="lazy"
-            className={`h-full w-full ${getPreviewImageClass(project)}`}
-          />
-        </div>
-      </div>
-    </motion.div>
-  </div>
-);
+const getLinkLabel = (href, fallback = "Open project") => {
+  const normalizedHref = href?.toLowerCase() || "";
+  if (normalizedHref.includes("play.google.com")) return "Play Store";
+  if (normalizedHref.includes("apps.apple.com")) return "App Store";
+  if (normalizedHref.includes("github.com")) return "GitHub";
+  return fallback;
+};
 
 const ProjectCard = ({ project, index, onOpen }) => {
   const {
@@ -46,6 +26,8 @@ const ProjectCard = ({ project, index, onOpen }) => {
   } = project;
   const reverse = index % 2 === 1;
   const number = String(index + 1).padStart(2, "0");
+  const fallbackLinkLabel = getLinkLabel(links?.live);
+  const chips = [...new Set([...tags, ...tech])].slice(0, 8);
 
   return (
     <motion.article
@@ -54,7 +36,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
     >
       <div className="grid lg:grid-cols-12">
         <div className={`${reverse ? "lg:order-2 lg:col-span-5" : "lg:col-span-5"}`}>
-          <DevicePreview project={project} />
+          <ProjectArtwork project={project} />
         </div>
 
         <div
@@ -98,7 +80,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
 
           <div className="mt-10">
             <div className="flex flex-wrap gap-2">
-              {[...tags, ...tech].slice(0, 8).map((tag) => (
+              {chips.map((tag) => (
                 <span
                   key={tag}
                   className="chip"
@@ -124,7 +106,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
                   rel="noreferrer"
                   className="button-secondary px-4 py-2.5"
                 >
-                  Open project
+                  {fallbackLinkLabel}
                 </a>
               )}
               {storeLinks.map((link) => (
@@ -135,7 +117,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
                   rel="noreferrer"
                   className="button-secondary px-4 py-2.5"
                 >
-                  {link.label}
+                  {getLinkLabel(link.href, link.label || "Open project")}
                   <FiArrowUpRight />
                 </a>
               ))}
