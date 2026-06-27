@@ -64,6 +64,15 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
+  const goTop = () => {
+    if (pathname !== "/" || hash) {
+      navigate("/");
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-[55] hidden w-[19rem] border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
@@ -75,7 +84,12 @@ const Navbar = () => {
           <span className="block meta-text">Bej</span>
         </Link>
 
-        <div className="mt-8 overflow-hidden rounded-md border border-line-light bg-surface-elevated p-2 dark:border-line-dark dark:bg-surface-dark">
+        <button
+          type="button"
+          onClick={goTop}
+          className="mt-8 overflow-hidden rounded-md border border-line-light bg-surface-elevated p-2 text-left transition hover:border-brand-primary dark:border-line-dark dark:bg-surface-dark dark:hover:border-brand-secondary"
+          aria-label="Scroll to top"
+        >
           <div className="flex aspect-[4/3] w-full flex-col justify-between rounded bg-ink-strong p-4 text-white dark:bg-ink-inverse dark:text-ink-strong">
             <div className="flex items-start justify-between">
               <span className="font-display text-5xl font-extrabold leading-none">PB</span>
@@ -95,7 +109,7 @@ const Navbar = () => {
               {heroContent.location}
             </p>
           </div>
-        </div>
+        </button>
 
         <nav aria-label="Primary navigation" className="mt-8">
           <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] meta-text">

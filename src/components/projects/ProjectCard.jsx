@@ -27,6 +27,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
   const reverse = index % 2 === 1;
   const number = String(index + 1).padStart(2, "0");
   const fallbackLinkLabel = getLinkLabel(links?.live);
+  const chips = [...new Set([...tags, ...tech])].slice(0, 8);
 
   return (
     <motion.article
@@ -79,7 +80,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
 
           <div className="mt-10">
             <div className="flex flex-wrap gap-2">
-              {[...tags, ...tech].slice(0, 8).map((tag) => (
+              {chips.map((tag) => (
                 <span
                   key={tag}
                   className="chip"

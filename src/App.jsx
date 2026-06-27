@@ -3,6 +3,7 @@ import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer, Navbar } from "./components";
+import BackToTopButton from "./components/layout/BackToTopButton";
 import ScrollProgress from "./components/layout/ScrollProgress";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -58,6 +59,7 @@ const ScrollManager = () => {
 const App = () => (
   <div className="relative min-h-screen overflow-x-hidden bg-canvas-light text-ink-base antialiased dark:bg-canvas-dark dark:text-ink-inverse">
     <ScrollProgress />
+    <BackToTopButton />
     <Navbar />
 
     <a
