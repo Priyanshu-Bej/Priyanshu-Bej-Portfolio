@@ -123,4 +123,49 @@
     background: rgba(102, 106, 115, 0.45);
     background-clip: content-box;
   }
+
+  .skills-marquee-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: 0.5rem;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .skills-marquee::before,
+  .skills-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .skills-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0));
+  }
+
+  .skills-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0));
+  }
+
+  .dark .skills-marquee::before {
+    background: linear-gradient(to right, rgba(16, 21, 29, 0.96), rgba(16, 21, 29, 0));
+  }
+
+  .dark .skills-marquee::after {
+    background: linear-gradient(to left, rgba(16, 21, 29, 0.96), rgba(16, 21, 29, 0));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skills-marquee-track {
+      transform: none;
+    }
+  }
 }
