@@ -2,13 +2,10 @@ import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiExternalLink, FiX } from "react-icons/fi";
 
+import ProjectArtwork from "./ProjectArtwork";
+
 const focusableSelectors =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex="0"]';
-
-const getPreviewImageClass = (project) =>
-  project.preview === "app-icon" || project.id === "locky"
-    ? "object-contain p-10"
-    : "object-cover";
 
 const ProjectModal = ({ project, onClose }) => {
   const dialogRef = useRef(null);
@@ -61,7 +58,6 @@ const ProjectModal = ({ project, onClose }) => {
     impact,
     tech,
     links,
-    image,
     timeframe,
     facts = [],
     storeLinks = [],
@@ -92,7 +88,7 @@ const ProjectModal = ({ project, onClose }) => {
           aria-modal="true"
           aria-labelledby="project-modal-title"
           tabIndex={-1}
-          className="premium-card relative grid max-h-[90vh] w-full max-w-5xl overflow-hidden lg:grid-cols-[0.9fr,1.1fr]"
+          className="premium-card relative grid max-h-[90vh] w-full max-w-5xl overflow-y-auto lg:grid-cols-[0.9fr,1.1fr] lg:overflow-hidden"
           initial={{ y: 16, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 12, opacity: 0 }}
@@ -107,20 +103,9 @@ const ProjectModal = ({ project, onClose }) => {
             <FiX className="text-lg" />
           </button>
 
-          <div className="bg-surface-muted p-6 dark:bg-surface-dark-muted lg:p-8">
-            <div className="mx-auto max-w-[260px] rounded-[2rem] border-[10px] border-ink-strong bg-ink-strong p-1 shadow-lift dark:border-black">
-              <div className="aspect-[9/16] overflow-hidden rounded-[1.35rem] bg-white">
-                <img
-                  src={image}
-                  alt={`${title} app preview`}
-                  loading="lazy"
-                  className={`h-full w-full ${getPreviewImageClass(project)}`}
-                />
-              </div>
-            </div>
-          </div>
+          <ProjectArtwork project={project} variant="modal" />
 
-          <div className="scrollbar-premium max-h-[90vh] overflow-y-auto p-6 md:p-8">
+          <div className="scrollbar-premium p-6 md:p-8 lg:max-h-[90vh] lg:overflow-y-auto">
             <p className="eyebrow">
               {category} · {timeframe}
             </p>
