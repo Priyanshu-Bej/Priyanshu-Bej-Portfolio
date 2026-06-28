@@ -170,26 +170,14 @@ export const experienceTimeline = [
 export const educationTimeline = [
   {
     school: "Gandhi Institute for Technology [GIFT], Bhubaneswar",
-    program: "Master of Computer Applications - Computer Software Engineering",
-    period: "Nov 2021 – Dec 2023",
+    program: "Master of Computer Applications (MCA)",
+    period: "2021 – 2023",
     icon: FiBookOpen,
   },
   {
-    school: "Baripada Degree College",
-    program: "Bachelor of Science",
+    school: "North Orissa University, Baripada",
+    program: "Bachelor of Science (B.Sc.)",
     period: "2018 – 2021",
-    icon: FiBookOpen,
-  },
-  {
-    school: "Baripada Jr. College",
-    program: "Intermediate (Class 12)",
-    period: "2016 – 2018",
-    icon: FiBookOpen,
-  },
-  {
-    school: "Kendriya Vidyalaya Kendujhar",
-    program: "Matriculation",
-    period: "2016",
     icon: FiBookOpen,
   },
 ];
