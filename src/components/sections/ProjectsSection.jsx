@@ -1,5 +1,5 @@
-import { lazy, Suspense, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { lazy, Suspense, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { projects } from "../../constants";
@@ -9,8 +9,15 @@ import ProjectCard from "../projects/ProjectCard";
 const ProjectModal = lazy(() => import("../projects/ProjectModal"));
 
 const ProjectsSection = () => {
+  const sectionRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const titleY = useTransform(scrollYProgress, [0, 1], [42, -48]);
   const { featuredProjects, additionalProjects } = useMemo(
     () => ({
       featuredProjects: projects.filter((project) => project.featured !== false),
@@ -20,14 +27,19 @@ const ProjectsSection = () => {
   );
 
   return (
-    <section id="projects" className="bg-surface-elevated dark:bg-surface-dark" aria-labelledby="projects-title">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className="section-grid-lines bg-surface-elevated dark:bg-surface-dark"
+      aria-labelledby="projects-title"
+    >
       <div className="border-y border-line-light dark:border-line-dark">
         <motion.div
           variants={staggered()}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.35 }}
-          className="grid gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[0.75fr,1.25fr] lg:px-12 lg:py-20"
+          className="section-grid-lines grid gap-8 bg-surface-elevated px-5 py-14 dark:bg-surface-dark sm:px-8 lg:sticky lg:top-0 lg:z-10 lg:grid-cols-[0.75fr,1.25fr] lg:px-12 lg:py-20"
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
@@ -45,6 +57,7 @@ const ProjectsSection = () => {
             id="projects-title"
             variants={fadeInUp(0.12, 16)}
             className="max-w-5xl text-balance text-[clamp(2.6rem,7vw,7.5rem)] font-extrabold leading-[0.9]"
+            style={{ y: shouldReduceMotion ? 0 : titleY }}
           >
             Case studies built around decisions, not decoration.
           </motion.h2>

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import {
   FiCheckCircle,
   FiGithub,
@@ -28,11 +28,18 @@ const inputClass =
   "w-full border-0 border-b border-line-light bg-transparent px-0 py-4 text-base text-ink-base outline-none transition placeholder:text-ink-muted focus:border-brand-primary dark:border-line-dark dark:text-ink-inverse dark:placeholder:text-ink-inverse/70 dark:focus:border-brand-secondary";
 
 const ContactSection = () => {
+  const sectionRef = useRef(null);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: null, message: "" });
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const titleY = useTransform(scrollYProgress, [0, 1], [36, -42]);
 
   const validate = () => {
     const newErrors = {};
@@ -99,14 +106,19 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="bg-ink-strong text-white dark:bg-black" aria-labelledby="contact-title">
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="section-grid-lines section-grid-lines-inverse bg-ink-strong text-white dark:bg-black"
+      aria-labelledby="contact-title"
+    >
       <div className="grid lg:grid-cols-[0.95fr,1.05fr]">
         <motion.div
           variants={staggered()}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="flex min-h-[70vh] flex-col justify-between border-b border-white/20 px-5 py-12 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:py-16"
+          className="section-grid-lines section-grid-lines-inverse flex min-h-[70vh] flex-col justify-between border-b border-white/20 bg-ink-strong px-5 py-12 dark:bg-black sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-16"
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-brand-secondary">
@@ -116,6 +128,7 @@ const ContactSection = () => {
               id="contact-title"
               variants={fadeInUp(0.1, 16)}
               className="mt-8 max-w-4xl text-balance text-[clamp(3rem,9vw,8rem)] font-extrabold leading-[0.88] text-white"
+              style={{ y: shouldReduceMotion ? 0 : titleY }}
             >
               Send the brief. I will map the build.
             </motion.h2>

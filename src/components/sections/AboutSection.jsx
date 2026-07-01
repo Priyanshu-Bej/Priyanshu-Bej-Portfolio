@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 import { aboutContent, educationTimeline, experienceTimeline } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
@@ -152,11 +153,19 @@ const ExperienceModelCard = () => {
 
 const AboutSection = () => {
   const { headline, body, qualities } = aboutContent;
+  const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const titleY = useTransform(scrollYProgress, [0, 1], [34, -38]);
 
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="border-b border-line-light dark:border-line-dark"
+      className="section-grid-lines border-b border-line-light bg-canvas-light dark:border-line-dark dark:bg-canvas-dark"
       aria-labelledby="about-title"
     >
       <div className="grid lg:grid-cols-[0.9fr,1.1fr]">
@@ -165,7 +174,7 @@ const AboutSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="border-b border-line-light px-5 py-14 dark:border-line-dark sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:py-20"
+          className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-14 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-20"
         >
           <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
             Profile
@@ -174,6 +183,7 @@ const AboutSection = () => {
             id="about-title"
             variants={fadeInUp(0.1, 16)}
             className="mt-6 text-balance text-[clamp(2.4rem,7vw,6.5rem)] font-extrabold leading-[0.9]"
+            style={{ y: shouldReduceMotion ? 0 : titleY }}
           >
             {headline}
           </motion.h2>

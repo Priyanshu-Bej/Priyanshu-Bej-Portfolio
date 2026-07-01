@@ -74,6 +74,8 @@ const Navbar = () => {
   };
 
   const goTop = () => {
+    setMobileOpen(false);
+
     if (pathname !== "/" || hash) {
       navigate("/");
       return;
@@ -87,6 +89,10 @@ const Navbar = () => {
       <aside className="scrollbar-premium fixed inset-y-0 left-0 z-[55] hidden w-[19rem] overflow-y-auto border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
         <Link
           to="/"
+          onClick={(event) => {
+            event.preventDefault();
+            goTop();
+          }}
           className="font-display text-2xl font-extrabold leading-none text-ink-strong transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
         >
           Priyanshu
@@ -169,6 +175,10 @@ const Navbar = () => {
         >
           <Link
             to="/"
+            onClick={(event) => {
+              event.preventDefault();
+              goTop();
+            }}
             className="font-display text-base font-bold text-current"
           >
             Priyanshu Bej

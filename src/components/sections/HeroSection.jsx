@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import {
   FiCheck,
   FiCopy,
@@ -21,8 +21,20 @@ const getCapabilityTags = (value) =>
 const HeroSection = () => {
   const navigate = useNavigate();
   const [emailCopied, setEmailCopied] = useState(false);
+  const sectionRef = useRef(null);
   const marqueeShellRef = useRef(null);
   const marqueeTrackRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 260]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -28]);
+  const asideY = useTransform(scrollYProgress, [0, 1], [0, -44]);
+  const titleY = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const accentOpacity = useTransform(scrollYProgress, [0, 0.8], [0.9, 0.36]);
   const {
     eyebrow,
     bio = [],
@@ -112,16 +124,33 @@ const HeroSection = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
-      className="relative min-h-screen border-b border-line-light dark:border-line-dark"
+      className="section-grid-lines relative min-h-screen overflow-hidden border-b border-line-light bg-canvas-light dark:border-line-dark dark:bg-canvas-dark"
       aria-labelledby="hero-title"
     >
-      <div className="grid min-h-screen lg:grid-cols-[minmax(0,1fr),17rem]">
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -inset-x-10 top-0 h-[135%] bg-[linear-gradient(115deg,rgba(37,99,235,0.16),transparent_36%),linear-gradient(245deg,rgba(249,115,22,0.10),transparent_42%)] dark:bg-[linear-gradient(115deg,rgba(20,184,166,0.18),transparent_36%),linear-gradient(245deg,rgba(37,99,235,0.12),transparent_42%)]"
+        style={{ opacity: shouldReduceMotion ? 0.72 : accentOpacity, y: shouldReduceMotion ? 0 : backgroundY }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -inset-x-8 -top-16 h-[145%] opacity-70 [background-image:linear-gradient(to_right,rgba(37,99,235,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(249,115,22,0.055)_1px,transparent_1px)] [background-size:96px_96px] dark:opacity-60 dark:[background-image:linear-gradient(to_right,rgba(20,184,166,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,99,235,0.06)_1px,transparent_1px)]"
+        style={{ y: shouldReduceMotion ? 0 : gridY }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-canvas-light via-canvas-light/78 to-transparent dark:from-canvas-dark dark:via-canvas-dark/82"
+      />
+
+      <div className="relative grid min-h-screen lg:grid-cols-[minmax(0,1fr),17rem]">
         <motion.div
           variants={staggered(0.08, 0.08)}
           initial="hidden"
           animate="show"
           className="flex min-w-0 flex-col gap-4 px-4 py-10 sm:px-8 lg:gap-6 lg:px-12 lg:py-16 xl:px-14"
+          style={{ y: shouldReduceMotion ? 0 : contentY }}
         >
           <div className="min-w-0">
             <motion.div
@@ -155,6 +184,7 @@ const HeroSection = () => {
               id="hero-title"
               variants={fadeInUp(0.04, 18)}
               className="mt-9 max-w-5xl text-balance text-[clamp(1.95rem,8.2vw,7rem)] font-extrabold leading-[0.95] sm:mt-10 lg:mt-12"
+              style={{ y: shouldReduceMotion ? 0 : titleY }}
             >
               Products engineered for performance, reliability, and scale.
             </motion.h1>
@@ -226,6 +256,7 @@ const HeroSection = () => {
           initial="hidden"
           animate="show"
           className="border-t border-line-light bg-surface-elevated p-5 dark:border-line-dark dark:bg-surface-dark sm:p-6 lg:border-l lg:border-t-0"
+          style={{ y: shouldReduceMotion ? 0 : asideY }}
         >
           <div className="sticky top-7 space-y-7">
             <div>
