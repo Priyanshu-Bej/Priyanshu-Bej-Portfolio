@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { FiChevronDown, FiX } from "react-icons/fi";
 
 import { certificationImagesByFile } from "../../assets";
@@ -240,8 +240,15 @@ const CertificationModal = ({ certification, onClose }) => {
 };
 
 const TestimonialsSection = () => {
+  const sectionRef = useRef(null);
   const [showAll, setShowAll] = useState(false);
   const [selectedCertification, setSelectedCertification] = useState(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const titleY = useTransform(scrollYProgress, [0, 1], [28, -34]);
 
   const { featuredCertifications, additionalCertifications } = useMemo(
     () => ({
@@ -257,8 +264,9 @@ const TestimonialsSection = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="certifications"
-      className="section-wrapper"
+      className="section-grid-lines section-wrapper bg-canvas-light dark:bg-canvas-dark"
       aria-labelledby="certifications-title"
     >
       <div className="section-shell">
@@ -267,7 +275,7 @@ const TestimonialsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.35 }}
-          className="grid gap-6 lg:grid-cols-[0.8fr,1.2fr] lg:items-end"
+          className="section-grid-lines grid gap-6 bg-canvas-light dark:bg-canvas-dark lg:sticky lg:top-0 lg:z-10 lg:grid-cols-[0.8fr,1.2fr] lg:items-end lg:pb-8 lg:pt-4"
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
@@ -277,6 +285,7 @@ const TestimonialsSection = () => {
               id="certifications-title"
               variants={fadeInUp(0.1, 16)}
               className="mt-4 text-balance text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05]"
+              style={{ y: shouldReduceMotion ? 0 : titleY }}
             >
               Certifications that support the work, not distract from it.
             </motion.h2>
