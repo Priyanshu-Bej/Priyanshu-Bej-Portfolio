@@ -59,7 +59,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
               {category}
             </p>
             <h3 className="mt-3 text-balance text-[clamp(2.25rem,5vw,5rem)] font-extrabold leading-[0.95]">
-              <ScrambleText duration={680} delay={0.08}>
+              <ScrambleText duration={680} delay={80}>
                 {title}
               </ScrambleText>
             </h3>

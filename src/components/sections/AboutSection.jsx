@@ -1,7 +1,7 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { aboutContent, educationTimeline, experienceTimeline } from "../../constants";
+import useParallax from "../../hooks/useParallax";
 import { fadeInUp, staggered } from "../../utils/animations";
 import ScrambleText from "../common/ScrambleText";
 
@@ -154,13 +154,7 @@ const ExperienceModelCard = () => {
 
 const AboutSection = () => {
   const { headline, body, qualities } = aboutContent;
-  const sectionRef = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 1], [34, -38]);
+  const { ref: sectionRef, y: titleY } = useParallax(34, -38);
 
   return (
     <section
@@ -180,16 +174,17 @@ const AboutSection = () => {
           <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
             Profile
           </motion.p>
-          <motion.h2
-            id="about-title"
-            variants={fadeInUp(0.1, 16)}
-            className="mt-6 text-balance text-[clamp(2.4rem,7vw,6.5rem)] font-extrabold leading-[0.9]"
-            style={{ y: shouldReduceMotion ? 0 : titleY }}
-          >
-            <ScrambleText duration={900} delay={0.1}>
-              {headline}
-            </ScrambleText>
-          </motion.h2>
+          <motion.div style={{ y: titleY }}>
+            <motion.h2
+              id="about-title"
+              variants={fadeInUp(0.1, 16)}
+              className="mt-6 text-balance text-[clamp(2.4rem,7vw,6.5rem)] font-extrabold leading-[0.9]"
+            >
+              <ScrambleText duration={900} delay={100}>
+                {headline}
+              </ScrambleText>
+            </motion.h2>
+          </motion.div>
           <motion.p
             variants={fadeInUp(0.16, 16)}
             className="mt-8 max-w-2xl text-pretty text-lg text-ink-muted dark:text-ink-inverse/80"
@@ -270,7 +265,7 @@ const AboutSection = () => {
             <div className="max-w-4xl">
               <p className="eyebrow">Experience Log</p>
               <h2 className="mt-5 max-w-3xl text-balance text-[clamp(2.3rem,5vw,4.75rem)] font-extrabold leading-[0.92]">
-                <ScrambleText duration={780} delay={0.1}>
+                <ScrambleText duration={780} delay={100}>
                   Work history with real operating context.
                 </ScrambleText>
               </h2>
@@ -305,7 +300,7 @@ const AboutSection = () => {
         <div>
           <p className="eyebrow">Education</p>
           <h2 className="mt-5 text-3xl font-extrabold leading-tight">
-            <ScrambleText duration={560} delay={0.08}>
+            <ScrambleText duration={560} delay={80}>
               Academic foundation.
             </ScrambleText>
           </h2>

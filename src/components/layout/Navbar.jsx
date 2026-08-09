@@ -85,24 +85,36 @@ const Navbar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleLogoClick = (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    goTop();
+  };
+
   return (
     <>
       <aside className="scrollbar-premium fixed inset-y-0 left-0 z-[55] hidden w-[19rem] overflow-y-auto border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
         <Link
           to="/"
-          onClick={(event) => {
-            event.preventDefault();
-            goTop();
-          }}
+          onClick={handleLogoClick}
           className="font-display text-2xl font-extrabold leading-none text-ink-strong transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
         >
-          <ScrambleText trigger="mount" duration={620} delay={0.08}>
+          <ScrambleText duration={620} delay={80}>
             Priyanshu
           </ScrambleText>
           <ScrambleText
-            trigger="mount"
             duration={620}
-            delay={0.16}
+            delay={160}
             className="block meta-text"
           >
             Bej
@@ -185,13 +197,10 @@ const Navbar = () => {
         >
           <Link
             to="/"
-            onClick={(event) => {
-              event.preventDefault();
-              goTop();
-            }}
+            onClick={handleLogoClick}
             className="font-display text-base font-bold text-current"
           >
-            <ScrambleText trigger="mount" duration={560} delay={0.08}>
+            <ScrambleText duration={560} delay={80}>
               Priyanshu Bej
             </ScrambleText>
           </Link>

@@ -1,18 +1,12 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { skillGroups, skillIcons } from "../../constants";
+import useParallax from "../../hooks/useParallax";
 import { fadeInUp, staggered } from "../../utils/animations";
 import ScrambleText from "../common/ScrambleText";
 
 const SkillsSection = () => {
-  const sectionRef = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 1], [38, -46]);
+  const { ref: sectionRef, y: titleY } = useParallax(38, -46);
 
   return (
     <section
@@ -33,9 +27,9 @@ const SkillsSection = () => {
           <motion.h2
             id="skills-title"
             className="mt-5 text-balance text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[0.95] lg:[writing-mode:vertical-rl]"
-            style={{ y: shouldReduceMotion ? 0 : titleY }}
+            style={{ y: titleY }}
           >
-            <ScrambleText duration={700} delay={0.1}>
+            <ScrambleText duration={700} delay={100}>
               Stack, systems, release.
             </ScrambleText>
           </motion.h2>
@@ -88,7 +82,7 @@ const SkillsSection = () => {
               <div>
                 <p className="eyebrow">Tools I Reach For</p>
                 <h3 className="mt-4 max-w-md text-balance text-[clamp(2rem,4vw,4rem)] font-extrabold leading-[0.95]">
-                  <ScrambleText duration={680} delay={0.08}>
+                  <ScrambleText duration={680} delay={80}>
                     Practical tools for shipping stable mobile systems.
                   </ScrambleText>
                 </h3>

@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
 
 const uppercaseScrambleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowercaseScrambleCharacters = "abcdefghijklmnopqrstuvwxyz";
@@ -8,6 +8,7 @@ const scrambleablePattern = /[A-Za-z0-9]/;
 const digitPattern = /[0-9]/;
 const lowercasePattern = /[a-z]/;
 const frameInterval = 48;
+const settleDelay = 340;
 
 const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
 const smootherStep = (value) => {
@@ -30,45 +31,13 @@ const getScrambleCharacter = (character) => {
   return pickCharacter(uppercaseScrambleCharacters);
 };
 
-const createGlyphs = (letters) =>
-  letters.map((character, index) => ({
-    character,
-    glyph: scrambleablePattern.test(character)
-      ? getScrambleCharacter(character)
-      : character,
-    index,
-    nextSwapAt: 0,
-    scrambleable: scrambleablePattern.test(character),
-  }));
-
-const buildFrame = (glyphs, revealCount, now) =>
-  glyphs.map((item) => {
-    if (item.index < revealCount || !item.scrambleable) {
-      item.glyph = item.character;
-      return item.character;
-    }
-
-    if (now >= item.nextSwapAt) {
-      item.glyph = getScrambleCharacter(item.character);
-      item.nextSwapAt = now + 120 + ((item.index % 5) * 28);
-    }
-
-    return item.glyph;
-  }).join("");
-
 const getRevealCount = (letterCount, progress) => {
   const eased = smootherStep(progress);
   return Math.min(letterCount, Math.floor(eased * (letterCount + 1)));
 };
 
-const getCharacterState = (text, revealCount, index) => {
-  const character = text[index] ?? "";
-
-  if (!scrambleablePattern.test(character)) {
-    return "revealed";
-  }
-
-  if (index < revealCount) {
+const getCharacterState = (revealCount, index, scrambleable) => {
+  if (!scrambleable || index < revealCount) {
     return "revealed";
   }
 
@@ -82,231 +51,193 @@ const getCharacterState = (text, revealCount, index) => {
 const getCharacterClassName = (state) =>
   `scramble-text-character scramble-text-character-${state}`;
 
-const getDisplayCharacter = (frame, character, index) => {
-  if (!scrambleablePattern.test(character)) {
-    return character;
-  }
-
-  return frame.value[index] ?? character;
-};
-
-const buildInitialFrame = (text) => ({
-  revealCount: text.length,
-  value: text,
-});
-
-const getStartFrame = (text) =>
-  Array.from(text, (character) => {
-    if (!scrambleablePattern.test(character)) {
-      return character;
+const buildTokens = (text) => {
+  const characters = [];
+  const tokens = (text.match(/\S+|\s+/g) ?? []).map((token, tokenIndex) => {
+    if (/^\s+$/.test(token)) {
+      return { key: `space-${tokenIndex}`, isSpace: true, token };
     }
 
-    return getScrambleCharacter(character);
-  }).join("");
+    const wordCharacters = Array.from(token).map((character) => {
+      const item = {
+        character,
+        scrambleable: scrambleablePattern.test(character),
+        glyph: scrambleablePattern.test(character)
+          ? getScrambleCharacter(character)
+          : character,
+        index: characters.length,
+        nextSwapAt: 0,
+      };
+      characters.push(item);
+      return item;
+    });
 
-const tokenizeText = (value) => value.match(/\S+|\s+/g) ?? [];
-const mapTokens = (tokens) => {
-  let cursor = 0;
-
-  return tokens.map((token, index) => {
-    const mappedToken = {
-      index,
-      start: cursor,
+    return {
+      key: `word-${tokenIndex}`,
+      isSpace: false,
       token,
-      isSpace: /^\s+$/.test(token),
+      characters: wordCharacters,
     };
-
-    cursor += token.length;
-    return mappedToken;
   });
+
+  return { tokens, characters };
 };
 
 const ScrambleText = ({
   children,
-  text,
-  as: Element = "span",
   className = "",
   duration = 820,
   delay = 0,
   trigger = "view",
-  replayOnHover = trigger === "manual",
-  once = true,
-  "aria-label": ariaLabel,
   ...props
 }) => {
-  const resolvedText = useMemo(
-    () => String(text ?? children ?? ""),
-    [children, text],
+  const resolvedText = String(children ?? "");
+  const { tokens, characters } = useMemo(
+    () => buildTokens(resolvedText),
+    [resolvedText],
   );
-  const accessibleText = ariaLabel ?? resolvedText;
-  const tokens = useMemo(() => mapTokens(tokenizeText(resolvedText)), [resolvedText]);
   const shouldReduceMotion = useReducedMotion();
   const elementRef = useRef(null);
-  const timeoutRef = useRef(null);
-  const frameRef = useRef(null);
-  const glyphsRef = useRef([]);
-  const hasPlayedRef = useRef(false);
-  const [frame, setFrame] = useState(() => buildInitialFrame(resolvedText));
+  const nodesRef = useRef([]);
+  const playedRef = useRef(false);
+  const [animating, setAnimating] = useState(false);
+  const isInView = useInView(elementRef, {
+    once: true,
+    amount: 0.45,
+    margin: "0px 0px -8% 0px",
+  });
 
-  const stopAnimation = useCallback(() => {
-    if (timeoutRef.current) {
-      window.clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
+  useEffect(() => {
+    if (shouldReduceMotion || !resolvedText || playedRef.current) {
+      return undefined;
     }
 
-    if (frameRef.current) {
-      window.cancelAnimationFrame(frameRef.current);
-      frameRef.current = null;
-    }
-  }, []);
-
-  const play = useCallback(() => {
-    if (!resolvedText) return;
-
-    stopAnimation();
-
-    if (shouldReduceMotion) {
-      setFrame(buildInitialFrame(resolvedText));
-      hasPlayedRef.current = true;
-      return;
+    if (trigger !== "mount" && !isInView) {
+      return undefined;
     }
 
-    const startAnimation = () => {
-      const startedAt = performance.now();
-      const letters = Array.from(resolvedText);
-      glyphsRef.current = createGlyphs(letters);
-      let lastFrameAt = 0;
-      setFrame({
-        revealCount: 0,
-        value: getStartFrame(resolvedText),
-      });
-
-      const tick = (now) => {
-        if (now - lastFrameAt < frameInterval) {
-          frameRef.current = window.requestAnimationFrame(tick);
-          return;
-        }
-
-        lastFrameAt = now;
-        const progress = Math.min((now - startedAt) / duration, 1);
-        const revealCount = getRevealCount(letters.length, progress);
-
-        setFrame({
-          revealCount: progress >= 1 ? letters.length : revealCount,
-          value:
-            progress >= 1
-              ? resolvedText
-              : buildFrame(glyphsRef.current, revealCount, now),
-        });
-
-        if (progress < 1) {
-          frameRef.current = window.requestAnimationFrame(tick);
-          return;
-        }
-
-        frameRef.current = null;
-        hasPlayedRef.current = true;
-      };
-
-      frameRef.current = window.requestAnimationFrame(tick);
+    const begin = () => {
+      playedRef.current = true;
+      setAnimating(true);
     };
 
     if (delay > 0) {
-      timeoutRef.current = window.setTimeout(startAnimation, delay * 1000);
-      return;
+      const timeoutId = window.setTimeout(begin, delay);
+      return () => window.clearTimeout(timeoutId);
     }
 
-    startAnimation();
-  }, [delay, duration, resolvedText, shouldReduceMotion, stopAnimation]);
+    begin();
+    return undefined;
+  }, [delay, isInView, resolvedText, shouldReduceMotion, trigger]);
 
   useEffect(() => {
-    setFrame(buildInitialFrame(resolvedText));
-    hasPlayedRef.current = false;
-    return stopAnimation;
-  }, [resolvedText, stopAnimation]);
-
-  useEffect(() => {
-    if (shouldReduceMotion || trigger === "manual") {
-      setFrame(buildInitialFrame(resolvedText));
+    if (!animating) {
       return undefined;
     }
 
-    if (trigger === "mount") {
-      play();
-      return undefined;
-    }
+    const startedAt = performance.now();
+    const states = new Array(characters.length).fill(null);
+    let lastFrameAt = 0;
+    let frameId = null;
+    let settleTimeoutId = null;
 
-    const element = elementRef.current;
-    if (!element || typeof IntersectionObserver === "undefined") {
-      play();
-      return undefined;
-    }
+    const tick = (now) => {
+      if (now - lastFrameAt < frameInterval) {
+        frameId = window.requestAnimationFrame(tick);
+        return;
+      }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        if (!once || !hasPlayedRef.current) play();
-        if (once) observer.disconnect();
-      },
-      { threshold: 0.45, rootMargin: "0px 0px -8% 0px" },
+      lastFrameAt = now;
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const revealCount =
+        progress >= 1
+          ? characters.length
+          : getRevealCount(characters.length, progress);
+
+      characters.forEach((item, index) => {
+        const node = nodesRef.current[index];
+        if (!node) {
+          return;
+        }
+
+        const state = getCharacterState(revealCount, index, item.scrambleable);
+
+        if (state !== "revealed" && now >= item.nextSwapAt) {
+          item.glyph = getScrambleCharacter(item.character);
+          item.nextSwapAt = now + 120 + ((index % 5) * 28);
+          node.lastChild.textContent = item.glyph;
+        }
+
+        if (states[index] !== state) {
+          states[index] = state;
+          node.className = getCharacterClassName(state);
+          if (state === "revealed") {
+            node.lastChild.textContent = item.character;
+          }
+        }
+      });
+
+      if (progress >= 1) {
+        frameId = null;
+        settleTimeoutId = window.setTimeout(() => setAnimating(false), settleDelay);
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+
+    return () => {
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+      if (settleTimeoutId) {
+        window.clearTimeout(settleTimeoutId);
+      }
+    };
+  }, [animating, characters, duration]);
+
+  const rootClassName = `scramble-text ${className}`.trim();
+
+  if (shouldReduceMotion || !animating) {
+    return (
+      <span {...props} ref={elementRef} className={rootClassName}>
+        {resolvedText}
+      </span>
     );
-
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [once, play, resolvedText, shouldReduceMotion, trigger]);
-
-  const handleMouseEnter = (event) => {
-    props.onMouseEnter?.(event);
-    if (replayOnHover && !shouldReduceMotion) play();
-  };
-
-  const handleFocus = (event) => {
-    props.onFocus?.(event);
-    if (replayOnHover && !shouldReduceMotion) play();
-  };
+  }
 
   return (
-    <Element
-      {...props}
-      ref={elementRef}
-      className={`scramble-text ${className}`.trim()}
-      onMouseEnter={handleMouseEnter}
-      onFocus={handleFocus}
-    >
-      <span className="scramble-text-reader">{accessibleText}</span>
-      <span aria-hidden="true">
-        {tokens.map(({ index, isSpace, start, token }) => {
-          if (isSpace) {
-            return <span key={`space-${index}`}>{token}</span>;
+    <span {...props} ref={elementRef} className={rootClassName}>
+      <span className="sr-only">{resolvedText}</span>
+      <span aria-hidden="true" className="select-none">
+        {tokens.map((word) => {
+          if (word.isSpace) {
+            return <span key={word.key}>{word.token}</span>;
           }
 
           return (
-            <span key={`${token}-${index}`} className="scramble-text-word">
-              {Array.from(token).map((character, characterIndex) => {
-                const textIndex = start + characterIndex;
-                const displayCharacter = getDisplayCharacter(frame, character, textIndex);
-                const characterState = getCharacterState(
-                  resolvedText,
-                  frame.revealCount,
-                  textIndex,
-                );
-
-                return (
-                  <span
-                    key={`${character}-${characterIndex}`}
-                    className={getCharacterClassName(characterState)}
-                  >
-                    <span className="scramble-text-measure">{character}</span>
-                    <span className="scramble-text-value">{displayCharacter}</span>
-                  </span>
-                );
-              })}
+            <span key={word.key} className="scramble-text-word">
+              {word.characters.map((item) => (
+                <span
+                  key={item.index}
+                  ref={(node) => {
+                    nodesRef.current[item.index] = node;
+                  }}
+                  className={getCharacterClassName(
+                    getCharacterState(0, item.index, item.scrambleable),
+                  )}
+                >
+                  <span className="scramble-text-measure">{item.character}</span>
+                  <span className="scramble-text-value">{item.glyph}</span>
+                </span>
+              ))}
             </span>
           );
         })}
       </span>
-    </Element>
+    </span>
   );
 };
 

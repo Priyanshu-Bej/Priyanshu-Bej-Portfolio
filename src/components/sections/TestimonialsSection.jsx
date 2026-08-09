@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiX } from "react-icons/fi";
 
 import { certificationImagesByFile } from "../../assets";
 import { certificationShowcase } from "../../constants";
+import useParallax from "../../hooks/useParallax";
 import { fadeInUp, staggered } from "../../utils/animations";
 import ScrambleText from "../common/ScrambleText";
 
@@ -241,15 +242,9 @@ const CertificationModal = ({ certification, onClose }) => {
 };
 
 const TestimonialsSection = () => {
-  const sectionRef = useRef(null);
+  const { ref: sectionRef, y: titleY } = useParallax(28, -34);
   const [showAll, setShowAll] = useState(false);
   const [selectedCertification, setSelectedCertification] = useState(null);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 1], [28, -34]);
 
   const { featuredCertifications, additionalCertifications } = useMemo(
     () => ({
@@ -282,16 +277,17 @@ const TestimonialsSection = () => {
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
               Certifications
             </motion.p>
-            <motion.h2
-              id="certifications-title"
-              variants={fadeInUp(0.1, 16)}
-              className="mt-4 text-balance text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05]"
-              style={{ y: shouldReduceMotion ? 0 : titleY }}
-            >
-              <ScrambleText duration={720} delay={0.1}>
-                Certifications that support the work, not distract from it.
-              </ScrambleText>
-            </motion.h2>
+            <motion.div style={{ y: titleY }}>
+              <motion.h2
+                id="certifications-title"
+                variants={fadeInUp(0.1, 16)}
+                className="mt-4 text-balance text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05]"
+              >
+                <ScrambleText duration={720} delay={100}>
+                  Certifications that support the work, not distract from it.
+                </ScrambleText>
+              </motion.h2>
+            </motion.div>
           </div>
           <motion.p
             variants={fadeInUp(0.16, 16)}

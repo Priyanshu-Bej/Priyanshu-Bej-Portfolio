@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   FiCheckCircle,
   FiGithub,
@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 
 import { contactChannels, socialLinks } from "../../constants";
+import useParallax from "../../hooks/useParallax";
 import { fadeInUp, staggered } from "../../utils/animations";
 import ScrambleText from "../common/ScrambleText";
 
@@ -29,18 +30,12 @@ const inputClass =
   "w-full border-0 border-b border-line-light bg-transparent px-0 py-4 text-base text-ink-base outline-none transition placeholder:text-ink-muted focus:border-brand-primary dark:border-line-dark dark:text-ink-inverse dark:placeholder:text-ink-inverse/70 dark:focus:border-brand-secondary";
 
 const ContactSection = () => {
-  const sectionRef = useRef(null);
+  const { ref: sectionRef, y: titleY } = useParallax(36, -42);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: null, message: "" });
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 1], [36, -42]);
 
   const validate = () => {
     const newErrors = {};
@@ -125,16 +120,17 @@ const ContactSection = () => {
             <motion.p variants={fadeInUp(0.05, 14)} className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-brand-secondary">
               Contact
             </motion.p>
-            <motion.h2
-              id="contact-title"
-              variants={fadeInUp(0.1, 16)}
-              className="mt-8 max-w-4xl text-balance text-[clamp(3rem,9vw,8rem)] font-extrabold leading-[0.88] text-white"
-              style={{ y: shouldReduceMotion ? 0 : titleY }}
-            >
-              <ScrambleText duration={820} delay={0.1}>
-                Send the brief. I will map the build.
-              </ScrambleText>
-            </motion.h2>
+            <motion.div style={{ y: titleY }}>
+              <motion.h2
+                id="contact-title"
+                variants={fadeInUp(0.1, 16)}
+                className="mt-8 max-w-4xl text-balance text-[clamp(3rem,9vw,8rem)] font-extrabold leading-[0.88] text-white"
+              >
+                <ScrambleText duration={820} delay={100}>
+                  Send the brief. I will map the build.
+                </ScrambleText>
+              </motion.h2>
+            </motion.div>
           </div>
 
           <motion.div variants={fadeInUp(0.18, 16)} className="mt-12 grid gap-4 sm:grid-cols-3">

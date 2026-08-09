@@ -125,7 +125,7 @@ const ProjectModal = ({ project, onClose }) => {
               id="project-modal-title"
               className="mt-4 text-balance text-4xl font-extrabold leading-tight"
             >
-              <ScrambleText duration={620} delay={0.08}>
+              <ScrambleText duration={620} delay={80}>
                 {title}
               </ScrambleText>
             </h3>
