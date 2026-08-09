@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 
 import { aboutContent, educationTimeline, experienceTimeline } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 
 const TimelineIcon = ({ icon: Icon }) =>
   Icon ? (
@@ -185,7 +186,9 @@ const AboutSection = () => {
             className="mt-6 text-balance text-[clamp(2.4rem,7vw,6.5rem)] font-extrabold leading-[0.9]"
             style={{ y: shouldReduceMotion ? 0 : titleY }}
           >
-            {headline}
+            <ScrambleText duration={900} delay={0.1}>
+              {headline}
+            </ScrambleText>
           </motion.h2>
           <motion.p
             variants={fadeInUp(0.16, 16)}
@@ -267,7 +270,9 @@ const AboutSection = () => {
             <div className="max-w-4xl">
               <p className="eyebrow">Experience Log</p>
               <h2 className="mt-5 max-w-3xl text-balance text-[clamp(2.3rem,5vw,4.75rem)] font-extrabold leading-[0.92]">
-                Work history with real operating context.
+                <ScrambleText duration={780} delay={0.1}>
+                  Work history with real operating context.
+                </ScrambleText>
               </h2>
               <p className="mt-6 max-w-2xl border-l border-brand-primary pl-5 text-pretty text-base leading-relaxed text-ink-muted dark:border-brand-secondary dark:text-ink-inverse/80 lg:text-lg">
                 From freelance MVPs to startup pressure, Bengaluru product teams,
@@ -300,7 +305,9 @@ const AboutSection = () => {
         <div>
           <p className="eyebrow">Education</p>
           <h2 className="mt-5 text-3xl font-extrabold leading-tight">
-            Academic foundation.
+            <ScrambleText duration={560} delay={0.08}>
+              Academic foundation.
+            </ScrambleText>
           </h2>
         </div>
         <div className="grid gap-x-8 md:grid-cols-2">

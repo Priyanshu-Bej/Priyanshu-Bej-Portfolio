@@ -4,6 +4,7 @@ import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { heroContent, navItems } from "../../constants";
+import ScrambleText from "../common/ScrambleText";
 import ThemeToggle from "./ThemeToggle";
 
 const getPathHash = (path) => {
@@ -95,8 +96,17 @@ const Navbar = () => {
           }}
           className="font-display text-2xl font-extrabold leading-none text-ink-strong transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
         >
-          Priyanshu
-          <span className="block meta-text">Bej</span>
+          <ScrambleText trigger="mount" duration={620} delay={0.08}>
+            Priyanshu
+          </ScrambleText>
+          <ScrambleText
+            trigger="mount"
+            duration={620}
+            delay={0.16}
+            className="block meta-text"
+          >
+            Bej
+          </ScrambleText>
         </Link>
 
         <button
@@ -181,7 +191,9 @@ const Navbar = () => {
             }}
             className="font-display text-base font-bold text-current"
           >
-            Priyanshu Bej
+            <ScrambleText trigger="mount" duration={560} delay={0.08}>
+              Priyanshu Bej
+            </ScrambleText>
           </Link>
 
           <div className="flex items-center gap-2">

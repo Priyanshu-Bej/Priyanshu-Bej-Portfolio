@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
 import { fadeInUp } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 import ProjectArtwork from "./ProjectArtwork";
 
 const getLinkLabel = (href, fallback = "Open project") => {
@@ -58,7 +59,9 @@ const ProjectCard = ({ project, index, onOpen }) => {
               {category}
             </p>
             <h3 className="mt-3 text-balance text-[clamp(2.25rem,5vw,5rem)] font-extrabold leading-[0.95]">
-              {title}
+              <ScrambleText duration={680} delay={0.08}>
+                {title}
+              </ScrambleText>
             </h3>
             <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted dark:text-ink-inverse/80">
               {description}

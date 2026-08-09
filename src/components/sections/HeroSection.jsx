@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import { contactChannels, heroContent, projects, skillGroups, skillIcons } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 
 const getCapabilityTags = (value) =>
   value
@@ -159,7 +160,9 @@ const HeroSection = () => {
             >
               <div className="flex flex-col gap-3 md:flex-row md:items-center">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-primary dark:text-brand-secondary">
-                  {eyebrow}
+                  <ScrambleText trigger="mount" duration={520} delay={0.12}>
+                    {eyebrow}
+                  </ScrambleText>
                 </p>
                 <div className="hidden h-px w-10 bg-line-light dark:bg-line-dark md:block" />
                 <div className="flex flex-wrap gap-2">
@@ -186,7 +189,9 @@ const HeroSection = () => {
               className="mt-9 max-w-5xl text-balance text-[clamp(1.95rem,8.2vw,7rem)] font-extrabold leading-[0.95] sm:mt-10 lg:mt-12"
               style={{ y: shouldReduceMotion ? 0 : titleY }}
             >
-              Products engineered for performance, reliability, and scale.
+              <ScrambleText duration={1360} delay={0.18}>
+                Products engineered for performance, reliability, and scale.
+              </ScrambleText>
             </motion.h1>
 
             <motion.div

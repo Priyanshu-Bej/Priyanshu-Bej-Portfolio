@@ -4,6 +4,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { projects } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 import ProjectCard from "../projects/ProjectCard";
 
 const ProjectModal = lazy(() => import("../projects/ProjectModal"));
@@ -59,7 +60,9 @@ const ProjectsSection = () => {
             className="max-w-5xl text-balance text-[clamp(2.6rem,7vw,7.5rem)] font-extrabold leading-[0.9]"
             style={{ y: shouldReduceMotion ? 0 : titleY }}
           >
-            Case studies built around decisions, not decoration.
+            <ScrambleText duration={900} delay={0.1}>
+              Case studies built around decisions, not decoration.
+            </ScrambleText>
           </motion.h2>
         </motion.div>
 

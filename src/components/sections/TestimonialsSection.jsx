@@ -6,6 +6,7 @@ import { FiChevronDown, FiX } from "react-icons/fi";
 import { certificationImagesByFile } from "../../assets";
 import { certificationShowcase } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 
 const getCertificateImage = (imageFile) =>
   imageFile ? certificationImagesByFile[imageFile] : null;
@@ -287,7 +288,9 @@ const TestimonialsSection = () => {
               className="mt-4 text-balance text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05]"
               style={{ y: shouldReduceMotion ? 0 : titleY }}
             >
-              Certifications that support the work, not distract from it.
+              <ScrambleText duration={720} delay={0.1}>
+                Certifications that support the work, not distract from it.
+              </ScrambleText>
             </motion.h2>
           </div>
           <motion.p

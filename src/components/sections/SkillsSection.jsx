@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 
 import { skillGroups, skillIcons } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 
 const SkillsSection = () => {
   const sectionRef = useRef(null);
@@ -34,7 +35,9 @@ const SkillsSection = () => {
             className="mt-5 text-balance text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[0.95] lg:[writing-mode:vertical-rl]"
             style={{ y: shouldReduceMotion ? 0 : titleY }}
           >
-            Stack, systems, release.
+            <ScrambleText duration={700} delay={0.1}>
+              Stack, systems, release.
+            </ScrambleText>
           </motion.h2>
         </motion.div>
 
@@ -85,7 +88,9 @@ const SkillsSection = () => {
               <div>
                 <p className="eyebrow">Tools I Reach For</p>
                 <h3 className="mt-4 max-w-md text-balance text-[clamp(2rem,4vw,4rem)] font-extrabold leading-[0.95]">
-                  Practical tools for shipping stable mobile systems.
+                  <ScrambleText duration={680} delay={0.08}>
+                    Practical tools for shipping stable mobile systems.
+                  </ScrambleText>
                 </h3>
               </div>
               <p className="max-w-2xl text-pretty text-base text-ink-muted dark:text-ink-inverse/80">

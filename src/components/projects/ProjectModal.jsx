@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiExternalLink, FiX } from "react-icons/fi";
 
+import ScrambleText from "../common/ScrambleText";
 import ProjectArtwork from "./ProjectArtwork";
 
 const focusableSelectors =
@@ -124,7 +125,9 @@ const ProjectModal = ({ project, onClose }) => {
               id="project-modal-title"
               className="mt-4 text-balance text-4xl font-extrabold leading-tight"
             >
-              {title}
+              <ScrambleText duration={620} delay={0.08}>
+                {title}
+              </ScrambleText>
             </h3>
             <p className="mt-4 text-pretty text-base text-ink-muted dark:text-ink-inverse/80">
               {description}

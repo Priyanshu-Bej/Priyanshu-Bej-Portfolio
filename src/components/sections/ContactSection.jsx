@@ -13,6 +13,7 @@ import {
 
 import { contactChannels, socialLinks } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 
 const initialForm = {
   name: "",
@@ -130,7 +131,9 @@ const ContactSection = () => {
               className="mt-8 max-w-4xl text-balance text-[clamp(3rem,9vw,8rem)] font-extrabold leading-[0.88] text-white"
               style={{ y: shouldReduceMotion ? 0 : titleY }}
             >
-              Send the brief. I will map the build.
+              <ScrambleText duration={820} delay={0.1}>
+                Send the brief. I will map the build.
+              </ScrambleText>
             </motion.h2>
           </div>
 
