@@ -4,6 +4,7 @@ import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { heroContent, navItems } from "../../constants";
+import ScrambleText from "../common/ScrambleText";
 import ThemeToggle from "./ThemeToggle";
 
 const getPathHash = (path) => {
@@ -84,19 +85,40 @@ const Navbar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleLogoClick = (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    goTop();
+  };
+
   return (
     <>
       <aside className="scrollbar-premium fixed inset-y-0 left-0 z-[55] hidden w-[19rem] overflow-y-auto border-r border-line-light bg-canvas-light/92 px-5 py-6 backdrop-blur-xl dark:border-line-dark dark:bg-canvas-dark/92 lg:flex lg:flex-col">
         <Link
           to="/"
-          onClick={(event) => {
-            event.preventDefault();
-            goTop();
-          }}
+          onClick={handleLogoClick}
           className="font-display text-2xl font-extrabold leading-none text-ink-strong transition hover:text-brand-primary dark:text-ink-inverse dark:hover:text-brand-secondary"
         >
-          Priyanshu
-          <span className="block meta-text">Bej</span>
+          <ScrambleText duration={620} delay={80}>
+            Priyanshu
+          </ScrambleText>
+          <ScrambleText
+            duration={620}
+            delay={160}
+            className="block meta-text"
+          >
+            Bej
+          </ScrambleText>
         </Link>
 
         <button
@@ -175,13 +197,12 @@ const Navbar = () => {
         >
           <Link
             to="/"
-            onClick={(event) => {
-              event.preventDefault();
-              goTop();
-            }}
+            onClick={handleLogoClick}
             className="font-display text-base font-bold text-current"
           >
-            Priyanshu Bej
+            <ScrambleText duration={560} delay={80}>
+              Priyanshu Bej
+            </ScrambleText>
           </Link>
 
           <div className="flex items-center gap-2">

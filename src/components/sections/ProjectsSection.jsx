@@ -1,23 +1,19 @@
-import { lazy, Suspense, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { lazy, Suspense, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { projects } from "../../constants";
+import useParallax from "../../hooks/useParallax";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 import ProjectCard from "../projects/ProjectCard";
 
 const ProjectModal = lazy(() => import("../projects/ProjectModal"));
 
 const ProjectsSection = () => {
-  const sectionRef = useRef(null);
+  const { ref: sectionRef, y: titleY } = useParallax(42, -48);
   const [selectedProject, setSelectedProject] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 1], [42, -48]);
   const { featuredProjects, additionalProjects } = useMemo(
     () => ({
       featuredProjects: projects.filter((project) => project.featured !== false),
@@ -53,14 +49,17 @@ const ProjectsSection = () => {
               user workflows.
             </motion.p>
           </div>
-          <motion.h2
-            id="projects-title"
-            variants={fadeInUp(0.12, 16)}
-            className="max-w-5xl text-balance text-[clamp(2.6rem,7vw,7.5rem)] font-extrabold leading-[0.9]"
-            style={{ y: shouldReduceMotion ? 0 : titleY }}
-          >
-            Case studies built around decisions, not decoration.
-          </motion.h2>
+          <motion.div style={{ y: titleY }}>
+            <motion.h2
+              id="projects-title"
+              variants={fadeInUp(0.12, 16)}
+              className="max-w-5xl text-balance text-[clamp(2.6rem,7vw,7.5rem)] font-extrabold leading-[0.9]"
+            >
+              <ScrambleText duration={900} delay={100}>
+                Case studies built around decisions, not decoration.
+              </ScrambleText>
+            </motion.h2>
+          </motion.div>
         </motion.div>
 
         <motion.div

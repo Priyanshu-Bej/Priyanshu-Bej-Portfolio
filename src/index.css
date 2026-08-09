@@ -93,6 +93,76 @@
     @apply text-ink-muted dark:text-ink-inverse/80;
   }
 
+  .scramble-text {
+    font-variant-ligatures: none;
+  }
+
+  .scramble-text-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .scramble-text-character {
+    position: relative;
+    display: inline-block;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .scramble-text-measure {
+    visibility: hidden;
+  }
+
+  .scramble-text-value {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    transition:
+      color 260ms ease,
+      opacity 220ms ease,
+      filter 260ms ease,
+      text-shadow 320ms ease,
+      transform 260ms ease;
+  }
+
+  .scramble-text-character-scrambling .scramble-text-value,
+  .scramble-text-character-settling .scramble-text-value {
+    will-change: color, opacity, filter, text-shadow, transform;
+  }
+
+  .scramble-text-character-scrambling .scramble-text-value {
+    color: theme('colors.brand.primary / 72%');
+    opacity: 0.3;
+    filter: blur(0.18px);
+    text-shadow: 0 0 10px theme('colors.brand.primary / 12%');
+    transform: translateY(0.025em);
+  }
+
+  .scramble-text-character-settling .scramble-text-value {
+    color: theme('colors.brand.secondary / 82%');
+    opacity: 0.72;
+    filter: blur(0.08px);
+    text-shadow: 0 0 8px theme('colors.brand.secondary / 10%');
+    transform: translateY(0.012em);
+  }
+
+  .scramble-text-character-revealed .scramble-text-value {
+    color: currentColor;
+    opacity: 1;
+    filter: blur(0);
+    text-shadow: none;
+    transform: translateY(0);
+  }
+
+  .dark .scramble-text-character-scrambling .scramble-text-value {
+    color: theme('colors.brand.secondary / 72%');
+    text-shadow: 0 0 10px theme('colors.brand.secondary / 14%');
+  }
+
+  .dark .scramble-text-character-settling .scramble-text-value {
+    color: theme('colors.brand.primary / 82%');
+    text-shadow: 0 0 8px theme('colors.brand.primary / 12%');
+  }
+
   .section-grid-lines {
     position: relative;
     isolation: isolate;
@@ -116,10 +186,36 @@
       linear-gradient(to bottom, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
   }
 
-  .section-grid-lines-inverse::before {
+  .section-grid-lines-inverse::before,
+  .dark .section-grid-lines-inverse::before {
     background-image:
       linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+  }
+
+  .hero-ambient-layer {
+    background-image:
+      linear-gradient(115deg, theme('colors.brand.primary / 16%'), transparent 36%),
+      linear-gradient(245deg, theme('colors.brand.accent / 10%'), transparent 42%);
+  }
+
+  .dark .hero-ambient-layer {
+    background-image:
+      linear-gradient(115deg, theme('colors.brand.secondary / 18%'), transparent 36%),
+      linear-gradient(245deg, theme('colors.brand.primary / 12%'), transparent 42%);
+  }
+
+  .hero-grid-layer {
+    background-image:
+      linear-gradient(to right, theme('colors.brand.primary / 8%') 1px, transparent 1px),
+      linear-gradient(to bottom, theme('colors.brand.accent / 5.5%') 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+
+  .dark .hero-grid-layer {
+    background-image:
+      linear-gradient(to right, theme('colors.brand.secondary / 8%') 1px, transparent 1px),
+      linear-gradient(to bottom, theme('colors.brand.primary / 6%') 1px, transparent 1px);
   }
 
   .section-grid-lines > * {

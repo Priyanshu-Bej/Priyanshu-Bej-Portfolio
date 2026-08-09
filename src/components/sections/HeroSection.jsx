@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import { contactChannels, heroContent, projects, skillGroups, skillIcons } from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
+import ScrambleText from "../common/ScrambleText";
 
 const getCapabilityTags = (value) =>
   value
@@ -126,23 +127,20 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="hero"
-      className="section-grid-lines relative min-h-screen overflow-hidden border-b border-line-light bg-canvas-light dark:border-line-dark dark:bg-canvas-dark"
+      className="relative min-h-screen border-b border-line-light bg-canvas-light dark:border-line-dark dark:bg-canvas-dark"
       aria-labelledby="hero-title"
     >
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -inset-x-10 top-0 h-[135%] bg-[linear-gradient(115deg,rgba(37,99,235,0.16),transparent_36%),linear-gradient(245deg,rgba(249,115,22,0.10),transparent_42%)] dark:bg-[linear-gradient(115deg,rgba(20,184,166,0.18),transparent_36%),linear-gradient(245deg,rgba(37,99,235,0.12),transparent_42%)]"
-        style={{ opacity: shouldReduceMotion ? 0.72 : accentOpacity, y: shouldReduceMotion ? 0 : backgroundY }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -inset-x-8 -top-16 h-[145%] opacity-70 [background-image:linear-gradient(to_right,rgba(37,99,235,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(249,115,22,0.055)_1px,transparent_1px)] [background-size:96px_96px] dark:opacity-60 dark:[background-image:linear-gradient(to_right,rgba(20,184,166,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,99,235,0.06)_1px,transparent_1px)]"
-        style={{ y: shouldReduceMotion ? 0 : gridY }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-canvas-light via-canvas-light/78 to-transparent dark:from-canvas-dark dark:via-canvas-dark/82"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="hero-ambient-layer absolute -inset-x-10 top-0 h-[135%]"
+          style={{ opacity: shouldReduceMotion ? 0.72 : accentOpacity, y: shouldReduceMotion ? 0 : backgroundY }}
+        />
+        <motion.div
+          className="hero-grid-layer absolute -inset-x-8 -top-16 h-[145%] opacity-70 dark:opacity-60"
+          style={{ y: shouldReduceMotion ? 0 : gridY }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-canvas-light via-canvas-light/78 to-transparent dark:from-canvas-dark dark:via-canvas-dark/82" />
+      </div>
 
       <div className="relative grid min-h-screen lg:grid-cols-[minmax(0,1fr),17rem]">
         <motion.div
@@ -159,7 +157,9 @@ const HeroSection = () => {
             >
               <div className="flex flex-col gap-3 md:flex-row md:items-center">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-primary dark:text-brand-secondary">
-                  {eyebrow}
+                  <ScrambleText trigger="mount" duration={520} delay={120}>
+                    {eyebrow}
+                  </ScrambleText>
                 </p>
                 <div className="hidden h-px w-10 bg-line-light dark:bg-line-dark md:block" />
                 <div className="flex flex-wrap gap-2">
@@ -180,14 +180,17 @@ const HeroSection = () => {
               </div>
             </motion.div>
 
-            <motion.h1
-              id="hero-title"
-              variants={fadeInUp(0.04, 18)}
-              className="mt-9 max-w-5xl text-balance text-[clamp(1.95rem,8.2vw,7rem)] font-extrabold leading-[0.95] sm:mt-10 lg:mt-12"
-              style={{ y: shouldReduceMotion ? 0 : titleY }}
-            >
-              Products engineered for performance, reliability, and scale.
-            </motion.h1>
+            <motion.div style={{ y: shouldReduceMotion ? 0 : titleY }}>
+              <motion.h1
+                id="hero-title"
+                variants={fadeInUp(0.04, 18)}
+                className="mt-9 max-w-5xl text-balance text-[clamp(1.95rem,8.2vw,7rem)] font-extrabold leading-[0.95] sm:mt-10 lg:mt-12"
+              >
+                <ScrambleText duration={1360} delay={180}>
+                  Products engineered for performance, reliability, and scale.
+                </ScrambleText>
+              </motion.h1>
+            </motion.div>
 
             <motion.div
               variants={fadeInUp(0.1, 18)}
