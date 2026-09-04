@@ -26,7 +26,13 @@ const educationLogoAssets = import.meta.glob("./education/*.{png,jpg,jpeg,webp}"
   query: "?url",
 });
 
-const companyLogoAssets = import.meta.glob("./company/*.{png,jpg,jpeg,svg,webp}", {
+const companyLogoAssets = import.meta.glob("./company/*.{png,svg,webp}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const profileImageAssets = import.meta.glob("./profile/*.{jpg,jpeg,webp}", {
   eager: true,
   import: "default",
   query: "?url",
@@ -48,6 +54,13 @@ const educationLogosByFile = Object.fromEntries(
 
 const companyLogosByFile = Object.fromEntries(
   Object.entries(companyLogoAssets).map(([path, image]) => [
+    path.split("/").pop(),
+    image,
+  ]),
+);
+
+const profileImagesByFile = Object.fromEntries(
+  Object.entries(profileImageAssets).map(([path, image]) => [
     path.split("/").pop(),
     image,
   ]),
@@ -105,7 +118,9 @@ const educationLogos = Object.freeze(
 );
 
 const companyLogoFiles = Object.freeze({
+  freelance: "freelance.svg",
   iriss: "iriss.svg",
+  kods: "kods.png",
 });
 
 const companyLogos = Object.freeze(
@@ -113,6 +128,19 @@ const companyLogos = Object.freeze(
     Object.entries(companyLogoFiles).map(([companyId, fileName]) => [
       companyId,
       companyLogosByFile[fileName],
+    ]),
+  ),
+);
+
+const profileImageFiles = Object.freeze({
+  priyanshu: "priyanshu-bej.jpg",
+});
+
+const profileImages = Object.freeze(
+  Object.fromEntries(
+    Object.entries(profileImageFiles).map(([profileId, fileName]) => [
+      profileId,
+      profileImagesByFile[fileName],
     ]),
   ),
 );
@@ -129,4 +157,7 @@ export {
   projectLogoFiles,
   projectLogos,
   projectLogosByFile,
+  profileImageFiles,
+  profileImages,
+  profileImagesByFile,
 };

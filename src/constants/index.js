@@ -3,6 +3,7 @@ import {
   companyLogos,
   educationLogos,
   projectLogos,
+  profileImages,
 } from "../assets";
 import {
   FiAward,
@@ -84,8 +85,10 @@ export const heroContent = {
 };
 
 export const aboutContent = {
-  headline: "Flutter specialist building enterprise mobile systems with clean architecture.",
+  headline: "Mobile specialist building enterprise systems with clean architecture.",
   body: `Hello World. I am Priyanshu Bej, a Senior Mobile Developer at IRISS Inc, building end-to-end digital products from concept to scale across mobile, industrial IoT, AI workflows, and hybrid cloud systems.`,
+  photo: profileImages.priyanshu,
+  photoAlt: "Priyanshu Bej portrait",
   qualities: [
     {
       title: "Clean architecture mindset",
@@ -146,6 +149,8 @@ export const experienceTimeline = [
     period: "Dec 2023 – Nov 2024",
     location: "Bengaluru, India",
     icon: FiCode,
+    logo: companyLogos.kods,
+    logoAlt: "Kods Technologies logo",
     bullets: [
       "Worked in a fast-paced Bengaluru product environment where ideas moved quickly from concept to shipped apps.",
       "Built cross-platform Flutter products while solving end-to-end product and engineering problems at scale.",
@@ -158,6 +163,8 @@ export const experienceTimeline = [
     period: "Dec 2022 – Dec 2023",
     location: "Bhubaneswar, India",
     icon: FiBox,
+    logo: projectLogos.typof,
+    logoAlt: "Typof logo",
     bullets: [
       "Built in a startup environment where real users depended on fast, practical product decisions.",
       "Solved production problems under pressure while growing deeper ownership of mobile product delivery.",
@@ -169,6 +176,8 @@ export const experienceTimeline = [
     period: "Mar 2022 – Dec 2022",
     location: "Remote",
     icon: FiTerminal,
+    logo: companyLogos.freelance,
+    logoAlt: "Freelance developer mark",
     bullets: [
       "Started independently with no fixed roadmap, taking ideas from uncertainty into working mobile products.",
       "Built early MVPs and learned to solve real problems directly with clients and users.",

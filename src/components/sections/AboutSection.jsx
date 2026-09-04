@@ -254,7 +254,7 @@ const ExperienceModelCard = () => {
 };
 
 const AboutSection = () => {
-  const { headline, body, qualities } = aboutContent;
+  const { headline, body, qualities, photo, photoAlt } = aboutContent;
   const { ref: sectionRef, y: titleY } = useParallax(34, -38);
 
   return (
@@ -303,9 +303,20 @@ const AboutSection = () => {
             className="border border-line-light bg-surface-elevated dark:border-line-dark dark:bg-surface-dark"
           >
             <div className="grid min-h-[20rem] grid-cols-2">
-              <div className="flex flex-col justify-between border-r border-line-light p-6 dark:border-line-dark">
-                <p className="eyebrow">Operating Model</p>
-                <p className="font-display text-7xl font-extrabold leading-none text-ink-strong dark:text-ink-inverse">
+              <div className="relative flex min-w-0 flex-col justify-between overflow-hidden border-r border-line-light bg-ink-strong dark:border-line-dark">
+                {photo ? (
+                  <img
+                    src={photo}
+                    alt={photoAlt}
+                    className="absolute inset-0 h-full w-full object-cover object-top opacity-95"
+                    loading="lazy"
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-strong/80 via-ink-strong/10 to-transparent" />
+                <div className="relative z-10 p-6">
+                  <p className="eyebrow">Operating Model</p>
+                </div>
+                <p className="relative z-10 p-6 font-display text-6xl font-extrabold leading-none text-white">
                   PB
                 </p>
               </div>
