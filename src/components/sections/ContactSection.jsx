@@ -84,7 +84,7 @@ const ContactSection = () => {
       setStatus({
         type: "error",
         message:
-          "The form could not send right now. Email me directly at priyanshubej2001@gmail.com.",
+          "The form could not send right now. Email me directly at codewithpriyanshubej@gmail.com.",
       });
     } finally {
       setLoading(false);

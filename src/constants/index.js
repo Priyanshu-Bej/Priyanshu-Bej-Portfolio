@@ -1,4 +1,10 @@
-import { certificationImageFiles, projectLogos } from "../assets";
+import {
+  certificationImageFiles,
+  companyLogos,
+  educationLogos,
+  projectLogos,
+  profileImages,
+} from "../assets";
 import {
   FiAward,
   FiBookOpen,
@@ -34,6 +40,7 @@ export const navItems = [
   { id: "home", label: "Home", path: "/" },
   { id: "about", label: "Profile", path: "/#about" },
   { id: "experience", label: "Experience Log", path: "/#experience" },
+  { id: "education", label: "Education Log", path: "/#education" },
   { id: "projects", label: "Engineered Work", path: "/#projects" },
   { id: "certifications", label: "Certifications", path: "/#certifications" },
 ];
@@ -69,7 +76,7 @@ export const heroContent = {
     label: "Connect on LinkedIn",
   },
   stats: [
-    { value: "4+ yrs", label: "Production experience" },
+    { value: "4.5+ yrs", label: "Production experience" },
     { value: "15+ apps", label: "Shipped across stores" },
     { value: "Crores", label: "Revenue impact" },
   ],
@@ -78,8 +85,10 @@ export const heroContent = {
 };
 
 export const aboutContent = {
-  headline: "Flutter specialist building enterprise mobile systems with clean architecture.",
+  headline: "Mobile specialist building enterprise systems with clean architecture.",
   body: `Hello World. I am Priyanshu Bej, a Senior Mobile Developer at IRISS Inc, building end-to-end digital products from concept to scale across mobile, industrial IoT, AI workflows, and hybrid cloud systems.`,
+  photo: profileImages.priyanshu,
+  photoAlt: "Priyanshu Bej portrait",
   qualities: [
     {
       title: "Clean architecture mindset",
@@ -106,6 +115,8 @@ export const experienceTimeline = [
     period: "Dec 2024 – Present",
     location: "Florida, United States x Bengaluru, India | Hybrid",
     icon: FiCpu,
+    logo: companyLogos.iriss,
+    logoAlt: "IRISS logo",
     summary:
       "One company journey: from owning the E-Sentry mobile experience to senior-level work across mobile, IoT, AI, and industrial innovation.",
     roles: [
@@ -113,6 +124,7 @@ export const experienceTimeline = [
         title: "Senior Mobile Developer",
         period: "Jan 2026 – Present",
         label: "Current role",
+        current: true,
         bullets: [
           "Working at the intersection of mobile, IoT, AI, and industrial innovation.",
           "Building E Sentry Systems and IRISS SiteWalk across NFC asset inspection, thermal site workflows, offline sync, cloud reporting, and admin operations.",
@@ -137,6 +149,8 @@ export const experienceTimeline = [
     period: "Dec 2023 – Nov 2024",
     location: "Bengaluru, India",
     icon: FiCode,
+    logo: companyLogos.kods,
+    logoAlt: "Kods Technologies logo",
     bullets: [
       "Worked in a fast-paced Bengaluru product environment where ideas moved quickly from concept to shipped apps.",
       "Built cross-platform Flutter products while solving end-to-end product and engineering problems at scale.",
@@ -149,6 +163,8 @@ export const experienceTimeline = [
     period: "Dec 2022 – Dec 2023",
     location: "Bhubaneswar, India",
     icon: FiBox,
+    logo: projectLogos.typof,
+    logoAlt: "Typof logo",
     bullets: [
       "Built in a startup environment where real users depended on fast, practical product decisions.",
       "Solved production problems under pressure while growing deeper ownership of mobile product delivery.",
@@ -160,6 +176,8 @@ export const experienceTimeline = [
     period: "Mar 2022 – Dec 2022",
     location: "Remote",
     icon: FiTerminal,
+    logo: companyLogos.freelance,
+    logoAlt: "Freelance developer mark",
     bullets: [
       "Started independently with no fixed roadmap, taking ideas from uncertainty into working mobile products.",
       "Built early MVPs and learned to solve real problems directly with clients and users.",
@@ -169,10 +187,25 @@ export const experienceTimeline = [
 
 export const educationTimeline = [
   {
+    school: "Indian Institute of Technology, Kharagpur",
+    program: "Executive Post Graduate Program in Generative AI and Agentic AI",
+    period: "Jun 2026 – Present",
+    icon: SiOpenai,
+    logo: educationLogos["iit-kharagpur"],
+    logoAlt: "Indian Institute of Technology Kharagpur logo",
+    status: "Current education",
+    description:
+      "The best way to predict the future is to build it. Currently expanding my expertise in Generative AI, Agentic AI, LLMs, RAG, and production-ready AI systems while applying these learnings to real-world product development.",
+    skills: ["Python", "RAG", "LLMs", "Agentic AI", "Generative AI"],
+    current: true,
+  },
+  {
     school: "Gandhi Institute for Technology [GIFT], Bhubaneswar",
     program: "Master of Computer Applications (MCA)",
     period: "2021 – 2023",
     icon: FiBookOpen,
+    logo: educationLogos["gift-bhubaneswar"],
+    logoAlt: "Gandhi Institute for Technology logo",
   },
   {
     school: "North Orissa University, Baripada",
@@ -711,8 +744,8 @@ export const certificationShowcase = [
 export const socialLinks = [
   {
     label: "Email",
-    href: "mailto:priyanshubej2001@gmail.com",
-    handle: "priyanshubej2001@gmail.com",
+    href: "mailto:codewithpriyanshubej@gmail.com",
+    handle: "codewithpriyanshubej@gmail.com",
   },
   {
     label: "LinkedIn",
@@ -730,8 +763,8 @@ export const contactChannels = [
   {
     type: "email",
     label: "Email",
-    value: "priyanshubej2001@gmail.com",
-    href: "mailto:priyanshubej2001@gmail.com",
+    value: "codewithpriyanshubej@gmail.com",
+    href: "mailto:codewithpriyanshubej@gmail.com",
   },
   {
     type: "location",

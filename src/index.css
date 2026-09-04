@@ -102,6 +102,16 @@
     white-space: nowrap;
   }
 
+  .hero-title-scramble {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-title-scramble .scramble-text-word {
+    white-space: normal;
+  }
+
   .scramble-text-character {
     position: relative;
     display: inline-block;
