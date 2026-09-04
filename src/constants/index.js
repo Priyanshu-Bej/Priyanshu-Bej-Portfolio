@@ -69,7 +69,7 @@ export const heroContent = {
     label: "Connect on LinkedIn",
   },
   stats: [
-    { value: "4+ yrs", label: "Production experience" },
+    { value: "4.5+ yrs", label: "Production experience" },
     { value: "15+ apps", label: "Shipped across stores" },
     { value: "Crores", label: "Revenue impact" },
   ],
@@ -711,8 +711,8 @@ export const certificationShowcase = [
 export const socialLinks = [
   {
     label: "Email",
-    href: "mailto:priyanshubej2001@gmail.com",
-    handle: "priyanshubej2001@gmail.com",
+    href: "mailto:codewithpriyanshubej@gmail.com",
+    handle: "codewithpriyanshubej@gmail.com",
   },
   {
     label: "LinkedIn",
@@ -730,8 +730,8 @@ export const contactChannels = [
   {
     type: "email",
     label: "Email",
-    value: "priyanshubej2001@gmail.com",
-    href: "mailto:priyanshubej2001@gmail.com",
+    value: "codewithpriyanshubej@gmail.com",
+    href: "mailto:codewithpriyanshubej@gmail.com",
   },
   {
     type: "location",

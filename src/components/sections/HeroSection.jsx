@@ -67,7 +67,7 @@ const HeroSection = () => {
   const visibleFeaturedProjects = featuredProjects.slice(0, 2);
   const emailAddress =
     contactChannels.find((channel) => channel.type === "email")?.value ||
-    "priyanshubej2001@gmail.com";
+    "codewithpriyanshubej@gmail.com";
 
   const copyEmail = async () => {
     try {

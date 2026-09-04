@@ -176,4 +176,4 @@ Built and maintained by **Priyanshu Bej**.
 
 - LinkedIn: https://www.linkedin.com/in/priyanshubej/
 - GitHub: https://github.com/Priyanshu-Bej
-- Email: priyanshubej2001@gmail.com
+- Email: codewithpriyanshubej@gmail.com

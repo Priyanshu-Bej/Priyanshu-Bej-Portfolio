@@ -131,7 +131,7 @@ const Navbar = () => {
             <div className="flex items-start justify-between">
               <span className="font-display text-5xl font-extrabold leading-none">PB</span>
               <span className="rounded border border-white/20 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] dark:border-black/20">
-                4+ yrs
+                4.5+ yrs
               </span>
             </div>
             <p className="max-w-[11rem] text-sm font-semibold leading-tight text-white/90 dark:text-ink-strong">
