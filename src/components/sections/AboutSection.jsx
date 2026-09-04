@@ -12,31 +12,96 @@ const TimelineIcon = ({ icon: Icon }) =>
     </span>
   ) : null;
 
-const ExperienceRoleCard = ({ role }) => (
-  <div className="rounded-md border border-line-light bg-canvas-light p-5 dark:border-line-dark dark:bg-canvas-dark">
-    <div className="flex flex-wrap items-center justify-between gap-3">
-      <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-primary dark:text-brand-secondary">
-        {role.label}
-      </p>
-      <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
-        {role.period}
-      </p>
-    </div>
-    <h4 className="mt-4 text-2xl font-extrabold leading-tight text-ink-strong dark:text-ink-inverse">
-      {role.title}
-    </h4>
-    <div className="mt-4 grid gap-2">
-      {role.bullets?.map((bullet) => (
-        <p
-          key={bullet}
-          className="border-l border-line-light pl-4 text-sm leading-relaxed text-ink-muted dark:border-line-dark dark:text-ink-inverse/80"
-        >
-          {bullet}
+const EducationLogo = ({ item, large = false }) =>
+  item.logo ? (
+    <span
+      className={`flex shrink-0 items-center justify-center overflow-hidden rounded-md border border-line-light bg-white p-2 shadow-subtle dark:border-white/15 dark:bg-white ${
+        large ? "h-20 w-20" : "h-14 w-14"
+      }`}
+    >
+      <img
+        src={item.logo}
+        alt={item.logoAlt || `${item.school} logo`}
+        className="h-full w-full object-contain"
+        loading="lazy"
+      />
+    </span>
+  ) : (
+    <TimelineIcon icon={item.icon} />
+  );
+
+const ExperienceLogo = ({ item }) =>
+  item.logo ? (
+    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-line-light bg-white p-2 shadow-subtle dark:border-white/15">
+      <img
+        src={item.logo}
+        alt={item.logoAlt || `${item.company} logo`}
+        className="h-full w-full object-contain"
+        loading="lazy"
+      />
+    </span>
+  ) : (
+    <TimelineIcon icon={item.icon} />
+  );
+
+const ExperienceRoleCard = ({ role, companyLogo, companyLogoAlt, company }) => {
+  const isCurrent = role.current || role.label === "Current role";
+
+  return (
+    <div
+      className={`rounded-md border p-5 transition duration-300 ease-premium ${
+        isCurrent
+          ? "border-brand-primary bg-brand-primary/5 shadow-subtle dark:border-brand-secondary dark:bg-brand-secondary/10"
+          : "border-line-light bg-canvas-light dark:border-line-dark dark:bg-canvas-dark"
+      }`}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-3">
+          {isCurrent && companyLogo ? (
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line-light bg-white p-2 dark:border-white/15">
+              <img
+                src={companyLogo}
+                alt={companyLogoAlt || `${company} logo`}
+                className="h-full w-full object-contain"
+                loading="lazy"
+              />
+            </span>
+          ) : null}
+          <div className="min-w-0">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-primary dark:text-brand-secondary">
+              {role.label}
+            </p>
+            {isCurrent && company ? (
+              <p className="mt-1 text-xs font-bold text-ink-muted dark:text-ink-inverse/80">
+                {company}
+              </p>
+            ) : null}
+          </div>
+        </div>
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
+          {role.period}
         </p>
-      ))}
+      </div>
+      <h4 className="mt-4 text-2xl font-extrabold leading-tight text-ink-strong dark:text-ink-inverse">
+        {role.title}
+      </h4>
+      <div className="mt-4 grid gap-2">
+        {role.bullets?.map((bullet) => (
+          <p
+            key={bullet}
+            className={`border-l pl-4 text-sm leading-relaxed text-ink-muted dark:text-ink-inverse/80 ${
+              isCurrent
+                ? "border-brand-primary/45 dark:border-brand-secondary/55"
+                : "border-line-light dark:border-line-dark"
+            }`}
+          >
+            {bullet}
+          </p>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ExperienceRow = ({ item, index }) => (
   <motion.article
@@ -48,7 +113,7 @@ const ExperienceRow = ({ item, index }) => (
         {item.period}
       </p>
       <div className="lg:mt-6">
-        <TimelineIcon icon={item.icon} />
+        <ExperienceLogo item={item} />
       </div>
     </div>
 
@@ -72,7 +137,15 @@ const ExperienceRow = ({ item, index }) => (
 
     <div className="grid content-start gap-3">
       {item.roles
-        ? item.roles.map((role) => <ExperienceRoleCard key={role.title} role={role} />)
+        ? item.roles.map((role) => (
+            <ExperienceRoleCard
+              key={role.title}
+              role={role}
+              company={item.company}
+              companyLogo={item.logo}
+              companyLogoAlt={item.logoAlt}
+            />
+          ))
         : item.bullets?.map((bullet) => (
             <p
               key={bullet}
@@ -88,17 +161,45 @@ const ExperienceRow = ({ item, index }) => (
 const EducationItem = ({ item, index }) => (
   <motion.article
     variants={fadeInUp(0.04 * index, 12)}
-    className="grid gap-4 border-t border-line-light py-5 dark:border-line-dark md:grid-cols-[3rem,1fr]"
+    className={`relative grid gap-5 border-t py-6 md:grid-cols-[4rem,1fr] ${
+      item.current
+        ? "border-brand-primary bg-brand-primary/5 px-5 dark:border-brand-secondary dark:bg-brand-secondary/10 md:col-span-2"
+        : "border-line-light dark:border-line-dark"
+    }`}
   >
-    <TimelineIcon icon={item.icon} />
-    <div>
-      <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
-        {item.period}
-      </p>
-      <h3 className="mt-3 text-lg font-extrabold leading-tight">{item.program}</h3>
+    <EducationLogo item={item} />
+    <div className="min-w-0">
+      <div className="flex flex-wrap items-center gap-2">
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] meta-text">
+          {item.period}
+        </p>
+        {item.status ? (
+          <span className="rounded-md bg-brand-primary px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-white dark:bg-brand-secondary dark:text-ink-strong">
+            {item.status}
+          </span>
+        ) : null}
+      </div>
+      <h3 className="mt-3 text-balance text-xl font-extrabold leading-tight">{item.program}</h3>
       <p className="mt-2 text-sm text-ink-muted dark:text-ink-inverse/80">
         {item.school}
       </p>
+      {item.description ? (
+        <p className="mt-3 text-sm leading-relaxed text-ink-muted dark:text-ink-inverse/80">
+          {item.description}
+        </p>
+      ) : null}
+      {item.skills ? (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {item.skills.map((skill) => (
+            <span
+              key={skill}
+              className="rounded-md border border-line-light px-2.5 py-1 text-xs font-semibold text-ink-muted dark:border-white/15 dark:text-ink-inverse/75"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      ) : null}
     </div>
   </motion.article>
 );
@@ -291,21 +392,28 @@ const AboutSection = () => {
       </div>
 
       <motion.div
+        id="education"
         variants={staggered(0.06, 0.12)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="grid gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[17rem,1fr] lg:px-12 lg:py-16"
+        className="grid scroll-mt-24 gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[20rem,1fr] lg:px-12 lg:py-16"
       >
-        <div>
-          <p className="eyebrow">Education</p>
-          <h2 className="mt-5 text-3xl font-extrabold leading-tight">
-            <ScrambleText duration={560} delay={80}>
-              Academic foundation.
-            </ScrambleText>
-          </h2>
+        <div className="grid content-start gap-6">
+          <div>
+            <p className="eyebrow">Education Log</p>
+            <h2 className="mt-5 text-3xl font-extrabold leading-tight">
+              <ScrambleText duration={560} delay={80}>
+                Academic foundation, sharpened for AI.
+              </ScrambleText>
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-ink-muted dark:text-ink-inverse/80">
+              Formal computer-science foundation with an active IIT Kharagpur program focused on
+              Generative AI, Agentic AI, and production-ready intelligent systems.
+            </p>
+          </div>
         </div>
-        <div className="grid gap-x-8 md:grid-cols-2">
+        <div className="grid content-start gap-x-8 md:grid-cols-2">
           {educationTimeline.map((item, index) => (
             <EducationItem key={`${item.school}-${item.period}`} item={item} index={index} />
           ))}

@@ -1,4 +1,9 @@
-import { certificationImageFiles, projectLogos } from "../assets";
+import {
+  certificationImageFiles,
+  companyLogos,
+  educationLogos,
+  projectLogos,
+} from "../assets";
 import {
   FiAward,
   FiBookOpen,
@@ -34,6 +39,7 @@ export const navItems = [
   { id: "home", label: "Home", path: "/" },
   { id: "about", label: "Profile", path: "/#about" },
   { id: "experience", label: "Experience Log", path: "/#experience" },
+  { id: "education", label: "Education Log", path: "/#education" },
   { id: "projects", label: "Engineered Work", path: "/#projects" },
   { id: "certifications", label: "Certifications", path: "/#certifications" },
 ];
@@ -106,6 +112,8 @@ export const experienceTimeline = [
     period: "Dec 2024 – Present",
     location: "Florida, United States x Bengaluru, India | Hybrid",
     icon: FiCpu,
+    logo: companyLogos.iriss,
+    logoAlt: "IRISS logo",
     summary:
       "One company journey: from owning the E-Sentry mobile experience to senior-level work across mobile, IoT, AI, and industrial innovation.",
     roles: [
@@ -113,6 +121,7 @@ export const experienceTimeline = [
         title: "Senior Mobile Developer",
         period: "Jan 2026 – Present",
         label: "Current role",
+        current: true,
         bullets: [
           "Working at the intersection of mobile, IoT, AI, and industrial innovation.",
           "Building E Sentry Systems and IRISS SiteWalk across NFC asset inspection, thermal site workflows, offline sync, cloud reporting, and admin operations.",
@@ -169,10 +178,25 @@ export const experienceTimeline = [
 
 export const educationTimeline = [
   {
+    school: "Indian Institute of Technology, Kharagpur",
+    program: "Executive Post Graduate Program in Generative AI and Agentic AI",
+    period: "Jun 2026 – Present",
+    icon: SiOpenai,
+    logo: educationLogos["iit-kharagpur"],
+    logoAlt: "Indian Institute of Technology Kharagpur logo",
+    status: "Current education",
+    description:
+      "The best way to predict the future is to build it. Currently expanding my expertise in Generative AI, Agentic AI, LLMs, RAG, and production-ready AI systems while applying these learnings to real-world product development.",
+    skills: ["Python", "RAG", "LLMs", "Agentic AI", "Generative AI"],
+    current: true,
+  },
+  {
     school: "Gandhi Institute for Technology [GIFT], Bhubaneswar",
     program: "Master of Computer Applications (MCA)",
     period: "2021 – 2023",
     icon: FiBookOpen,
+    logo: educationLogos["gift-bhubaneswar"],
+    logoAlt: "Gandhi Institute for Technology logo",
   },
   {
     school: "North Orissa University, Baripada",

@@ -20,8 +20,34 @@ const projectLogoAssets = import.meta.glob("./projects/logos/*.{png,jpg,jpeg,web
   query: "?url",
 });
 
+const educationLogoAssets = import.meta.glob("./education/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const companyLogoAssets = import.meta.glob("./company/*.{png,jpg,jpeg,svg,webp}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
 const projectLogosByFile = Object.fromEntries(
   Object.entries(projectLogoAssets).map(([path, image]) => [
+    path.split("/").pop(),
+    image,
+  ]),
+);
+
+const educationLogosByFile = Object.fromEntries(
+  Object.entries(educationLogoAssets).map(([path, image]) => [
+    path.split("/").pop(),
+    image,
+  ]),
+);
+
+const companyLogosByFile = Object.fromEntries(
+  Object.entries(companyLogoAssets).map(([path, image]) => [
     path.split("/").pop(),
     image,
   ]),
@@ -64,9 +90,42 @@ const projectLogos = Object.freeze(
   ),
 );
 
+const educationLogoFiles = Object.freeze({
+  "iit-kharagpur": "iit-kharagpur.jpeg",
+  "gift-bhubaneswar": "gift-bhubaneswar.png",
+});
+
+const educationLogos = Object.freeze(
+  Object.fromEntries(
+    Object.entries(educationLogoFiles).map(([educationId, fileName]) => [
+      educationId,
+      educationLogosByFile[fileName],
+    ]),
+  ),
+);
+
+const companyLogoFiles = Object.freeze({
+  iriss: "iriss.svg",
+});
+
+const companyLogos = Object.freeze(
+  Object.fromEntries(
+    Object.entries(companyLogoFiles).map(([companyId, fileName]) => [
+      companyId,
+      companyLogosByFile[fileName],
+    ]),
+  ),
+);
+
 export {
   certificationImageFiles,
   certificationImagesByFile,
+  companyLogoFiles,
+  companyLogos,
+  companyLogosByFile,
+  educationLogoFiles,
+  educationLogos,
+  educationLogosByFile,
   projectLogoFiles,
   projectLogos,
   projectLogosByFile,

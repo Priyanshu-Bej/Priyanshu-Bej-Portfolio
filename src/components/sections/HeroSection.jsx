@@ -9,7 +9,14 @@ import {
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
-import { contactChannels, heroContent, projects, skillGroups, skillIcons } from "../../constants";
+import {
+  contactChannels,
+  educationTimeline,
+  heroContent,
+  projects,
+  skillGroups,
+  skillIcons,
+} from "../../constants";
 import { fadeInUp, staggered } from "../../utils/animations";
 import ScrambleText from "../common/ScrambleText";
 
@@ -39,7 +46,6 @@ const HeroSection = () => {
   const {
     eyebrow,
     bio = [],
-    workflow = [],
     availability,
     location,
     linkedin,
@@ -47,6 +53,7 @@ const HeroSection = () => {
   } = heroContent;
 
   const featuredProjects = projects.slice(0, 3);
+  const currentEducation = educationTimeline.find((item) => item.current);
   const capabilityTags = getCapabilityTags(availability);
   const visibleCapabilityTags = capabilityTags.slice(0, 3);
   const hiddenCapabilityCount = Math.max(0, capabilityTags.length - visibleCapabilityTags.length);
@@ -265,12 +272,41 @@ const HeroSection = () => {
             <div>
               <p className="eyebrow">Current Signal</p>
               <p className="mt-5 text-lg font-bold text-ink-strong dark:text-ink-inverse">
-                {workflow.join(" / ")}
+                Building production mobile, IoT, and AI systems.
               </p>
               <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-muted dark:text-ink-inverse/90">
                 <FiMapPin />
                 {location}
               </p>
+              {currentEducation ? (
+                <div className="mt-5 rounded-md border border-brand-primary/40 bg-canvas-light p-3 dark:border-brand-secondary/50 dark:bg-surface-dark-elevated">
+                  <div className="flex items-center gap-3">
+                    {currentEducation.logo ? (
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md border border-line-light bg-white p-1.5 dark:border-white/15">
+                        <img
+                          src={currentEducation.logo}
+                          alt={currentEducation.logoAlt || `${currentEducation.school} logo`}
+                          className="h-full w-full object-contain"
+                        />
+                      </span>
+                    ) : null}
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-primary dark:text-brand-secondary">
+                      Current education
+                    </span>
+                  </div>
+                  <div className="mt-3 min-w-0">
+                    <span className="mt-1 block text-sm font-extrabold leading-snug text-ink-strong dark:text-ink-inverse">
+                      Executive AI Program
+                    </span>
+                    <span className="mt-1 block text-xs leading-relaxed text-ink-muted dark:text-ink-inverse/80">
+                      IIT Kharagpur · Generative AI and Agentic AI
+                    </span>
+                    <span className="mt-2 block font-mono text-[10px] font-semibold uppercase tracking-[0.14em] meta-text">
+                      {currentEducation.period}
+                    </span>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             <div className="space-y-3.5">
