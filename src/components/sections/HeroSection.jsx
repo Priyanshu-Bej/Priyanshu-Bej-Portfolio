@@ -169,17 +169,17 @@ const HeroSection = () => {
                   </ScrambleText>
                 </p>
                 <div className="hidden h-px w-10 bg-line-light dark:bg-line-dark md:block" />
-                <div className="flex flex-wrap gap-2">
+                <div className="flex min-w-0 max-w-full flex-wrap gap-2 overflow-hidden">
                   {visibleCapabilityTags.map((item) => (
                     <span
                       key={item}
-                      className="rounded-sm border border-line-light px-2.5 py-1 text-xs font-semibold text-ink-muted dark:border-line-dark dark:text-ink-inverse/80"
+                      className="max-w-full shrink-0 rounded-sm border border-line-light px-2.5 py-1 text-xs font-semibold text-ink-muted dark:border-line-dark dark:text-ink-inverse/80"
                     >
                       {item}
                     </span>
                   ))}
                   {hiddenCapabilityCount > 0 && (
-                    <span className="rounded-sm border border-line-light px-2.5 py-1 text-xs font-semibold text-ink-muted dark:border-line-dark dark:text-ink-inverse/80">
+                    <span className="shrink-0 rounded-sm border border-line-light px-2.5 py-1 text-xs font-semibold text-ink-muted dark:border-line-dark dark:text-ink-inverse/80">
                       +{hiddenCapabilityCount}
                     </span>
                   )}
@@ -191,9 +191,12 @@ const HeroSection = () => {
               <motion.h1
                 id="hero-title"
                 variants={fadeInUp(0.04, 18)}
-                className="mt-9 max-w-5xl text-balance text-[clamp(1.95rem,8.2vw,7rem)] font-extrabold leading-[0.95] sm:mt-10 lg:mt-12"
+                className="mt-9 max-w-full overflow-hidden text-[clamp(1.85rem,7.8vw,7rem)] font-extrabold leading-[0.98] [overflow-wrap:anywhere] sm:mt-10 sm:text-balance sm:leading-[0.95] lg:mt-12"
               >
-                <ScrambleText duration={1360} delay={180}>
+                <span className="block sm:hidden">
+                  Products engineered for performance, reliability, and scale.
+                </span>
+                <ScrambleText className="hidden sm:block hero-title-scramble" duration={1360} delay={180}>
                   Products engineered for performance, reliability, and scale.
                 </ScrambleText>
               </motion.h1>
