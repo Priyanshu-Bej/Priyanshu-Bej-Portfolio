@@ -20,7 +20,7 @@ const SkillsSection = () => {
           variants={fadeInUp(0.06, 14)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: "some" }}
           className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-12 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-8 lg:py-16"
         >
           <p className="eyebrow">Capability Index</p>
@@ -40,7 +40,7 @@ const SkillsSection = () => {
             variants={staggered(0.08, 0.12)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: "some" }}
           >
             {skillGroups.map(({ title, description, items }, index) => (
               <motion.article
@@ -75,7 +75,7 @@ const SkillsSection = () => {
             variants={fadeInUp(0.14, 16)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: "some" }}
             className="px-5 py-12 sm:px-8 lg:px-12 lg:py-16"
           >
             <div className="grid gap-6 lg:grid-cols-[0.42fr,1fr] lg:items-end">

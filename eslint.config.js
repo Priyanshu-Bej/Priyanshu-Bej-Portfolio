@@ -1,11 +1,10 @@
 import js from "@eslint/js";
 import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 
 export default [
   {
-    ignores: ["dist", "node_modules"],
+    ignores: ["dist", "node_modules", "playwright-report", "test-results"],
   },
   js.configs.recommended,
   {
@@ -22,12 +21,14 @@ export default [
     },
     plugins: {
       "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-hooks/set-state-in-effect": "off",
-      "react-refresh/only-export-components": "off",
     },
+  },
+  {
+    files: ["playwright.config.js"],
+    languageOptions: { globals: globals.node },
   },
 ];

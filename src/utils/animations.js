@@ -14,36 +14,6 @@ export const fadeInUp = (delay = 0, distance = 24) => ({
   },
 });
 
-export const fadeIn = (delay = 0) => ({
-  hidden: {
-    opacity: 0,
-  },
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 0.38,
-      delay,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  },
-});
-
-export const scaleIn = (delay = 0) => ({
-  hidden: {
-    opacity: 0,
-    scale: 0.85,
-  },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.45,
-      delay,
-      ease: [0.34, 1.56, 0.64, 1],
-    },
-  },
-});
-
 export const staggered = (staggerChildren = 0.12, delayChildren = 0.15) => ({
   hidden: {},
   show: {

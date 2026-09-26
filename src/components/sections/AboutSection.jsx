@@ -106,6 +106,9 @@ const ExperienceRoleCard = ({ role, companyLogo, companyLogoAlt, company }) => {
 const ExperienceRow = ({ item, index }) => (
   <motion.article
     variants={fadeInUp(0.04 * index, 14)}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true, amount: "some" }}
     className="grid gap-6 border-t border-line-light px-5 py-8 dark:border-line-dark sm:px-8 lg:grid-cols-[0.7fr,1fr,1.35fr] lg:px-12 xl:grid-cols-[0.6fr,0.9fr,1.7fr]"
   >
     <div className="flex items-start justify-between gap-4 lg:block">
@@ -269,7 +272,7 @@ const AboutSection = () => {
           variants={staggered()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: "some" }}
           className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-14 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-20"
         >
           <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
@@ -299,7 +302,7 @@ const AboutSection = () => {
             variants={fadeInUp(0.12, 16)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, amount: "some" }}
             className="border border-line-light bg-surface-elevated dark:border-line-dark dark:bg-surface-dark"
           >
             <div className="grid min-h-[20rem] grid-cols-2">
@@ -339,7 +342,7 @@ const AboutSection = () => {
             variants={staggered(0.08, 0.12)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, amount: "some" }}
             className="mt-8 grid gap-0 border-y border-line-light dark:border-line-dark"
           >
             {qualities.map(({ title, description }, index) => (
@@ -371,7 +374,7 @@ const AboutSection = () => {
           variants={staggered(0.08, 0.12)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: "some" }}
         >
           <div className="grid gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr),22rem] lg:items-end lg:px-12 lg:py-16">
             <div className="max-w-4xl">
@@ -407,7 +410,7 @@ const AboutSection = () => {
         variants={staggered(0.06, 0.12)}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: "some" }}
         className="grid scroll-mt-24 gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[20rem,1fr] lg:px-12 lg:py-16"
       >
         <div className="grid content-start gap-6">

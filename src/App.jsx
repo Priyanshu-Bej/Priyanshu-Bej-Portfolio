@@ -2,7 +2,8 @@ import { AnimatePresence } from "framer-motion";
 import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
-import { Footer, Navbar } from "./components";
+import Footer from "./components/layout/Footer";
+import Navbar from "./components/layout/Navbar";
 import BackToTopButton from "./components/layout/BackToTopButton";
 import ScrollProgress from "./components/layout/ScrollProgress";
 
@@ -14,50 +15,63 @@ const Contact = lazy(() => import("./pages/Contact"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
 
+// Mount scrolling with the page, after its lazy content and any exit transition.
+const RoutedPage = ({ component: Component }) => (
+  <>
+    <ScrollManager />
+    <Component />
+  </>
+);
+
 const AppRoutes = () => {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-and-conditions" element={<Terms />} />
-        <Route path="*" element={<Home />} />
+        <Route path="/" element={<RoutedPage component={Home} />} />
+        <Route path="/about" element={<RoutedPage component={About} />} />
+        <Route path="/projects" element={<RoutedPage component={Projects} />} />
+        <Route path="/skills" element={<RoutedPage component={Skills} />} />
+        <Route path="/contact" element={<RoutedPage component={Contact} />} />
+        <Route path="/privacy-policy" element={<RoutedPage component={PrivacyPolicy} />} />
+        <Route path="/terms-and-conditions" element={<RoutedPage component={Terms} />} />
+        <Route path="*" element={<RoutedPage component={Home} />} />
       </Routes>
     </AnimatePresence>
   );
 };
 
 const ScrollManager = () => {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (hash) {
-      const id = hash.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        requestAnimationFrame(() => {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+    const frame = requestAnimationFrame(() => {
+      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth";
+      if (hash) {
+        let id = hash.slice(1);
+        try {
+          id = decodeURIComponent(id);
+        } catch {
+          // An invalid URL escape should not prevent the page from rendering.
+        }
+        document.getElementById(id)?.scrollIntoView({ behavior, block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior });
       }
-      return;
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname, hash]);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, hash, key]);
 
   return null;
 };
 
 const App = () => (
-  <div className="relative min-h-screen overflow-x-hidden bg-canvas-light text-ink-base antialiased dark:bg-canvas-dark dark:text-ink-inverse">
+  <div className="relative min-h-screen overflow-x-clip bg-canvas-light text-ink-base antialiased dark:bg-canvas-dark dark:text-ink-inverse">
     <ScrollProgress />
     <BackToTopButton />
     <Navbar />
@@ -74,7 +88,6 @@ const App = () => (
       className="relative flex min-h-screen flex-col pt-20 lg:pl-[19rem] lg:pt-0"
     >
       <Suspense fallback={null}>
-        <ScrollManager />
         <AppRoutes />
       </Suspense>
       <Footer />

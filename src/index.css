@@ -15,6 +15,22 @@
     scroll-behavior: smooth;
   }
 
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    section[id] {
+      scroll-margin-top: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply min-h-screen bg-canvas-light font-sans text-ink-base antialiased transition-colors duration-300 ease-premium dark:bg-canvas-dark dark:text-ink-inverse;
     background-image:
@@ -83,10 +99,6 @@
 
   .chip {
     @apply inline-flex items-center rounded-md border border-line-light bg-surface-muted px-2.5 py-1 text-xs font-semibold text-ink-strong transition duration-300 ease-premium dark:border-white/20 dark:bg-surface-dark-elevated dark:text-ink-inverse;
-  }
-
-  .chip-lg {
-    @apply px-3 py-2 text-sm font-bold;
   }
 
   .meta-text {

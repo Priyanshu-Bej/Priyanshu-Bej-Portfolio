@@ -148,16 +148,8 @@ const profileImages = Object.freeze(
 export {
   certificationImageFiles,
   certificationImagesByFile,
-  companyLogoFiles,
   companyLogos,
-  companyLogosByFile,
-  educationLogoFiles,
   educationLogos,
-  educationLogosByFile,
-  projectLogoFiles,
   projectLogos,
-  projectLogosByFile,
-  profileImageFiles,
   profileImages,
-  profileImagesByFile,
 };

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import {
   FiCheckCircle,
@@ -63,6 +62,9 @@ const ContactSection = () => {
     setStatus({ type: null, message: "" });
 
     try {
+      // The SDK probes browser storage on import. Load it inside the error
+      // boundary for submission so restricted storage cannot crash the page.
+      const { default: emailjs } = await import("@emailjs/browser");
       await emailjs.send(
         serviceId,
         templateId,
@@ -113,7 +115,7 @@ const ContactSection = () => {
           variants={staggered()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: "some" }}
           className="section-grid-lines section-grid-lines-inverse flex min-h-[70vh] flex-col justify-between border-b border-white/20 bg-ink-strong px-5 py-12 dark:bg-black sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-16"
         >
           <div>
@@ -175,7 +177,7 @@ const ContactSection = () => {
           variants={fadeInUp(0.14, 16)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: "some" }}
           onSubmit={handleSubmit}
           noValidate
           className="bg-canvas-light px-5 py-12 text-ink-base dark:bg-surface-dark dark:text-ink-inverse sm:px-8 lg:px-12 lg:py-16"
