@@ -32,9 +32,9 @@ import {
   SiKotlin,
   SiMongodb,
   SiNodedotjs,
-  SiOpenai,
   SiPostman,
 } from "react-icons/si";
+import { RiOpenaiFill } from "react-icons/ri";
 
 export const navItems = [
   { id: "home", label: "Home", path: "/" },
@@ -50,26 +50,12 @@ export const legalLinks = [
   { label: "Terms & Conditions", path: "/terms-and-conditions" },
 ];
 
-export const resumeResource = {
-  label: "View resume",
-  href: "https://drive.google.com/file/d/1jQe3SbdPrWvahaKmO2byuugcghnZxJI9/view?usp=sharing",
-  preview:
-    "https://github.com/Priyanshu-Bej/Priyanshu-Pritam-Bej-Resume/blob/main/Priyanshu_Pritam_Bej_Resume_Thumbnail.png?raw=true",
-  fileName: undefined,
-};
-
 export const heroContent = {
   eyebrow: "Senior Mobile Developer @ IRISS Inc.",
-  name: "Priyanshu Bej",
-  role: "I build end-to-end products across mobile, IoT, AI, and hybrid cloud to deliver reliable systems at scale.",
-  title: "Priyanshu Bej",
-  highlight: "Priyanshu",
   bio: [],
   availability: "Engineering Enterprise Mobile, IoT, AI & Hybrid Cloud Solutions",
   location: "Bengaluru, India",
   toolbox: ["Flutter", "Dart", "Clean Architecture", "SOLID", "GitHub Actions"],
-  workflow: ["Clean Architecture", "Agile teams", "CI/CD pipelines"],
-  passion: "I cannot ignore messy code. I refactor until it is clean, readable, and production ready.",
   linkedin: {
     href: "https://www.linkedin.com/in/priyanshubej/",
     handle: "@priyanshubej",
@@ -80,7 +66,6 @@ export const heroContent = {
     { value: "15+ apps", label: "Shipped across stores" },
     { value: "Crores", label: "Revenue impact" },
   ],
-  primaryAction: { label: "View engineered work", href: "/#projects" },
   secondaryAction: { label: "Start a conversation", href: "/contact" },
 };
 
@@ -190,7 +175,7 @@ export const educationTimeline = [
     school: "Indian Institute of Technology, Kharagpur",
     program: "Executive Post Graduate Program in Generative AI and Agentic AI",
     period: "Jun 2026 – Present",
-    icon: SiOpenai,
+    icon: RiOpenaiFill,
     logo: educationLogos["iit-kharagpur"],
     logoAlt: "Indian Institute of Technology Kharagpur logo",
     status: "Current education",
@@ -254,7 +239,7 @@ export const skillIcons = [
   { name: "Android Studio", icon: SiAndroidstudio },
   { name: "Postman", icon: SiPostman },
   { name: "Figma", icon: SiFigma },
-  { name: "AI Workflows", icon: SiOpenai },
+  { name: "AI Workflows", icon: RiOpenaiFill },
 ];
 
 export const projects = [

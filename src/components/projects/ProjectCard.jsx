@@ -1,3 +1,4 @@
+import { getProjectLinks } from "../../utils/projectLinks";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -5,34 +6,27 @@ import { fadeInUp } from "../../utils/animations";
 import ScrambleText from "../common/ScrambleText";
 import ProjectArtwork from "./ProjectArtwork";
 
-const getLinkLabel = (href, fallback = "Open project") => {
-  const normalizedHref = href?.toLowerCase() || "";
-  if (normalizedHref.includes("play.google.com")) return "Play Store";
-  if (normalizedHref.includes("apps.apple.com")) return "App Store";
-  if (normalizedHref.includes("github.com")) return "GitHub";
-  return fallback;
-};
-
 const ProjectCard = ({ project, index, onOpen }) => {
   const {
     title,
     category,
     description,
     tags,
-    links,
     timeframe,
     impact = [],
     tech = [],
-    storeLinks = [],
   } = project;
   const reverse = index % 2 === 1;
   const number = String(index + 1).padStart(2, "0");
-  const fallbackLinkLabel = getLinkLabel(links?.live);
+  const externalLinks = getProjectLinks(project);
   const chips = [...new Set([...tags, ...tech])].slice(0, 8);
 
   return (
     <motion.article
-      variants={fadeInUp(0.04 * index, 18)}
+      variants={fadeInUp(0.04, 18)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: "some" }}
       className="border-t border-line-light dark:border-line-dark"
     >
       <div className="grid lg:grid-cols-12">
@@ -102,17 +96,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
                 Read case study
                 <FiArrowUpRight />
               </button>
-              {storeLinks.length === 0 && links.live && (
-                <a
-                  href={links.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="button-secondary px-4 py-2.5"
-                >
-                  {fallbackLinkLabel}
-                </a>
-              )}
-              {storeLinks.map((link) => (
+              {externalLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -120,7 +104,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
                   rel="noreferrer"
                   className="button-secondary px-4 py-2.5"
                 >
-                  {getLinkLabel(link.href, link.label || "Open project")}
+                  {link.label}
                   <FiArrowUpRight />
                 </a>
               ))}

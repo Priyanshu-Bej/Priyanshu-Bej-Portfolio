@@ -5,7 +5,7 @@ This portfolio is a Vite static app. Build output is generated in `dist/`.
 ## Local Verification
 
 ```bash
-npm install --legacy-peer-deps
+npm ci
 npm run build
 npm run preview
 ```

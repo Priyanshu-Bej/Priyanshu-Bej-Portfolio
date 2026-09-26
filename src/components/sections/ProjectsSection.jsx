@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useCallback, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
@@ -13,6 +13,7 @@ const ProjectModal = lazy(() => import("../projects/ProjectModal"));
 const ProjectsSection = () => {
   const { ref: sectionRef, y: titleY } = useParallax(42, -48);
   const [selectedProject, setSelectedProject] = useState(null);
+  const closeProject = useCallback(() => setSelectedProject(null), []);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const { featuredProjects, additionalProjects } = useMemo(
     () => ({
@@ -34,7 +35,7 @@ const ProjectsSection = () => {
           variants={staggered()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.35 }}
+          viewport={{ once: true, amount: "some" }}
           className="section-grid-lines grid gap-8 bg-surface-elevated px-5 py-14 dark:bg-surface-dark sm:px-8 lg:sticky lg:top-0 lg:z-10 lg:grid-cols-[0.75fr,1.25fr] lg:px-12 lg:py-20"
         >
           <div>
@@ -62,12 +63,7 @@ const ProjectsSection = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          variants={staggered(0.08, 0.12)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.08 }}
-        >
+        <div>
           {featuredProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
@@ -76,7 +72,7 @@ const ProjectsSection = () => {
               onOpen={setSelectedProject}
             />
           ))}
-        </motion.div>
+        </div>
 
         {additionalProjects.length > 0 && (
           <div className="border-t border-line-light px-5 py-8 dark:border-line-dark sm:px-8 lg:px-12">
@@ -105,9 +101,8 @@ const ProjectsSection = () => {
           {showAllProjects && (
             <motion.div
               key="additional-projects"
-              variants={staggered(0.06, 0.05)}
-              initial="hidden"
-              animate="show"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
             >
@@ -125,7 +120,11 @@ const ProjectsSection = () => {
       </div>
 
       <Suspense fallback={null}>
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        <AnimatePresence>
+          {selectedProject && (
+            <ProjectModal key={selectedProject.id} project={selectedProject} onClose={closeProject} />
+          )}
+        </AnimatePresence>
       </Suspense>
     </section>
   );

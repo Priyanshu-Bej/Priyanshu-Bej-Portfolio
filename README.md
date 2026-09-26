@@ -11,7 +11,7 @@ The vibe is simple: clean interface, sharp content, no noisy portfolio circus.
 - Senior mobile engineering work across Flutter, Android, iOS, IoT, AI-enabled workflows, and hybrid cloud products.
 - Selected project case studies first, with smaller shipped apps tucked under **View all projects** so the page stays focused.
 - Light and dark mode with a restrained premium visual system.
-- Experience timeline, capability index, certifications showcase, resume, and direct contact.
+- Experience timeline, capability index, certifications showcase and direct contact.
 - Real app store links and product context instead of fake placeholder cards.
 
 ## Tech Stack
@@ -47,7 +47,7 @@ src/
 Use Node 24.x.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -65,6 +65,7 @@ http://localhost:5173/
 | `npm run build` | Creates the production build in `dist/`. |
 | `npm run preview` | Serves the production build locally. |
 | `npm run lint` | Runs ESLint for JS/JSX files. |
+| `npm test` | Builds and tests the production app in a browser. |
 | `npm audit --audit-level=moderate` | Checks dependency security status. |
 
 ## Environment Variables
@@ -90,7 +91,6 @@ Common updates:
 - Projects: edit the `projects` array.
 - Featured work: keep strong projects visible by default. Add `featured: false` for smaller apps that should stay under **View all projects**.
 - Certifications: add certificate data in `certificationShowcase`, then place images in `src/assets/certifications/`.
-- Resume: update `resumeResource`.
 - Social links: update `heroContent`.
 
 ## Design Notes
@@ -164,11 +164,30 @@ npm run lint
 npm run build
 ```
 
-Current verification status:
+Browser regression tests cover routes, anchor navigation, small-screen visibility,
+project and certificate dialogs, keyboard focus, sticky sections, theme persistence,
+blocked storage, image loading, and contact validation and submission. EmailJS calls
+are intercepted, so tests never send real email.
 
-- `npm audit --audit-level=moderate` - 0 vulnerabilities
-- `npm run lint` - passing
-- `npm run build` - passing
+Install the test browser once, then run the suite:
+
+```bash
+npx playwright install chromium
+npm test
+```
+
+To use an existing Google Chrome installation instead:
+
+```bash
+PLAYWRIGHT_CHANNEL=chrome npm test
+```
+
+The suite builds the app and starts its own preview server on port 4175. Failed
+checks retain a trace under `test-results/`.
+
+Dependency maintenance keeps compatible updates in `package-lock.json`. Tailwind
+4 and Framer Motion 13 are separate major-version migrations; this update retains
+Tailwind 3 and Framer Motion 12 to preserve the existing styling and animation APIs.
 
 ## Contact
 
