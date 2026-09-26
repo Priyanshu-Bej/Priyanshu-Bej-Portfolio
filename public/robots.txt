@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://priyanshu-dev.vercel.app/sitemap.xml
+Sitemap: https://priyanshubej.vercel.app/sitemap.xml

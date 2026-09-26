@@ -144,7 +144,7 @@ https://your-domain.com/sitemap.xml
 ```
 
 4. Use URL Inspection for the homepage and request indexing.
-5. When a custom domain is added, update these files from `priyanshu-dev.vercel.app` to the final domain:
+5. When a custom domain is added, update these files from `priyanshubej.vercel.app` to the final domain:
 
 ```text
 index.html
