@@ -135,14 +135,93 @@ test("certificate dialog traps and restores keyboard focus", async ({ page }) =>
   await expect(trigger).toBeFocused();
 });
 
-test("sticky section header tracks the document viewport", async ({ page }) => {
-  await page.goto("/");
-  const projects = page.locator("#projects");
-  await projects.evaluate((element) => {
-    window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY + 650, behavior: "instant" });
+for (const route of ["/", "/projects"]) {
+  for (const size of [{ width: 1440, height: 900 }, { width: 1024, height: 768 }]) {
+    test(`case studies scroll clear of the heading on ${route} at ${size.width}px`, async ({ page }) => {
+      await page.setViewportSize(size);
+      await page.goto(route);
+      const projects = page.locator("#projects");
+      const intro = projects.locator(":scope > div > div").first();
+      await expect(projects.locator("article")).toHaveCount(6);
+
+      for (const card of await projects.locator("article").all()) {
+        // Read the top of each card at a normal viewport position. Visibility
+        // alone does not catch an opaque sticky heading covering the content.
+        await card.evaluate((element) => {
+          window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 24, behavior: "instant" });
+        });
+        await expect(card).toHaveCSS("opacity", "1");
+        await expect.poll(() => intro.evaluate((element) => element.getBoundingClientRect().bottom)).toBeLessThanOrEqual(25);
+        const title = card.getByRole("heading");
+        await expect(title).toBeInViewport();
+        await expect.poll(() => title.evaluate((element) => {
+          const box = element.getBoundingClientRect();
+          return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
+        })).toBe(true);
+        await card.getByRole("button", { name: "Read case study" }).click({ trial: true });
+      }
+    });
+  }
+}
+
+for (const size of [
+  { width: 1440, height: 900 },
+  { width: 1024, height: 600 },
+  { width: 375, height: 667 },
+  { width: 320, height: 568 },
+]) {
+  test(`every section remains readable while scrolling at ${size.width}px`, async ({ page }) => {
+    await page.setViewportSize(size);
+    await page.goto("/");
+    await expect(page.locator("#contact-title")).toBeAttached();
+    const headings = page.locator("main section h1, main section h2, #experience article h3, #education article h3, #skills article h3");
+    for (const heading of await headings.all()) {
+      await scrollTo(heading);
+      await expect(heading).toBeInViewport();
+      await expect.poll(() => heading.evaluate((element) => {
+        const box = element.getBoundingClientRect();
+        let opacity = 1;
+        for (let parent = element; parent; parent = parent.parentElement) {
+          opacity *= Number(getComputedStyle(parent).opacity);
+        }
+        return opacity > 0.99 && element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
+      })).toBe(true);
+    }
+    await page.getByRole("button", { name: "Send brief" }).click({ trial: true });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
-  await expectAligned(page.locator("#projects > div > div").first());
-});
+}
+
+for (const route of ["/", "/about"]) {
+  for (const size of [{ width: 1440, height: 900 }, { width: 1024, height: 600 }]) {
+    test(`certificates scroll clear of their heading on ${route} at ${size.width}px`, async ({ page }) => {
+      await page.setViewportSize(size);
+      await page.goto(route);
+      const certificates = page.locator("#certifications");
+      await certificates.getByRole("button", { name: "View all credentials" }).click();
+      const cards = certificates.locator("button.premium-card");
+      await expect(cards).toHaveCount(10);
+      for (const card of await cards.all()) {
+        await card.evaluate((element) => {
+          window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 24, behavior: "instant" });
+        });
+        await expect(card).toHaveCSS("opacity", "1");
+        // Test the preview near the top, where the old pinned intro covered it.
+        await expect.poll(() => card.evaluate((element) => {
+          const box = element.getBoundingClientRect();
+          return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + 48));
+        })).toBe(true);
+        await card.click();
+        const dialog = page.getByRole("dialog");
+        await expect(dialog).toBeVisible();
+        await dialog.getByRole("button", { name: "Close certification details" }).click();
+        await expect(dialog).toHaveCount(0);
+      }
+      await certificates.getByRole("button", { name: "Show fewer", exact: true }).click();
+      await expect(cards).toHaveCount(6);
+    });
+  }
+}
 
 test("system theme follows changes until the user chooses a preference", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });

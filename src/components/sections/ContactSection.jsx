@@ -116,7 +116,7 @@ const ContactSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: "some" }}
-          className="section-grid-lines section-grid-lines-inverse flex min-h-[70vh] flex-col justify-between border-b border-white/20 bg-ink-strong px-5 py-12 dark:bg-black sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-16"
+          className="section-grid-lines section-grid-lines-inverse flex min-h-[70vh] flex-col justify-between border-b border-white/20 bg-ink-strong px-5 py-12 dark:bg-black sm:px-8 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-16"
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-brand-secondary">

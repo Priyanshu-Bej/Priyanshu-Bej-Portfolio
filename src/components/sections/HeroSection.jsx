@@ -271,7 +271,7 @@ const HeroSection = () => {
           className="border-t border-line-light bg-surface-elevated p-5 dark:border-line-dark dark:bg-surface-dark sm:p-6 lg:border-l lg:border-t-0"
           style={{ y: shouldReduceMotion ? 0 : asideY }}
         >
-          <div className="sticky top-7 space-y-7">
+          <div className="space-y-7">
             <div>
               <p className="eyebrow">Current Signal</p>
               <p className="mt-5 text-lg font-bold text-ink-strong dark:text-ink-inverse">
