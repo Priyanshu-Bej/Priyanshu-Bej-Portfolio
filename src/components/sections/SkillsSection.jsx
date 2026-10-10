@@ -21,7 +21,7 @@ const SkillsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: "some" }}
-          className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-12 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-8 lg:py-16"
+          className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-12 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:self-start lg:border-b-0 lg:border-r lg:px-8 lg:py-16"
         >
           <p className="eyebrow">Capability Index</p>
           <motion.h2

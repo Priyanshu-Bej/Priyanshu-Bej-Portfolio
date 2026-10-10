@@ -233,7 +233,7 @@ const TestimonialsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: "some" }}
-          className="section-grid-lines grid gap-6 bg-canvas-light dark:bg-canvas-dark lg:sticky lg:top-0 lg:z-10 lg:grid-cols-[0.8fr,1.2fr] lg:items-end lg:pb-8 lg:pt-4"
+          className="section-grid-lines grid gap-6 bg-canvas-light dark:bg-canvas-dark lg:grid-cols-[0.8fr,1.2fr] lg:items-end lg:pb-8 lg:pt-4"
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">

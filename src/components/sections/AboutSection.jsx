@@ -273,7 +273,7 @@ const AboutSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: "some" }}
-          className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-14 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:sticky lg:top-0 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-20"
+          className="section-grid-lines border-b border-line-light bg-canvas-light px-5 py-14 dark:border-line-dark dark:bg-canvas-dark sm:px-8 lg:self-start lg:border-b-0 lg:border-r lg:px-12 lg:py-20"
         >
           <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
             Profile

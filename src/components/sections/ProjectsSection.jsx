@@ -36,7 +36,7 @@ const ProjectsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: "some" }}
-          className="section-grid-lines grid gap-8 bg-surface-elevated px-5 py-14 dark:bg-surface-dark sm:px-8 lg:sticky lg:top-0 lg:z-10 lg:grid-cols-[0.75fr,1.25fr] lg:px-12 lg:py-20"
+          className="section-grid-lines grid gap-8 bg-surface-elevated px-5 py-14 dark:bg-surface-dark sm:px-8 lg:grid-cols-[0.75fr,1.25fr] lg:px-12 lg:py-20"
         >
           <div>
             <motion.p variants={fadeInUp(0.05, 14)} className="eyebrow">
